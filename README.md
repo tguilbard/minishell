@@ -1,6 +1,6 @@
 # Projet miniShell
 
-*Vous pouvez parametre dans le fichier minishell_defined.h le nom d'utilisateur, afficher par le prompt
+Vous pouvez parametre dans le fichier minishell_defined.h le nom d'utilisateur, afficher par le prompt
 
 ## Commandes
 
