@@ -6,7 +6,7 @@
 /*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 14:07:45 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/06 16:00:46 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/06 16:27:56 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,12 @@ int main(int ac,char **av)
 				echo_command(line + i);
 				break;
 			}
-			if (test_command("exit", line + i))
+			else if (test_command("help", line + i))
+			{
+				help();
+				break;
+			}
+			else if (test_command("exit", line + i))
 				exit(0);
 			i++;
 		}

@@ -6,3 +6,4 @@ Vous pouvez parametre dans le fichier minishell_defined.h le nom d'utilisateur, 
 
  * exit : ferme le shell
  * echo : ecrit tout les argument qui suivent
+ * help : affiche le README.md

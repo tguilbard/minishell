@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   help.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/06 13:43:02 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/06 16:28:15 by tguilbar         ###   ########.fr       */
+/*   Created: 2020/02/06 16:23:47 by tguilbar          #+#    #+#             */
+/*   Updated: 2020/02/06 16:30:54 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-#include "minishell_include.h"
+void	help()
+{
+	char	*line;
+	int		fd;
+	size_t	size;
 
-void	echo_command(char *line);
-void	help();
-
-#endif
+	fd = open("README.md", O_RDONLY);
+	while(get_next_line(fd, &line) == 1)
+	{
+		size = ft_strlen(line);
+		write(1, line, size);
+		write(1, "\n", 1);
+	}
+}
