@@ -4,5 +4,5 @@ Vous pouvez parametre dans le fichier minishell_defined.h le nom d'utilisateur, 
 
 ## Commandes
 
-*exit : ferme le shell
-*echo : ecrit tout les argument qui suivent
+ * exit : ferme le shell
+ * echo : ecrit tout les argument qui suivent
