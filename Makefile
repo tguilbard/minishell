@@ -6,12 +6,12 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 08:17:15 by ldutriez          #+#    #+#              #
-#    Updated: 2020/02/07 11:53:56 by tguilbar         ###   ########.fr        #
+#    Updated: 2020/02/07 12:11:54 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= miniShell
-#BONUS_NAME	= Cub3D_bonus
+#BONUS_NAME	= Cub3D_bonus <---wtf?
 
 CC =		gcc
 
@@ -109,4 +109,4 @@ fclean:			clean
 				@rm -f $(NAME) $(BONUS_NAME)
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
-.PHONY: all clean flcean re install re-install show norme #bonus 
+.PHONY: all clean flcean re install re-install show norme #bonus
