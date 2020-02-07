@@ -6,42 +6,24 @@
 /*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 14:07:45 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/06 16:27:56 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/07 11:50:34 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_bool	test_command(char *p_src, char *p_target)
-{
-	int	i;
-
-	i = 0;
-	if (p_src == NULL || p_target == NULL)
-		return (0);
-	while (p_src[i] != '\0' && p_target[i] != '\0')
-	{
-		if (p_src[i] != p_target[i])
-			return (false);
-		i++;
-	}
-	return (true);
-}
 
 void	prompt(char *prompt)
 {
 	write(1, prompt, ft_strlen(prompt));
 }
 
-int main(int ac,char **av)
+int main()
 {
 	char	*line;
 	size_t	i;
 	int		ret;
 
-	if (ac != 1)
-		exit(0);
-	prompt("user:");
+	prompt(USER);
 	while ((ret = get_next_line(0, &line)) != -1)
 	{
 		i = 0;
@@ -65,6 +47,6 @@ int main(int ac,char **av)
 		free(line);
 		if (ret == 0)
 			write(1, "\n", 1);
-		prompt("user:");
+		prompt(USER);
 	}
 }

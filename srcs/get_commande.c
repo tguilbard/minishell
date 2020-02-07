@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   help.c                                             :+:      :+:    :+:   */
+/*   get_commande.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/06 16:23:47 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/07 11:09:45 by tguilbar         ###   ########.fr       */
+/*   Created: 2020/02/07 11:46:38 by tguilbar          #+#    #+#             */
+/*   Updated: 2020/02/07 11:52:29 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	help()
+t_bool	test_command(char *p_src, char *p_target)
 {
-	char	*line;
-	int		fd;
-	size_t	size;
+	int	i;
+	int j;
 
-	fd = open("README.md", O_RDONLY);
-	while(get_next_line(fd, &line) == 1)
+	i = 0;
+	j = 0;
+	if (p_src == NULL || p_target == NULL)
+		return (0);
+	while (p_target[j] == ' ' && p_target[j])
+		j++;
+	while (p_target[j] != ' ' && p_target[j])
+		j++;
+	p_target[j] = '\0';
+	while (p_src[i] != '\0' || p_target[i] != '\0')
 	{
-		size = ft_strlen(line);
-		write(1, line, size);
-		write(1, "\n", 1);
-		free(line);
+		if (p_src[i] != p_target[i])
+			return (false);
+		i++;
 	}
-	size = ft_strlen(line);
-	write(1, line, size);
-	write(1, "\n", 1);
-	free(line);
-	close(fd);
+	p_target[j] = ' ';
+	return (true);
 }
+
+
