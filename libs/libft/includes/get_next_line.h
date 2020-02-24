@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 23:45:24 by ldutriez          #+#    #+#             */
-/*   Updated: 2019/12/16 12:06:17 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/02/22 11:34:09 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 16
 # endif
 
 # define IS_A_LINE 1

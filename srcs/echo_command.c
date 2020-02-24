@@ -6,7 +6,7 @@
 /*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:28:13 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/07 11:53:26 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/21 13:14:16 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,25 @@
 
 void	echo_command(char *line)
 {
-	size_t i;
-	t_bool find;
+	size_t	i;
+	int		find;
 
 	i = 0;
-	find = false;
-	while (line[i] == ' ')
+	find = 0;
+	while (line[i] == ' ' && line[i])
 		i++;
 	while (line[i])
 	{
 		if (line[i] == ' ')
+		{
 			write(1, " ", 1);
-		while (line[i] == ' ')
-			i++;
-		if (line[i] == '"')
+			while (line[i] == ' ' && line[i])
+				i++;
+		}
+		else if (line[i] == '"')
 		{
 			i++;
-			while (line[i] != '"')
+			while (line[i] != '"' && line[i])
 			{
 				write(1, line + i, 1);
 				i++;
@@ -39,21 +41,27 @@ void	echo_command(char *line)
 		else if (line[i] == 39)
 		{
 			i++;
-			while (line[i] != 39)
+			while (line[i] != 39 && line[i])
 			{
 				write(1, line + i, 1);
 				i++;
 			}
 		}
-		else if (test_command("-n", line + i) && find == false)
+		if (take_command("-n", line + i) && find == 0)
 		{
 			i += 2;
-			find = true;
+			find = 1;
+			while(line[i] == ' ' && line[i])
+				i++;
 		}
 		else
-			write(1, line + i, 1);
-		i++;
+			while (line[i] != ' ' && line[i])
+			{
+				write(1, line + i, 1);
+				i++;
+			}
+		find = (find == 1)? 1 : -1;
 	}
-	if (find == false)
+	if (find != 1)
 		write(1, "\n", 1);
 }

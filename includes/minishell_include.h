@@ -6,7 +6,7 @@
 /*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:39:06 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/06 13:40:42 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/20 12:19:14 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "libft.h"
+# include "minishell_elem.h"
+
 #endif

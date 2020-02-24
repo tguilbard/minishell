@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_define.h                                 :+:      :+:    :+:   */
+/*   elem_destructor.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/07 10:33:28 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/20 13:29:43 by tguilbar         ###   ########.fr       */
+/*   Created: 2020/02/20 12:07:13 by tguilbar          #+#    #+#             */
+/*   Updated: 2020/02/20 12:20:42 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_DEFINE_H
-# define MINISHELL_DEFINE_H
+#include "minishell.h"
 
-#endif
+void    destroy_elem(t_elem to_destroy)
+{
+	(void)to_destroy;
+}
+
+void    free_elem(t_elem *to_free)
+{
+	destroy_elem(*to_free);
+	free(to_free);
+}

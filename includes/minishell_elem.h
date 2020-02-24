@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_define.h                                 :+:      :+:    :+:   */
+/*   minishell_elem.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/07 10:33:28 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/20 13:29:43 by tguilbar         ###   ########.fr       */
+/*   Created: 2020/02/20 11:48:47 by tguilbar          #+#    #+#             */
+/*   Updated: 2020/02/21 13:29:23 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_DEFINE_H
-# define MINISHELL_DEFINE_H
+#ifndef MINISHELL_ELEM_H
+# define MINISHELL_ELEM_H
+
+typedef struct	s_elem
+{
+	char	*info;
+	t_bool	parsing;
+	int		type;
+}				t_elem;
+
+t_elem	create_elem(char *p_info, t_bool p_paring, int p_type);
+t_elem	*malloc_elem(char *p_info, t_bool p_paring, int p_type);
+void	destroy_elem(t_elem to_destroy);
+void	free_elem(t_elem *to_free);
 
 #endif
