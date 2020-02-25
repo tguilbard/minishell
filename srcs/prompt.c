@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/25 15:29:01 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/25 15:45:52 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,25 @@ static char	*get_usr(char **env)
 	return (ft_strdup("unknow"));
 }
 
+__attribute__((destructor)) void no_crtl(void)
+{
+		fork();
+}
+
 int			main(int ac, char **av, char **env)
 {
 	char *str;
 	char *user;
 
 	user = get_usr(env);
-	ft_str_add_suffix(&user, ft_strdup(":"));
+	ft_str_add_suffix(&user, ":");
 	print_prompt(user);
 	while (get_next_line(0, &str))
 	{
 		//parsing
+		free(str);
 		print_prompt(user);
 	}
-	write(1, "exit", 4);
-	free(user);
-	return (0);
+	write(1, "exit\n", 5);
+	exit (0);
 }
