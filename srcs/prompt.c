@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 14:07:45 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/22 11:56:48 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/24 18:24:15 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*find_user(char **env)
 	while(env[i])
 	{
 		if (take_env_variable("USER", env[i]))
-			return(ft_strjoin(((env[i]) + 5), ":"));
+			return(ft_strjoin(((env[i] + 5)), ":"));
 		i++;
 	}
 	return ("unknow:");
@@ -85,14 +85,14 @@ void	parse_buffer(char *buffer)
 
 	i = 0;
 	tab = NULL;
-	while (buffer[i])
+	while (buffer && buffer[i])
 	{
-		tab = realloc_tab(tab);	
+		tab = realloc_tab(tab);
 		while (buffer[i] && buffer[i] == ' ')
 			i++;
 		tab = check_command(tab, buffer + i);
 		while (buffer[i] && ((buffer[i] >= 97 && buffer[i] <= 122) ||
-					(buffer[i] >= 65 && buffer[i] <= 90)))
+					(buffer[i] >= 65 && buffer[i] <= 90))) //ça c'est ft_is_digit Tanguy
 			i++;
 		if (buffer[i])
 			i++;
@@ -104,7 +104,7 @@ int 		main(int ac, char **av, char **env)
 {
 	char *buffer;
 	char *user;
-	
+
 	user = find_user(env);
 	prompt(user);
 	while (get_next_line(0, &buffer) > 0)
