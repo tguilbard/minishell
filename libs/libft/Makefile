@@ -21,7 +21,9 @@ SRC =		ft_f_abs.c ft_f_floor.c ft_f_roof.c ft_i_abs.c ft_i_roof.c \
 			ft_strcmp.c ft_strcmp_c.c ft_strcpy.c ft_strsub.c ft_strstr.c \
 			ft_strjoin.c ft_split.c ft_str_add_prefixe.c ft_str_add_suffix.c \
 			ft_putchar.c ft_putstr.c ft_atoi.c get_next_line.c \
-			get_next_line_utils.c ft_f_round.c ft_tab_free.c ft_tab_len.c
+			get_next_line_utils.c ft_f_round.c ft_free_tab.c ft_tab_cpy.c \
+			ft_tab_new.c ft_tab_len.c ft_add_to_tab.c ft_get_file.c \
+			ft_str_is_only_digit.c ft_isdigit.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 

@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 14:07:45 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/24 18:24:15 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/02/25 09:16:42 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,24 @@ void		draw_parsing(t_elem **tab)
 
 t_elem	**realloc_tab(t_elem **tab)
 {
-	static size_t	j = 0;
+	static size_t	nb_cmd = 0;
 	size_t			i;
 	t_elem			**result;
 
+	nb_cmd++;
 	if (tab == NULL)
-		j = 0;
-	j++;
-	result = malloc(sizeof(t_elem*) * ((j * 3) + 1));
+		nb_cmd = 0;
+	result = malloc(sizeof(t_elem*) * ((nb_cmd * 3) + 3));
 	if (result == NULL)
 		return (NULL);
 	i = 0;
-	while (i < 4)
+	while (i < 3)
 	{
-		result[((j - 1) * 3) + i] = NULL;
+		result[(nb_cmd * 3) + i] = NULL;
 		i++;
 	}
 	i = 0;
-	while (tab && tab[i])
+	while (i < (nb_cmd * 3) + 3)
 	{
 		result[i] = tab[i];
 		i++;
@@ -91,11 +91,10 @@ void	parse_buffer(char *buffer)
 		while (buffer[i] && buffer[i] == ' ')
 			i++;
 		tab = check_command(tab, buffer + i);
-		while (buffer[i] && ((buffer[i] >= 97 && buffer[i] <= 122) ||
-					(buffer[i] >= 65 && buffer[i] <= 90))) //ça c'est ft_is_digit Tanguy
+		while (buffer[i] && buffer[i] == ' ')
 			i++;
-		if (buffer[i])
-			i++;
+		printf("reste: %s\n", buffer + i);
+		i++;
 	}
 	draw_parsing(tab);
 }
