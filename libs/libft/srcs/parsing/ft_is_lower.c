@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tab_cpy.c                                       :+:      :+:    :+:   */
+/*   ft_is_lower.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/14 14:14:19 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/25 12:10:59 by ldutriez         ###   ########.fr       */
+/*   Created: 2020/02/25 12:27:37 by ldutriez          #+#    #+#             */
+/*   Updated: 2020/02/25 12:36:28 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_tab_cpy(void **dst, void **src)
+t_bool	ft_is_lower(char p_c)
 {
-	int	index;
-
-	index = 0;
-	while (src[index] != NULL)
-	{
-		dst[index] = src[index];
-		index++;
-	}
+	if (p_c >= 'a' && p_c <= 'z')
+		return (true);
+	return (false);
 }

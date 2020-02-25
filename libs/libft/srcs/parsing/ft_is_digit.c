@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tab_cpy.c                                       :+:      :+:    :+:   */
+/*   ft_is_digit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/14 14:14:19 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/25 12:10:59 by ldutriez         ###   ########.fr       */
+/*   Created: 2020/02/25 10:28:38 by ncoudsi           #+#    #+#             */
+/*   Updated: 2020/02/25 12:34:56 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_tab_cpy(void **dst, void **src)
+t_bool	ft_is_digit(char c)
 {
-	int	index;
-
-	index = 0;
-	while (src[index] != NULL)
-	{
-		dst[index] = src[index];
-		index++;
-	}
+	if (c >= '0' && c <= '9')
+		return (true);
+	return (false);
 }

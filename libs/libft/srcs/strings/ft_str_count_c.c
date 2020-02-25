@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tab_cpy.c                                       :+:      :+:    :+:   */
+/*   ft_str_count_c.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/14 14:14:19 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/25 12:10:59 by ldutriez         ###   ########.fr       */
+/*   Created: 2020/02/25 10:55:11 by ncoudsi           #+#    #+#             */
+/*   Updated: 2020/02/25 11:12:51 by ncoudsi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_tab_cpy(void **dst, void **src)
+int	ft_str_count_c(char *str, char c)
 {
+	int	result;
 	int	index;
 
+	result = 0;
 	index = 0;
-	while (src[index] != NULL)
+	while (str[index] != '\0')
 	{
-		dst[index] = src[index];
+		if (str[index] == c)
+			result++;
 		index++;
 	}
+	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 14:07:45 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/25 09:16:42 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:05:40 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	prompt(char *prompt)
 
 static char	*find_user(char **env)
 {
-	int i;
+	int i;bite
 
 	i = 0;
 	while(env[i])

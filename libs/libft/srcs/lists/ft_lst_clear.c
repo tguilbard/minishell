@@ -6,7 +6,7 @@
 /*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:47:03 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/25 09:42:03 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/25 11:13:35 by ncoudsi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_lst_clear(t_list **lst, void (*del)(void*))
 	while (*lst)
 	{
 		l = *lst;
-		(*del)(l->content);
+		(*del)(l->data);
 		*lst = l->next;
 		free(l);
 	}

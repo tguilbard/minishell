@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_is_alpha.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 10:28:38 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/25 10:36:38 by ncoudsi          ###   ########.fr       */
+/*   Created: 2020/02/25 12:21:16 by ldutriez          #+#    #+#             */
+/*   Updated: 2020/02/25 12:36:34 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool	ft_isdigit(char c)
+t_bool	ft_is_alpha(char p_c)
 {
-	if (c >= '0' && c <= '9')
+	if (ft_is_upper(p_c) || ft_is_lower(p_c))
 		return (true);
-	return (false)
+	return (false);
 }

@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tab_cpy.c                                       :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/14 14:14:19 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/25 12:10:59 by ldutriez         ###   ########.fr       */
+/*   Created: 2019/11/08 12:44:08 by tguilbar          #+#    #+#             */
+/*   Updated: 2020/02/25 11:51:28 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_tab_cpy(void **dst, void **src)
+void	ft_lst_rm_data(t_list *lst, void (*del)(void*))
 {
-	int	index;
-
-	index = 0;
-	while (src[index] != NULL)
-	{
-		dst[index] = src[index];
-		index++;
-	}
+	if (lst == NULL)
+		return ;
+	del(lst->data);
+	free(lst);
+	lst = NULL;
 }

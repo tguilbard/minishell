@@ -6,7 +6,7 @@
 /*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:31:29 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/25 09:44:13 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/25 11:14:58 by ncoudsi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ft_lst_iter(t_list *lst, void (*f)(void *))
 		return ;
 	while (lst->next)
 	{
-		(*f)(lst->content);
+		(*f)(lst->data);
 		lst = lst->next;
 	}
-	(*f)(lst->content);
+	(*f)(lst->data);
 }

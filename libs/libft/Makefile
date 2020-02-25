@@ -16,14 +16,24 @@ LIB =
 SRC =		ft_f_abs.c ft_f_floor.c ft_f_roof.c ft_i_abs.c ft_i_roof.c \
 			ft_itoa_base.c ft_itoa.c ft_itoa_hexa.c ft_itoa_octa.c\
 			ft_itoa_unsigned_deci.c \
-			ft_lst_add_back.c ft_lst_add_front.c ft_lst_create_node.c \
+			\
 			ft_strdup.c ft_strdup_c.c ft_strlen.c ft_strlen_arg.c ft_strnew.c \
-			ft_strcmp.c ft_strcmp_c.c ft_strcpy.c ft_strsub.c ft_strstr.c \
+			ft_strcpy.c ft_strsub.c ft_strstr.c ft_str_count_c.c \
 			ft_strjoin.c ft_split.c ft_str_add_prefixe.c ft_str_add_suffix.c \
+			\
+			ft_str_is_only_digit.c ft_is_digit.c ft_strcmp.c ft_strcmp_c.c \
+			ft_is_alpha.c ft_is_lower.c ft_is_upper.c ft_is_alpha_num.c \
+			ft_is_whitespaces.c \
+			\
 			ft_putchar.c ft_putstr.c ft_atoi.c get_next_line.c \
-			get_next_line_utils.c ft_f_round.c ft_free_tab.c ft_tab_cpy.c \
-			ft_tab_new.c ft_tab_len.c ft_add_to_tab.c ft_get_file.c \
-			ft_str_is_only_digit.c ft_isdigit.c
+			get_next_line_utils.c ft_f_round.c ft_get_file.c \
+			\
+			ft_free_tab.c ft_tab_cpy.c ft_tab_new.c ft_tab_len.c \
+			ft_add_to_tab.c \
+			\
+			ft_lst_add_back.c ft_lst_clear.c ft_lst_rm_data.c ft_lst_map.c \
+			ft_lst_size.c ft_lst_add_front.c ft_lst_create_node.c \
+			ft_lst_iter.c ft_lst_rm_node.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 

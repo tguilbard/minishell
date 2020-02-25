@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tab_cpy.c                                       :+:      :+:    :+:   */
+/*   ft_is_alpha_num.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/14 14:14:19 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/25 12:10:59 by ldutriez         ###   ########.fr       */
+/*   Created: 2020/02/25 12:30:13 by ldutriez          #+#    #+#             */
+/*   Updated: 2020/02/25 12:36:38 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_tab_cpy(void **dst, void **src)
+t_bool	ft_is_alpha_num(char p_c)
 {
-	int	index;
-
-	index = 0;
-	while (src[index] != NULL)
-	{
-		dst[index] = src[index];
-		index++;
-	}
+	if (ft_is_digit(p_c) || ft_is_alpha(p_c))
+		return (true);
+	return (false);
 }

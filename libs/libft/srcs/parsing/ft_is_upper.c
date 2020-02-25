@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_is_upper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 12:44:08 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/25 09:44:21 by tguilbar         ###   ########.fr       */
+/*   Created: 2020/02/25 12:25:38 by ldutriez          #+#    #+#             */
+/*   Updated: 2020/02/25 12:36:24 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lst_delone(t_list *lst, void (*del)(void*))
+t_bool	ft_is_upper(char p_c)
 {
-	if (lst == NULL)
-		return ;
-	del(lst->content);
-	free(lst);
-	lst = NULL;
+	if (p_c >= 'A' && p_c <= 'Z')
+		return (true);
+	return (false);
 }
