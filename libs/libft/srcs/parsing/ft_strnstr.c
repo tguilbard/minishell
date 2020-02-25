@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   elem_destructor.c                                  :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/20 12:07:13 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/20 12:20:42 by tguilbar         ###   ########.fr       */
+/*   Created: 2019/11/05 15:09:03 by tguilbar          #+#    #+#             */
+/*   Updated: 2019/11/06 18:43:23 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <stdlib.h>
 
-void    destroy_elem(t_elem to_destroy)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	(void)to_destroy;
-}
+	size_t	i;
+	size_t	j;
 
-void    free_elem(t_elem *to_free)
-{
-	destroy_elem(*to_free);
-	free(to_free);
+	i = 0;
+	if (!*needle)
+		return ((char*)haystack);
+	while (haystack[i] && i < len)
+	{
+		j = 0;
+		while (needle[j] == haystack[i + j] && i + j < len)
+		{
+			if (needle[j + 1] == '\0')
+				return ((char*)haystack + i);
+			j++;
+		}
+		i++;
+	}
+	return (NULL);
 }

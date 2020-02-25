@@ -6,7 +6,7 @@
 /*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:06:39 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/25 12:35:12 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/02/25 15:12:32 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char		**ft_split(char *p_src, char p_sep);
 void		ft_str_add_prefixe(char *p_prefixe, char **p_str);
 void		ft_str_add_suffix(char **p_str, char *p_suffix);
 int			ft_str_count_c(char *str, char c);
-
+char		*ft_strnstr(char *haystack, char *needle, size_t len);
 
 /*
 ** Prototypage des PARSING.

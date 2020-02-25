@@ -93,7 +93,7 @@ int draw_centred_text(char *text, t_vector2i coord, int size, int color);
 ✔️t_vector2i_list calc_line_2di(t_vector2i p_a, t_vector2i p_b);
 ✔️t_vector2_list calc_line_2d(t_vector2 p_a, t_vector2 p_b);
 
-//
+//  wetr43r2
 // --- LISTE INFINIE ---
 //
 ✔️t_vector2 **vector2_tab_new(size_t nb);

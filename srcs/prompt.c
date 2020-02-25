@@ -3,114 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/06 14:07:45 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/25 14:05:40 by tguilbar         ###   ########.fr       */
+/*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
+/*   Updated: 2020/02/25 15:29:01 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern char **environ;
-
-static void	prompt(char *prompt)
+static void	print_prompt(char *user)
 {
-	write(1, prompt, ft_strlen(prompt));
+	write(1, user, ft_strlen(user));
 }
 
-static char	*find_user(char **env)
+static char	*get_usr(char **env)
 {
-	int i;bite
+	char	*result;
+	int		index;
 
-	i = 0;
-	while(env[i])
+	index = 0;
+	while (env[index])
 	{
-		if (take_env_variable("USER", env[i]))
-			return(ft_strjoin(((env[i] + 5)), ":"));
-		i++;
+		result = strnstr(env[index], "USER=", 5);
+		if (result != NULL)
+		{
+			result = ft_strdup(result + 5);
+			return (result);
+		}
+		index++;
 	}
-	return ("unknow:");
+	return (ft_strdup("unknow"));
 }
 
-void		draw_parsing(t_elem **tab)
+int			main(int ac, char **av, char **env)
 {
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	while (tab[i])
-	{
-		printf("%d | %s\n", tab[i]->type, tab[i]->info);
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	tab = NULL;
-}
-
-t_elem	**realloc_tab(t_elem **tab)
-{
-	static size_t	nb_cmd = 0;
-	size_t			i;
-	t_elem			**result;
-
-	nb_cmd++;
-	if (tab == NULL)
-		nb_cmd = 0;
-	result = malloc(sizeof(t_elem*) * ((nb_cmd * 3) + 3));
-	if (result == NULL)
-		return (NULL);
-	i = 0;
-	while (i < 3)
-	{
-		result[(nb_cmd * 3) + i] = NULL;
-		i++;
-	}
-	i = 0;
-	while (i < (nb_cmd * 3) + 3)
-	{
-		result[i] = tab[i];
-		i++;
-	}
-	free(tab);
-	return (result);
-}
-
-void	parse_buffer(char *buffer)
-{
-	size_t	i;
-	t_elem	**tab;
-
-	i = 0;
-	tab = NULL;
-	while (buffer && buffer[i])
-	{
-		tab = realloc_tab(tab);
-		while (buffer[i] && buffer[i] == ' ')
-			i++;
-		tab = check_command(tab, buffer + i);
-		while (buffer[i] && buffer[i] == ' ')
-			i++;
-		printf("reste: %s\n", buffer + i);
-		i++;
-	}
-	draw_parsing(tab);
-}
-
-int 		main(int ac, char **av, char **env)
-{
-	char *buffer;
+	char *str;
 	char *user;
 
-	user = find_user(env);
-	prompt(user);
-	while (get_next_line(0, &buffer) > 0)
+	user = get_usr(env);
+	ft_str_add_suffix(&user, ft_strdup(":"));
+	print_prompt(user);
+	while (get_next_line(0, &str))
 	{
-		parse_buffer(buffer);
-		prompt(user);
+		//parsing
+		print_prompt(user);
 	}
-	write(1, "exit\n", 5);
-	exit(0) ;
+	write(1, "exit", 4);
+	free(user);
+	return (0);
 }

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   help.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 16:23:47 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/07 11:09:45 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:15:56 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	help()
+void help()
 {
 	char	*line;
 	int		fd;

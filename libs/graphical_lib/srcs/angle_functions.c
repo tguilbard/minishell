@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_include.h                                :+:      :+:    :+:   */
+/*   angle_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/06 13:39:06 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/25 15:19:41 by tguilbar         ###   ########.fr       */
+/*   Created: 2019/12/11 07:35:35 by ldutriez          #+#    #+#             */
+/*   Updated: 2019/12/11 07:47:52 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_INCLUDE_H
-# define MINISHELL_INCLUDE_H
+#include "lgl.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "libft.h"
-# include "minishell_define.h"
+float degree_to_radian(float p_degree)
+{
+	return (p_degree * 3.141592653589 / 180);
+}
 
-#endif
+float radian_to_degree(float p_radian)
+{
+	return (p_radian * 180 / 3.141592653589);
+}
