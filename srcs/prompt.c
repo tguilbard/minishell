@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/26 20:01:02 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/02/26 20:18:21 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int			main(int ac __attribute__ ((unused)), char **av __attribute__ ((unused)), 
 	char *str;
 	char *user;
 
+	set_environ(env);
 	user = get_usr(env);
 	ft_str_add_suffix(&user, ":");
 	print_prompt(user);
