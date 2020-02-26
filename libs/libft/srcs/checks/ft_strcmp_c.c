@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp_c.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/04 14:55:32 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/01/13 14:49:46 by tguilbar         ###   ########.fr       */
+/*   Created: 2019/12/04 15:14:11 by ncoudsi           #+#    #+#             */
+/*   Updated: 2020/02/25 21:18:07 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool	ft_strcmp(char *p_src, char *p_target)
+t_bool	ft_strcmp_c(char *p_src, char p_target)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	if (p_src == NULL || p_target == NULL)
+	if (p_src == NULL || p_target == '\0')
 		return (0);
-	while (p_src[i] != '\0' || p_target[i] != '\0')
+	while (p_src[i] != '\0')
 	{
-		if (p_src[i] != p_target[i])
-			return (false);
+		if (p_src[i] == p_target)
+			return (true);
 		i++;
 	}
-	return (true);
+	return (false);
 }

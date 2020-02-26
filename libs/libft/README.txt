@@ -13,7 +13,7 @@ Les 5 regles du developere:👍
 int open_file(char *p_path, int p_mod);
 int get_str(int fd, char **line);
 int get_strsplit(int fd, char ***tab, char c);
-BOOL check_file_exist(char *path);
+✔️BOOL check_file_exist(char *path);
 BOOL copy_file(char *src, char *dest);
 void write_on_file(int fd, char *text);
 
@@ -89,11 +89,11 @@ int draw_centred_text(char *text, t_vector2i coord, int size, int color);
 
 //
 // --- PARTIE MATHEMATIQUE / ALGORYTHMN
-//​
+//
 ✔️t_vector2i_list calc_line_2di(t_vector2i p_a, t_vector2i p_b);
 ✔️t_vector2_list calc_line_2d(t_vector2 p_a, t_vector2 p_b);
 
-//  wetr43r2
+//
 // --- LISTE INFINIE ---
 //
 ✔️t_vector2 **vector2_tab_new(size_t nb);

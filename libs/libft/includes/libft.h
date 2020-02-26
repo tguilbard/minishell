@@ -6,7 +6,7 @@
 /*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:06:39 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/25 15:12:32 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/25 21:44:01 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ void		ft_str_add_prefixe(char *p_prefixe, char **p_str);
 void		ft_str_add_suffix(char **p_str, char *p_suffix);
 int			ft_str_count_c(char *str, char c);
 char		*ft_strnstr(char *haystack, char *needle, size_t len);
+char		*ft_rm_charset(char *p_str, char *p_charset);
 
 /*
-** Prototypage des PARSING.
+** Prototypage des CHECKS.
 */
 
 t_bool		ft_str_is_only_digit(char *str);
@@ -47,6 +48,7 @@ t_bool		ft_is_upper(char p_c);
 t_bool		ft_is_lower(char p_c);
 t_bool		ft_is_alpha(char p_c);
 t_bool		ft_is_alpha_num(char p_c);
+t_bool		ft_file_exist(char *p_path);
 
 /*
 ** Prototypage des CONVERTS.
@@ -97,7 +99,10 @@ void		ft_lst_rm_node(t_list **lst, size_t num, void (*del)(void*));
 
 void		ft_putchar(char c);
 void		ft_putstr(char *str);
+void  		ft_putnbr(int nb);
 char		**ft_get_file(char *path);
+void		ft_print_str_tab(char *p_name, char **p_tab);
+void		ft_print_int_tab(char *p_name, int *p_tab, size_t len);
 
 /*
 **	Prototypage des TABS.

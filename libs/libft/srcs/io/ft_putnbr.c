@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_only_digit.c                             :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/17 14:44:35 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/25 12:35:56 by ldutriez         ###   ########.fr       */
+/*   Created: 2020/02/25 21:04:53 by ldutriez          #+#    #+#             */
+/*   Updated: 2020/02/25 21:05:46 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool	ft_str_is_only_digit(char *str)
+void  ft_putnbr(int nb)
 {
-	int	index;
-
-	index = 0;
-	if (str == NULL)
-		return (false);
-	while (str[index] != '\0')
+	if (nb < 0)
 	{
-		if (ft_is_digit(str[index]) == false)
-			return (false);
-		index++;
+		ft_putchar('-');
+		nb = nb * -1;
 	}
-	return (true);
+	if (nb >= 10)
+	{
+		ft_putnbr(nb / 10);
+	}
+	ft_putchar((nb % 10) + '0');
 }
