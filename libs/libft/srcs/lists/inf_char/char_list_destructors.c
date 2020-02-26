@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   char_list_destructors.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/26 09:57:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/26 17:09:44 by ldutriez         ###   ########.fr       */
+/*   Created: 2020/01/11 16:18:38 by ldutriez          #+#    #+#             */
+/*   Updated: 2020/02/26 19:41:24 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	mini_echo(char *p_str)
+void			destroy_t_char_list(t_char_list to_delete)
 {
-	ft_putstr(p_str + 5);
-	ft_putchar('\n');
+	size_t i;
+
+	i = 0;
+	while (to_delete.data[i] != NULL)
+	{
+		free(to_delete.data[i]);
+		i++;
+	}
+	free(to_delete.data);
+}
+
+void			free_t_char_list(t_char_list *to_free)
+{
+	destroy_t_char_list(*to_free);
+	free(to_free);
 }

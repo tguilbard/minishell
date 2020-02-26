@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 18:59:06 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/25 19:39:09 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/02/26 19:54:49 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ char			*ft_rm_charset(char *p_str, char *p_charset)
 		}
 		index++;
 	}
+	free(p_str);
 	return (result);
 }
