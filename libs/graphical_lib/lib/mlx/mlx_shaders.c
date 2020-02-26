@@ -15,7 +15,7 @@ void display_log(GLuint object, void (*param_func)(), void (*getlog_func)())
   param_func(object, GL_INFO_LOG_LENGTH, &log_length);
   log = malloc(log_length);
   getlog_func(object, log_length, NULL, log);
-  fprintf(stderr, "%s", log);
+  //fprintf(stderr, "%s", log);
   free(log);
 }
 
@@ -42,7 +42,7 @@ int mlx_shaders_pixel(glsl_info_t *glsl)
 
   glGetShaderiv(glsl->pixel_vshader, GL_COMPILE_STATUS, &action_ok);
   if (!action_ok) {
-    fprintf(stderr, "Failed to compile pixel vshader :\n");
+    //fprintf(stderr, "Failed to compile pixel vshader :\n");
     display_log(glsl->pixel_vshader, glGetShaderiv, glGetShaderInfoLog);
     return (1);
   }
@@ -62,7 +62,7 @@ int mlx_shaders_pixel(glsl_info_t *glsl)
 
   glGetShaderiv(glsl->pixel_fshader, GL_COMPILE_STATUS, &action_ok);
   if (!action_ok) {
-    fprintf(stderr, "Failed to compile pixel fshader :\n");
+    //fprintf(stderr, "Failed to compile pixel fshader :\n");
     display_log(glsl->pixel_fshader, glGetShaderiv, glGetShaderInfoLog);
     return (1);
   }
@@ -74,7 +74,7 @@ int mlx_shaders_pixel(glsl_info_t *glsl)
 
   glGetProgramiv(glsl->pixel_program, GL_LINK_STATUS, &action_ok);
   if (!action_ok) {
-    fprintf(stderr, "Failed to link pixel shader program:\n");
+    //fprintf(stderr, "Failed to link pixel shader program:\n");
     display_log(glsl->pixel_program, glGetProgramiv, glGetProgramInfoLog);
     return (1);
   }
@@ -112,7 +112,7 @@ int mlx_shaders_image(glsl_info_t *glsl)
 
   glGetShaderiv(glsl->image_vshader, GL_COMPILE_STATUS, &action_ok);
   if (!action_ok) {
-    fprintf(stderr, "Failed to compile image vshader :\n");
+    //fprintf(stderr, "Failed to compile image vshader :\n");
     display_log(glsl->image_vshader, glGetShaderiv, glGetShaderInfoLog);
     return (1);
   }
@@ -132,7 +132,7 @@ int mlx_shaders_image(glsl_info_t *glsl)
 
   glGetShaderiv(glsl->image_fshader, GL_COMPILE_STATUS, &action_ok);
   if (!action_ok) {
-    fprintf(stderr, "Failed to compile image fshader :\n");
+    //fprintf(stderr, "Failed to compile image fshader :\n");
     display_log(glsl->image_fshader, glGetShaderiv, glGetShaderInfoLog);
     return (1);
   }
@@ -144,7 +144,7 @@ int mlx_shaders_image(glsl_info_t *glsl)
 
   glGetProgramiv(glsl->image_program, GL_LINK_STATUS, &action_ok);
   if (!action_ok) {
-    fprintf(stderr, "Failed to link image shader program:\n");
+    //fprintf(stderr, "Failed to link image shader program:\n");
     display_log(glsl->image_program, glGetProgramiv, glGetProgramInfoLog);
     return (1);
   }
@@ -189,7 +189,7 @@ int mlx_shaders_font(glsl_info_t *glsl)
 
   glGetShaderiv(glsl->font_vshader, GL_COMPILE_STATUS, &action_ok);
   if (!action_ok) {
-    fprintf(stderr, "Failed to compile font vshader :\n");
+    //fprintf(stderr, "Failed to compile font vshader :\n");
     display_log(glsl->font_vshader, glGetShaderiv, glGetShaderInfoLog);
     return (1);
   }
@@ -210,7 +210,7 @@ int mlx_shaders_font(glsl_info_t *glsl)
 
   glGetShaderiv(glsl->font_fshader, GL_COMPILE_STATUS, &action_ok);
   if (!action_ok) {
-    fprintf(stderr, "Failed to compile font fshader :\n");
+    //fprintf(stderr, "Failed to compile font fshader :\n");
     display_log(glsl->font_fshader, glGetShaderiv, glGetShaderInfoLog);
     return (1);
   }
@@ -222,7 +222,7 @@ int mlx_shaders_font(glsl_info_t *glsl)
 
   glGetProgramiv(glsl->font_program, GL_LINK_STATUS, &action_ok);
   if (!action_ok) {
-    fprintf(stderr, "Failed to link font shader program:\n");
+    //fprintf(stderr, "Failed to link font shader program:\n");
     display_log(glsl->font_program, glGetProgramiv, glGetProgramInfoLog);
     return (1);
   }

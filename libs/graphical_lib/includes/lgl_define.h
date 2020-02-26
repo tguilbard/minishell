@@ -1,33 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lgl_define.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/12 13:39:20 by ldutriez          #+#    #+#             */
+/*   Updated: 2020/01/13 14:30:00 by ldutriez         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef LGL_DEFINE_H
 # define LGL_DEFINE_H
 
-# define NOEVENTMASK 0L
-# define KEYPRESSMASK (1L<<0)
-# define KEYRELEASEMASK (1L<<1)
-# define BUTTONPRESSMASK (1L<<2)
-# define BUTTONRELEASEMASK (1L<<3)
-# define ENTERWINDOWMASK (1L<<4)
-# define LEAVEWINDOWMASK (1L<<5)
-# define POINTERMOTIONMASK (1L<<6)
-# define POINTERMOTIONHINTMASK (1L<<7)
-# define BUTTON1MOTIONMASK (1L<<8)
-# define BUTTON2MOTIONMASK (1L<<9)
-# define BUTTON3MOTIONMASK (1L<<10)
-# define BUTTON4MOTIONMASK (1L<<11)
-# define BUTTON5MOTIONMASK (1L<<12)
-# define BUTTONMOTIONMASK (1L<<13)
-# define KEYMAPSTATEMASK (1L<<14)
-# define EXPOSUREMASK (1L<<15)
-# define VISIBILITYCHANGEMASK (1L<<16)
-# define STRUCTURENOTIFYMASK (1L<<17)
-# define RESIZEREDIRECTMASK (1L<<18)
-# define SUBSTRUCTURENOTIFYMASK (1L<<19)
-# define SUBSTRUCTUREREDIRECTMASK (1L<<20)
-# define FOCUSCHANGEMASK (1L<<21)
-# define PROPERTYCHANGEMASK (1L<<22)
-# define COLORMAPCHANGEMASK (1L<<23)
-# define OWNERGRABBUTTONMASK (1L<<24)
+/*
+** # define NOEVENTMASK 0L
+** # define KEYPRESSMASK (1L<<0)
+** # define KEYRELEASEMASK (1L<<1)
+** # define BUTTONPRESSMASK (1L<<2)
+** # define BUTTONRELEASEMASK (1L<<3)
+** # define ENTERWINDOWMASK (1L<<4)
+** # define LEAVEWINDOWMASK (1L<<5)
+** # define POINTERMOTIONMASK (1L<<6)
+** # define POINTERMOTIONHINTMASK (1L<<7)
+** # define BUTTON1MOTIONMASK (1L<<8)
+** # define BUTTON2MOTIONMASK (1L<<9)
+** # define BUTTON3MOTIONMASK (1L<<10)
+** # define BUTTON4MOTIONMASK (1L<<11)
+** # define BUTTON5MOTIONMASK (1L<<12)
+** # define BUTTONMOTIONMASK (1L<<13)
+** # define KEYMAPSTATEMASK (1L<<14)
+** # define EXPOSUREMASK (1L<<15)
+** # define VISIBILITYCHANGEMASK (1L<<16)
+** # define STRUCTURENOTIFYMASK (1L<<17)
+** # define RESIZEREDIRECTMASK (1L<<18)
+** # define SUBSTRUCTURENOTIFYMASK (1L<<19)
+** # define SUBSTRUCTUREREDIRECTMASK (1L<<20)
+** # define FOCUSCHANGEMASK (1L<<21)
+** # define PROPERTYCHANGEMASK (1L<<22)
+** # define COLORMAPCHANGEMASK (1L<<23)
+** # define OWNERGRABBUTTONMASK (1L<<24)
+*/
 
 # define KEYPRESS 2
 # define KEYRELEASE 3
@@ -54,8 +67,8 @@
 # define GRAVITYNOTIFY 24
 
 /*
- * ** Mouse button keycodes
- * */
+** Mouse button keycodes
+*/
 
 # define BUT1_KEY 1
 # define BUT2_KEY 2
@@ -66,12 +79,12 @@
 # define SCROLLRIGHT_KEY 7
 
 /*
- * ** Keyboard keys
- * */
+** Keyboard keys
+*/
 
 /*
- * ** Letters keys
- * */
+** Letters keys
+*/
 
 # define A_KEY 0
 # define B_KEY 11
@@ -101,8 +114,8 @@
 # define Z_KEY 6
 
 /*
- * ** Numbers (not numeric keypad ones)
- * */
+** Numbers (not numeric keypad ones)
+*/
 
 # define K1_KEY 18
 # define K2_KEY 19
@@ -116,20 +129,20 @@
 # define K0_KEY 29
 
 /*
- * ** Special characters
- * ** SP_KEY is the space ( ) key
- * ** BQ_KEY is the back quote (`) and tilde (~) key
- * ** MN_KEY is the minus (-) and underscore (_) key
- * ** PL_KEY is the plus (+) and equal (=) key
- * ** SBO_KEY is the square bracket opening ([) and brace opening ({) key
- * ** SBC_KEY is the square bracket closing (]) and brace closing (}) key
- * ** BSL_KEY is the backslash (\) and pipe (|) key
- * ** SC_KEY is the semicolon (;) and colon (:) key
- * ** SQ_KEY is the simple quote (') and double quote (") key
- * ** CM_KEY is the comma (,) and angle bracket opening (<) key
- * ** PT_KEY is the point (.) and angle bracket closing (>) key
- * ** SL_KEY is the slash (/) and question mark (?) key
- * */
+** Special characters
+** SP_KEY is the space ( ) key
+** BQ_KEY is the back quote (`) and tilde (~) key
+** MN_KEY is the minus (-) and underscore (_) key
+** PL_KEY is the plus (+) and equal (=) key
+** SBO_KEY is the square bracket opening ([) and brace opening ({) key
+** SBC_KEY is the square bracket closing (]) and brace closing (}) key
+** BSL_KEY is the backslash (\) and pipe (|) key
+** SC_KEY is the semicolon (;) and colon (:) key
+** SQ_KEY is the simple quote (') and double quote (") key
+** CM_KEY is the comma (,) and angle bracket opening (<) key
+** PT_KEY is the point (.) and angle bracket closing (>) key
+** SL_KEY is the slash (/) and question mark (?) key
+*/
 
 # define SP_KEY 49
 # define BQ_KEY 50
@@ -145,9 +158,9 @@
 # define SL_KEY 44
 
 /*
- * ** Functions keys, you might use fn key to use them
- * ** Seems that did not work. I don't know. Deso pas deso, au pire on les use pas.
- * */
+** Functions keys, you might use fn key to use them
+** Seems that did not work. I don't know. Deso pas deso, au pire on les use pas.
+*/
 
 # define F1_KEY 122
 # define F2_KEY 120
@@ -170,8 +183,8 @@
 # define F19_KEY 80
 
 /*
- * ** Arrow keys
- * */
+** Arrow keys
+*/
 
 # define UP_KEY 126
 # define DOWN_KEY 125
@@ -179,18 +192,18 @@
 # define LEFT_KEY 123
 
 /*
- * ** Special keys
- * ** CL_KEY is the caps lock key
- * ** LSFT_KEY and RLFT_KEY are the left shift and right shift keys
- * ** LCTRL_KEY and RCTRL_KEY are the left control and right control keys
- * ** LOPT_KEY and ROPT_KEY are the left option and right option keys
- * ** LCMD_KEY and RCMD_KEY are the left command and right command keys
- * ** LDEL_KEY and RDEL_KEY are the left delete and right delete keys
- * ** RTN_KEY is the return key
- * ** EJ_KEY is the eject key and doesn't react
- * ** PUP_KEY and PDOWN_KEY are the page up and page down keys
- * ** CLR_KEY is the clear key
- * */
+** Special keys
+** CL_KEY is the caps lock key
+** LSFT_KEY and RLFT_KEY are the left shift and right shift keys
+** LCTRL_KEY and RCTRL_KEY are the left control and right control keys
+** LOPT_KEY and ROPT_KEY are the left option and right option keys
+** LCMD_KEY and RCMD_KEY are the left command and right command keys
+** LDEL_KEY and RDEL_KEY are the left delete and right delete keys
+** RTN_KEY is the return key
+** EJ_KEY is the eject key and doesn't react
+** PUP_KEY and PDOWN_KEY are the page up and page down keys
+** CLR_KEY is the clear key
+*/
 
 # define ESC_KEY 53
 # define TAB_KEY 48
@@ -215,15 +228,15 @@
 # define CLR_KEY 71
 
 /*
- * ** Numeric keyboard keys, preceded by NK
- * ** NKEQ_KEY is the equal (=) key
- * ** NKSL_KEY is the slash (/) key
- * ** NKWC_KEY is the wildcard (*) key
- * ** NKMN_KEY is the minus (-) key
- * ** NKPL_KEY is the plus (+) key
- * ** NKPT_KEY is the point (.) key
- * ** NKNTR_KEY is the enter key
- * */
+** Numeric keyboard keys, preceded by NK
+** NKEQ_KEY is the equal (=) key
+** NKSL_KEY is the slash (/) key
+** NKWC_KEY is the wildcard (*) key
+** NKMN_KEY is the minus (-) key
+** NKPL_KEY is the plus (+) key
+** NKPT_KEY is the point (.) key
+** NKNTR_KEY is the enter key
+*/
 
 # define NK1_KEY 83
 # define NK2_KEY 84
@@ -243,11 +256,13 @@
 # define NKPT_KEY 65
 # define NKNTR_KEY 76
 
-#define UCHAR unsigned char
+/*
+** # define UCHAR unsigned char
+*/
 
-#define RED_COMP 2
-#define GREEN_COMP 1
-#define BLUE_COMP 0
-#define ALPHA_COMP 3
+# define RED_COMP 2
+# define GREEN_COMP 1
+# define BLUE_COMP 0
+# define ALPHA_COMP 3
 
 #endif
