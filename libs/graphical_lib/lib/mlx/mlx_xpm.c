@@ -95,7 +95,7 @@ int	mlx_int_get_text_rgb(char *name, char *end)
     return (strtol(name+1,0,16));
   if (end)
     {
-      snprintf(buff, 64, "%s %s", name, end);
+      //snprintf(buff, 64, "%s %s", name, end);
       name = buff;
     }
   i = 0;

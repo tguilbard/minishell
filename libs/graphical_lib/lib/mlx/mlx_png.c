@@ -339,7 +339,7 @@ int	mipng_verif_hdr(unsigned char *hdr, png_info_t *pi)
     pi->bpp *= 3;
   if (pi->color == 6)
     pi->bpp *= 4;
-  //  printf("hdr info : %d x %d, depth %d, col type %d, comp %d, filter %d, interlace %d\nbpp is %d\n",
+  printf("hdr info : %d x %d, depth %d, col type %d, comp %d, filter %d, interlace %d\nbpp is %d\n",
   //	 pi->width, pi->height, pi->depth, pi->color, compress, filter, pi->interlace, pi->bpp);
   return (0);
 }

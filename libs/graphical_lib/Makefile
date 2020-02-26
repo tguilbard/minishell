@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 09:02:30 by ldutriez          #+#    #+#              #
-#    Updated: 2019/12/03 08:36:17 by ldutriez         ###   ########.fr        #
+#    Updated: 2020/01/31 03:00:15 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC_DIR = 	$(shell find srcs -type d)
 INC_DIR = 	$(shell find includes -type d) $(shell find lib/mlx -type d)
 LIB_DIR =
 OBJ_DIR = 	obj
+MLX_OBJ_DIR = 	mlx_obj
 
 vpath %.c $(foreach dir, $(SRC_DIR), $(dir):) $(foreach dir, $(MLX_DIR), $(dir):)
 vpath %.m $(foreach dir, $(MLX_DIR), $(dir):)
@@ -32,15 +33,25 @@ LIB =
 MLX_SRC = mlx_shaders.c mlx_new_window.m mlx_init_loop.m mlx_new_image.m mlx_xpm.c \
 		mlx_int_str_to_wordtab.c mlx_png.c mlx_mouse.m
 
-SRC = $(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
+SRC = error_text.c application_behavior.c application_creators.c \
+	application_destructors.c application_event_catcher.c basic_convert.c \
+	basic_put.c basic_str1.c basic_str2.c ftoa.c color_behavior.c \
+	color_creators.c color_destructors.c draw_button.c draw_line.c \
+	draw_panel.c draw_primitive.c lgl_images_constructors.c \
+	lgl_images_destructors.c vector2_list_behavior.c vector2_list_creators.c \
+	vector2_list_destructors.c angle_functions.c calc_line.c f_power.c \
+	vector2_behavior.c vector2_constructors.c vector2_destructors.c \
+	vector2_normalize.c vector3_behavior.c vector3_constructors.c \
+	vector3_destructors.c vector4_behavior.c vector4_constructors.c \
+	vector4_destructors.c
 
 OBJ1 = $(MLX_SRC:%.c=%.o)
 OBJ2 = $(OBJ1:%.m=%.o)
-MLX_OBJ = $(addprefix $(OBJ_DIR)/, $(OBJ2))
+MLX_OBJ = $(addprefix $(MLX_OBJ_DIR)/, $(OBJ2))
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
 #Compilation flag
-CFLAGS = #-Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
 IFLAGS = $(foreach dir, $(INC_DIR), -I$(dir))
 
@@ -74,10 +85,16 @@ $(OBJ_DIR)/%.o : %.c
 				@$(CC) $(CFLAGS) $(IFLAGS) -o $@ -c $<
 				@echo "$(_GREEN)DONE$(_WHITE)"
 
-$(OBJ_DIR)/%.o : %.m
+$(MLX_OBJ_DIR)/%.o : %.c
+				@echo "Compiling $(_YELLOW)$@$(_WHITE) ... \c"
+				@mkdir -p $(MLX_OBJ_DIR)
+				@$(CC) -Wno-deprecated-declarations $(IFLAGS) -o $@ -c $<
+				@echo "$(_GREEN)DONE$(_WHITE)"
+
+$(MLX_OBJ_DIR)/%.o : %.m
 				@echo "Compiling $(_YELLOW)$@$(_WHITE) ... \c"
 				@mkdir -p $(OBJ_DIR)
-				@$(CC) $(CFLAGS) $(IFLAGS) -o $@ -c $<
+				@$(CC) -Wno-deprecated-declarations $(IFLAGS) -o $@ -c $<
 				@echo "$(_GREEN)DONE$(_WHITE)"
 
 $(NAME): 		$(MLX_OBJ) $(OBJ) Makefile
