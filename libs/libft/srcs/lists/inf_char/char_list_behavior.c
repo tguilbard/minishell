@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 16:23:39 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/26 19:46:41 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/02/26 21:15:11 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,26 @@ void			ft_char_list_push_back(t_char_list *list, char *to_add)
 		free(tmp);
 	}
 	list->data[i] = to_add;
+}
+
+void			ft_char_list_rm(t_char_list *list, char *to_rm)
+{
+	size_t	i;
+
+	i = 0;
+	while (list->data[i] != NULL && i < list->size)
+	{
+		if (ft_strcmp(list->data[i], to_rm) == 0)
+		{
+			free(list->data[i]);
+			list->data[i] = NULL;
+			while (list->data[i + 1] != NULL && i + 1 < list->size)
+			{
+				list->data[i] = list->data[i + 1];
+				i++;
+			}
+			break ;
+		}
+		i++;
+	}
 }

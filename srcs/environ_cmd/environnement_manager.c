@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_environ.c                                   :+:      :+:    :+:   */
+/*   environnement_manager.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:05:06 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/26 20:17:08 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/26 21:15:13 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,29 @@ void	set_environ(char **env)
 	while (i < len)
 	{
 		ft_char_list_push_back(&g_env, ft_strdup(env[i]));
+		i++;
+	}
+}
+
+void	mini_export(char *p_to_add)
+{
+	ft_char_list_push_back(&g_env, p_to_add);
+}
+
+void	mini_unset(char *p_to_remove)
+{
+	ft_char_rm(*g_env, p_to_remove);
+}
+
+void	mini_env(void)
+{
+	size_t	i;
+
+	i = 0;
+	while (g_env.data[i])
+	{
+		ft_putstr(g_env.data[i]);
+		ft_putchar('\n');
 		i++;
 	}
 }
