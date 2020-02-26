@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/06 13:43:02 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/26 16:07:14 by tguilbar         ###   ########.fr       */
+/*   Created: 2020/02/26 15:56:31 by tguilbar          #+#    #+#             */
+/*   Updated: 2020/02/26 16:21:20 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "minishell_include.h"
+void	mini_pwd(void)
+{
+	char	*buf;
+	char	*mem;
+	size_t	size;
 
-void	mini_pwd(void);
-void	mini_echo(char *p_str);
-void	help(void);
-
-#endif
+	buf = NULL;
+	mem = NULL;
+	size = 16;
+	while (buf == NULL)
+	{
+		free(mem);
+		buf = malloc(sizeof(char) * (size));
+		if (buf == NULL)
+			return ;
+		mem = buf;
+		buf = getcwd(buf, size);
+		size += 16;
+	}
+	ft_putstr(buf);
+	free(buf);
+}

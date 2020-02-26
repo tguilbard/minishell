@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/26 09:58:36 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/02/26 16:16:12 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,13 @@ __attribute__((destructor)) void no_crtl(void)
 
 void		treatment(char *p_str)
 {
-	if (strnstr(p_str, "echo", ft_strlen(p_str)))
+	if (strnstr(p_str, "echo", ft_strlen("echo")))
 	{
 		mini_echo(p_str);
+	}
+	if (strnstr(p_str, "pwd", ft_strlen("pwd")))
+	{
+		mini_pwd();
 	}
 }
 
