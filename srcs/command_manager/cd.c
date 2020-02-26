@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   mini_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/06 13:43:02 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/26 21:52:40 by tguilbar         ###   ########.fr       */
+/*   Created: 2020/02/26 21:29:09 by tguilbar          #+#    #+#             */
+/*   Updated: 2020/02/26 22:04:12 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "minishell_include.h"
-
-
-void	mini_pwd(void);
-void	mini_echo(char *p_str);
-void	mini_exit(void);
-void	mini_env(void);
-void	mini_export(char *p_str);
-void	mini_unset(char *p_str);
-void	mini_cd(char *path);
-void	help(void);
-void	mini_echo(char *p_str);
-void	set_environ(char **env);
-
-#endif
+void	mini_cd(char *path)
+{
+	if (path == NULL)
+	{
+		chdir("~");
+		return ;
+	}
+	if (chdir(path) == -1)
+		printf("No such file or directory\n");
+}
+/*
+** Modifier le PWD et OLDPWD de l'env
+*/

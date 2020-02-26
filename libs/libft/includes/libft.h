@@ -6,7 +6,7 @@
 /*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:06:39 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/26 19:46:40 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/02/26 21:53:56 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void			destroy_t_char_list(t_char_list to_delete);
 void			free_t_char_list(t_char_list *to_free);
 void			ft_chartab_cpy(char **old, char **new);
 void			ft_char_list_push_back(t_char_list *list, char *to_add);
+void			ft_char_list_rm(t_char_list *list, char *to_rm);
 
 /*
 ** Prototypage des IO.

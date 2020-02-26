@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/26 20:18:21 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/26 22:19:50 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,20 @@ __attribute__((destructor)) void no_crtl(void)
 
 void		treatment(char *p_str)
 {
-	if (strnstr(p_str, "echo", ft_strlen("echo")))
-	{
-		mini_echo(p_str);
-	}
-	if (strnstr(p_str, "pwd", ft_strlen("pwd")))
-	{
+	if (ft_strnstr(p_str, "echo", ft_strlen("echo")))
+		mini_echo(p_str + 5);
+	else if (ft_strnstr(p_str, "pwd", ft_strlen("pwd")))
 		mini_pwd();
-	}
+	else if (ft_strnstr(p_str, "env", ft_strlen("env")))
+		mini_env();
+	else if (ft_strnstr(p_str, "export", ft_strlen("export")))
+		mini_export(p_str + 7);
+	else if (ft_strnstr(p_str, "unset", ft_strlen("unset")))
+		mini_unset(p_str + 6);
+	else if (ft_strnstr(p_str, "cd", ft_strlen("cd")))
+		mini_cd(p_str + 3);
+	else if (ft_strnstr(p_str, "exit", ft_strlen("exit")))
+			mini_exit();
 }
 
 int			main(int ac __attribute__ ((unused)), char **av __attribute__ ((unused)), char **env)
@@ -69,6 +75,6 @@ int			main(int ac __attribute__ ((unused)), char **av __attribute__ ((unused)), 
 		free(str);
 		print_prompt(user);
 	}
-	write(1, "exit\n", 5);
-	exit (0);
+	mini_exit();
+	return (0);
 }
