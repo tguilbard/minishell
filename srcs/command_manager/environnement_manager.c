@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:05:06 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/26 22:26:49 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/26 23:44:21 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	mini_unset(char *p_to_remove)
 	{
 		if (ft_strnstr(g_env.data[i], p_to_remove, ft_strlen(p_to_remove)))
 		{
-			printf("%d\n", i);
 			ft_char_list_rm(&g_env, g_env.data[i]);
 			return ;
 		}

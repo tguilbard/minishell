@@ -6,7 +6,7 @@
 /*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:06:39 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/26 21:53:56 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/27 02:21:44 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,25 +92,6 @@ void			ft_lst_iter(t_list *lst, void (*f)(void*));
 t_list			*ft_lst_map(t_list *lst, void *(*f)(void*), void (*del)(void*));
 int				ft_lst_size(t_list *lst);
 void			ft_lst_rm_node(t_list **lst, size_t num, void (*del)(void*));
-
-/*
-**	List inf de char
-*/
-
-typedef struct	s_char_list
-{
-	char		**data;
-	size_t		size;
-}				t_char_list;
-
-char			**ft_chartab_new(size_t nb);
-t_char_list		create_char_list(size_t p_size);
-t_char_list		*malloc_char_list(size_t p_push_size);
-void			destroy_t_char_list(t_char_list to_delete);
-void			free_t_char_list(t_char_list *to_free);
-void			ft_chartab_cpy(char **old, char **new);
-void			ft_char_list_push_back(t_char_list *list, char *to_add);
-void			ft_char_list_rm(t_char_list *list, char *to_rm);
 
 /*
 ** Prototypage des IO.

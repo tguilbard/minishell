@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_cd.c                                          :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/26 21:29:09 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/26 22:04:12 by tguilbar         ###   ########.fr       */
+/*   Created: 2020/02/27 03:59:26 by ldutriez          #+#    #+#             */
+/*   Updated: 2020/02/27 04:02:26 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@ void	mini_cd(char *path)
 		return ;
 	}
 	if (chdir(path) == -1)
+	{
 		printf("No such file or directory\n");
+	}
+	else
+	{
+		ft_char_list_replace(&g_env, "PWD", "OLDPWD=");
+		ft_char_list_replace(&g_env, , "PWD=");
+	}
 }
 /*
 ** Modifier le PWD et OLDPWD de l'env

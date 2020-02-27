@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/26 22:19:50 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/26 23:45:12 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ __attribute__((destructor)) void no_crtl(void)
 		fork();
 }
 
-void		treatment(char *p_str)
+void		treatment(char *p_str) //J'ai l'impression qu'un foncteur fera l'affaire
 {
 	if (ft_strnstr(p_str, "echo", ft_strlen("echo")))
 		mini_echo(p_str + 5);
@@ -57,6 +57,11 @@ void		treatment(char *p_str)
 		mini_cd(p_str + 3);
 	else if (ft_strnstr(p_str, "exit", ft_strlen("exit")))
 			mini_exit();
+	else
+	{
+		ft_putstr(p_str);
+		ft_putstr(": command not found\n");
+	}
 }
 
 int			main(int ac __attribute__ ((unused)), char **av __attribute__ ((unused)), char **env)

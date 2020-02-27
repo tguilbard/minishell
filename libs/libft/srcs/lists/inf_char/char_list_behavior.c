@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 16:23:39 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/26 22:25:15 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/02/27 00:34:00 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,24 @@ void			ft_char_list_push_back(t_char_list *list, char *to_add)
 		free(tmp);
 	}
 	list->data[i] = to_add;
+}
+
+void			ft_char_list_replace(t_char_list *list, char *to_add,
+															char *breakpoint)
+{
+	size_t		i;
+
+	i = 0;
+	while (list->data[i] != NULL && i < list->size)
+	{
+		if (ft_strnstr(list->data[i], breakpoint, ft_strlen(breakpoint)))
+		{
+			free(list->data[i]);
+			list->data[i] = to_add;
+			return ;
+		}
+		i++;
+	}
 }
 
 void			ft_char_list_rm(t_char_list *list, char *to_rm)
