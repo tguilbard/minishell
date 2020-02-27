@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 02:19:30 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/27 02:21:40 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/02/27 11:58:13 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ void			free_t_char_list(t_char_list *to_free);
 void			ft_chartab_cpy(char **old, char **new);
 void			ft_char_list_push_back(t_char_list *list, char *to_add);
 void			ft_char_list_rm(t_char_list *list, char *to_rm);
+void			ft_char_list_replace(t_char_list *list, char *to_modif,
+															char *new);
 
 #endif
