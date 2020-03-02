@@ -6,13 +6,13 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:58:31 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/26 21:15:14 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/02 11:20:18 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	mini_exit()
+void	mini_exit(void)
 {
 	ft_putstr("exit\n");
 	exit(0);

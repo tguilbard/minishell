@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/26 23:45:12 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/02 11:32:52 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,7 @@ static char	*get_usr(char **p_env)
 	return (ft_strdup("unknow"));
 }
 
-__attribute__((destructor)) void no_crtl(void)
-{
-		fork();
-}
-
-void		treatment(char *p_str) //J'ai l'impression qu'un foncteur fera l'affaire
+void		treatment(char *p_str)
 {
 	if (ft_strnstr(p_str, "echo", ft_strlen("echo")))
 		mini_echo(p_str + 5);
@@ -56,7 +51,7 @@ void		treatment(char *p_str) //J'ai l'impression qu'un foncteur fera l'affaire
 	else if (ft_strnstr(p_str, "cd", ft_strlen("cd")))
 		mini_cd(p_str + 3);
 	else if (ft_strnstr(p_str, "exit", ft_strlen("exit")))
-			mini_exit();
+		mini_exit();
 	else
 	{
 		ft_putstr(p_str);
@@ -64,7 +59,8 @@ void		treatment(char *p_str) //J'ai l'impression qu'un foncteur fera l'affaire
 	}
 }
 
-int			main(int ac __attribute__ ((unused)), char **av __attribute__ ((unused)), char **env)
+int			main(int ac __attribute__((unused)),
+								char **av __attribute__((unused)), char **env)
 {
 	char *str;
 	char *user;
@@ -75,7 +71,6 @@ int			main(int ac __attribute__ ((unused)), char **av __attribute__ ((unused)), 
 	print_prompt(user);
 	while (get_next_line(0, &str))
 	{
-		//parsing
 		treatment(str);
 		free(str);
 		print_prompt(user);

@@ -1,34 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   help.c                                             :+:      :+:    :+:   */
+/*   environnement_manager2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/06 16:23:47 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/02 11:23:23 by tguilbar         ###   ########.fr       */
+/*   Created: 2020/03/02 11:14:34 by tguilbar          #+#    #+#             */
+/*   Updated: 2020/03/02 11:15:42 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	help(void)
-{
-	char	*line;
-	int		fd;
-	size_t	size;
+extern t_char_list	g_env;
 
-	fd = open("README.md", O_RDONLY);
-	while (get_next_line(fd, &line) == 1)
+void	mini_env(void)
+{
+	size_t	i;
+
+	i = 0;
+	while (g_env.data[i] != NULL)
 	{
-		size = ft_strlen(line);
-		write(1, line, size);
-		write(1, "\n", 1);
-		free(line);
+		ft_putstr(g_env.data[i]);
+		ft_putchar('\n');
+		i++;
 	}
-	size = ft_strlen(line);
-	write(1, line, size);
-	write(1, "\n", 1);
-	free(line);
-	close(fd);
+}
+
+void	set_environ(char **env)
+{
+	size_t	i;
+	size_t	len;
+
+	len = ft_tab_len((void**)env);
+	g_env = create_char_list(len);
+	i = 0;
+	while (i < len)
+	{
+		ft_char_list_push_back(&g_env, ft_strdup(env[i]));
+		i++;
+	}
 }
