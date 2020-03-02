@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 09:57:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/02 15:42:13 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/02 17:19:27 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@ extern t_char_list	g_env;
 
 void	mini_echo(char *p_str)
 {
-	if (execve("/bin/echo", p_str, g_env.data) == -1)
-		perror("minishell");
+	int		pid;
+	char	*param[2];
+
+	param[0] = p_str;
+	param[1] = 0;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		if (execve("/bin/echo", param - 1, NULL) == -1)
+			perror("minishell");
+	}
+	else
+		wait(NULL);
 }
