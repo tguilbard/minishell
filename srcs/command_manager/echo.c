@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 09:57:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/02 17:19:27 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/02 18:26:08 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	mini_echo(char *p_str)
 
 	param[0] = p_str;
 	param[1] = 0;
-
 	pid = fork();
 	if (pid == 0)
 	{

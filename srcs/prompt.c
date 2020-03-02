@@ -6,32 +6,33 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/03/02 20:04:00 by ldutriez         ###   ########.fr       */
+=======
+/*   Updated: 2020/03/02 18:14:49 by tguilbar         ###   ########.fr       */
+>>>>>>> e73b5159a986ebb7924978fe895e85fc9cfb5f0a
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_char_list	g_env;
 
 static void	print_prompt(char *user)
 {
 	write(1, user, ft_strlen(user));
 }
 
-static char	*get_usr(char **p_env)
+static char	*get_usr(void)
 {
 	char	*result;
 	int		index;
 
-	index = 0;
-	while (p_env[index])
+	index = find_env_var("USER");
+	if (index != -1)
 	{
-		result = strnstr(p_env[index], "USER=", 5);
-		if (result != NULL)
-		{
-			result = ft_strdup(result + 5);
-			return (result);
-		}
-		index++;
+		result = ft_strdup(g_env.data[index] + 5);
+		return (result);
 	}
 	return (ft_strdup("unknow"));
 }
@@ -98,7 +99,7 @@ int			main(int ac __attribute__((unused)),
 	char *user;
 
 	set_environ(env);
-	user = get_usr(env);
+	user = get_usr();
 	ft_str_add_suffix(&user, ":");
 	print_prompt(user);
 	while (get_next_line(0, &str))
@@ -107,6 +108,7 @@ int			main(int ac __attribute__((unused)),
 		ft_print_str_tab("args : ", check_param(str));
 		free(str);
 		print_prompt(user);
+		system("leaks miniShell");
 	}
 	mini_exit();
 	return (0);

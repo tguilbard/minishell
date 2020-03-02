@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 03:59:26 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/02 11:19:57 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/02 18:28:02 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,26 @@ extern t_char_list g_env;
 
 static void	find_oldpwd(size_t i)
 {
-	size_t j;
+	int j;
 
-	j = 0;
-	while (g_env.data[j] && j < g_env.size)
-	{
-		if (ft_strnstr(g_env.data[j], "OLDPWD", ft_strlen("OLDPWD")))
-			ft_char_list_replace(&g_env, g_env.data[j], ft_strjoin("OLD",
+	j = find_env_var("OLDPWD");
+	if (j != -1)
+		ft_char_list_replace(&g_env, g_env.data[j], ft_strjoin("OLD",
 																g_env.data[i]));
-		j++;
-	}
+}
+
+static void	change_pwd(size_t i)
+{
+	char *pwd;
+
+	pwd = get_pwd();
+	ft_str_add_prefixe("PWD=", &pwd);
+	ft_char_list_replace(&g_env, g_env.data[i], pwd);
 }
 
 void		mini_cd(char *path)
 {
-	size_t i;
+	size_t	i;
 
 	if (path == NULL)
 	{
@@ -49,8 +54,7 @@ void		mini_cd(char *path)
 			if (ft_strnstr(g_env.data[i], "PWD", ft_strlen("PWD")))
 			{
 				find_oldpwd(i);
-				ft_char_list_replace(&g_env, g_env.data[i], ft_strjoin("PWD=",
-																	get_pwd()));
+				change_pwd(i);
 			}
 			i++;
 		}
