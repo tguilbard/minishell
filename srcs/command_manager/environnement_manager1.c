@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:05:06 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/02 11:21:44 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/02 18:04:12 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,12 @@ int		find_env_var(char *find)
 			i++;
 		lst = ft_strsub(g_env.data[j], 0, i);
 		if (ft_strcmp(lst, find))
+		{
+			free(lst);
 			return (j);
+		}
 		j++;
+		free(lst);
 	}
 	return (-1);
 }
@@ -60,6 +64,7 @@ void	mini_export(char *p_to_add)
 		ft_char_list_replace(&g_env, g_env.data[i], ft_strdup(p_to_add));
 	else
 		ft_char_list_push_back(&g_env, ft_strdup(p_to_add));
+	free(find);
 }
 
 void	mini_unset(char *p_to_remove)
