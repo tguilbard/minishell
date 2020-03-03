@@ -6,11 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/03/02 20:04:00 by ldutriez         ###   ########.fr       */
-=======
-/*   Updated: 2020/03/02 18:14:49 by tguilbar         ###   ########.fr       */
->>>>>>> e73b5159a986ebb7924978fe895e85fc9cfb5f0a
+/*   Updated: 2020/03/03 14:04:36 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,37 +57,6 @@ static void		*find_command(char *p_str)
 	}
 }
 
-static char **check_param(char *param)
-{
-	void 	**result;
-	size_t	index;
-	size_t	start;
-
-	result = ft_tab_new(0);
-	index = 0;
-	start = 0;
-	while (param[index])
-	{
-		if (param[index] == ' ')
-		{
-			ft_add_to_tab((void*)ft_strsub(param, start, index - start), &result);
-			start = index + 1;
-		}
-		else if (param[index] == '"')
-		{
-			index++;
-			while (param[index] != '"')
-				index++;
-			ft_add_to_tab((void*)ft_strsub(param, start, index + 1 - start), &result);
-			start = index + 1;
-		}
-		else if (param[index + 1] == '\0')
-			ft_add_to_tab((void*)ft_strsub(param, start, index + 1 - start), &result);
-		index++;
-	}
-	return ((char**)result);
-}
-
 int			main(int ac __attribute__((unused)),
 								char **av __attribute__((unused)), char **env)
 {
@@ -105,10 +70,10 @@ int			main(int ac __attribute__((unused)),
 	while (get_next_line(0, &str))
 	{
 		//find_command(str);
-		ft_print_str_tab("args : ", check_param(str));
+		ft_print_str_tab("args : ", replace_environ(check_param(str)));
 		free(str);
 		print_prompt(user);
-		system("leaks miniShell");
+		// system("leaks miniShell");
 	}
 	mini_exit();
 	return (0);
