@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:29:30 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/03 15:17:01 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/03 20:03:06 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,40 @@ char		**check_param(char *param)
 		ft_add_to_tab((void*)ft_strsub(param, start, index - start), &result);
 	}
 	return ((char**)result);
+}
+
+static char	**rm_quotes(char **tab)
+{
+	size_t	i;
+	size_t	j;
+	char	*tmp;
+
+	i = 0;
+	j = 0;
+	while (tab[i])
+	{
+		j = 0;
+		while (tab[i][j])
+		{
+			if (tab[i][j] == 39)
+			{
+				tmp = tab[i];
+				tab[i] = ft_rm_charset(tab[i], "'");
+				free(tmp);
+				break;
+			}
+			else if (tab[i][j] == '"')
+			{
+				tmp = tab[i];
+				tab[i] = ft_rm_charset(tab[i], "\"");
+				free(tmp);
+				break;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (tab);
 }
 
 char	**replace_environ(char **result)
@@ -111,5 +145,5 @@ char	**replace_environ(char **result)
 		}
 		i++;
 	}
-	return (result);
+	return (rm_quotes(result));
 }
