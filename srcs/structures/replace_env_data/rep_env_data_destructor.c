@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_include.h                                :+:      :+:    :+:   */
+/*   rep_env_data_destructor.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/06 13:39:06 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/04 09:30:14 by ldutriez         ###   ########.fr       */
+/*   Created: 2020/03/04 09:29:01 by ldutriez          #+#    #+#             */
+/*   Updated: 2020/03/04 09:37:21 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_INCLUDE_H
-# define MINISHELL_INCLUDE_H
+#include "minishell.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "libft.h"
-# include "minishell_define.h"
-# include "minishell_replace_env_data.h"
+void	destroy_rep_env_data(t_rep_env_data p_info __attribute__ ((unused)))
+{
+	;
+}
 
-#endif
+void	free_rep_env_data(t_rep_env_data *p_info)
+{
+	destroy_rep_env_data(*p_info);
+	free(p_info);
+}

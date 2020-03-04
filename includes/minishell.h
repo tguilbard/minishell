@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:43:02 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/03 14:06:34 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/04 07:35:15 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	help(void);
 void	mini_echo(char *p_str);
 void	set_environ(char **env);
 int		find_env_var(char *find);
-char	**check_param(char *param);
-char	**replace_environ(char **result);
+char	**get_param(char *param);
 
 #endif

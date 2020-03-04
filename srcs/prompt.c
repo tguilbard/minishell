@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/03 14:04:36 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/04 09:16:34 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int			main(int ac __attribute__((unused)),
 {
 	char *str;
 	char *user;
+	char **param;
 
 	set_environ(env);
 	user = get_usr();
@@ -70,11 +71,12 @@ int			main(int ac __attribute__((unused)),
 	while (get_next_line(0, &str))
 	{
 		//find_command(str);
-		ft_print_str_tab("args : ", replace_environ(check_param(str)));
+		ft_print_str_tab("ARGS", param = get_param(str));
 		free(str);
 		print_prompt(user);
 		// system("leaks miniShell");
 	}
+	ft_free_tab((void**)param);
 	mini_exit();
 	return (0);
 }

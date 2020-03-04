@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:29:30 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/03 20:03:06 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/04 10:05:47 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,115 @@ static void	jump_quotes(char *param, size_t *index)
 		(*index)++;
 }
 
-char		**check_param(char *param)
+static char *rm_quote(char *p_str, char *type)
+{
+	char *tmp;
+
+	tmp = p_str;
+	if (ft_strcmp(type, "simple"))
+		p_str = ft_rm_charset(p_str, "'");
+	else if (ft_strcmp(type, "double"))
+		p_str = ft_rm_charset(p_str, "\"");
+	free(tmp);
+	return (p_str);
+}
+
+static char	**quotes_parsing(char **tab)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (tab[i])
+	{
+		j = 0;
+		while (tab[i][j])
+		{
+			if (tab[i][j] == 39)
+			{
+				tab[i] = rm_quote(tab[i], "simple");
+				break;
+			}
+			else if (tab[i][j] == '"')
+			{
+				tab[i] = rm_quote(tab[i], "double");
+				break;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (tab);
+}
+static t_bool	is_raw(t_rep_env_data info)
+{
+
+}
+
+static char	**replace_environ(char **result)
+{
+	t_rep_env_data	info;
+
+	info = create_rep_env_data();
+	while (result[info.i])
+	{
+		info.j = 0;
+		while (result[info.i][info.j] && result[info.i][info.j] != 39 && result[info.i][info.j] != 34)
+			info.j++;
+		if (result[info.i][info.j] == 39)
+			info.raw_text = true;
+		else if (result[info.i][info.j] == 34 || result[info.i][info.j] == 0)
+			info.raw_text = false;
+		info.j = 0;
+		while (result[info.i] && result[info.i][info.j])
+		{
+			if (result[info.i][info.j] == '$' && ft_is_alpha_num(result[info.i][info.j + 1]) && info.raw_text == false)
+			{
+				info.start = info.j;
+				info.len = 1;
+				while(ft_is_alpha_num(result[info.i][info.j + info.len]))
+					info.len++;
+				info.str = ft_strsub(result[info.i], info.start + 1, info.len - 1);
+				info.ret = find_env_var(info.str);
+				free(info.str);
+				info.new = ft_strsub(result[info.i], 0, info.start);
+				if (info.ret != -1)
+				{
+					info.str = ft_strdup(g_env.data[info.ret] + info.len);
+					if (info.new != NULL)
+					{
+						ft_str_add_suffix(&info.new, info.str);
+						free(info.str);
+					}
+					else
+						info.new = info.str;
+				}
+				info.str = ft_strdup(result[info.i] + info.start + info.len);
+				ft_str_add_suffix(&info.new, info.str);
+				free(info.str);
+				free(result[info.i]);
+				result[info.i] = info.new;
+				if (info.ret != -1)
+					info.j = ft_strlen(g_env.data[info.ret]) - (info.len + 1) + info.start;
+			}
+			else if (result[info.i][info.j] == 39 && result[info.i][info.j + 1] && info.raw_text == true)
+			{
+				info.j++;
+				while (result[info.i][info.j + 1] && result[info.i][info.j + 1] != 39)
+					info.j++;	//heap buffer overflow car tu peux avamcer trop loin. (info.j'ai rajouté + 1)
+							//&& Si pas de deuxieme quote, revenir en arriere pour parser,
+							//ou alors ne pas parser la simple quote quand entre double quote <------
+				info.j++;
+			}
+			else
+				info.j++;
+		}
+		info.i++;
+	}
+	return (quotes_parsing(result));
+}
+
+char		**get_param(char *param)
 {
 	void 	**result;
 	size_t	index;
@@ -51,99 +159,5 @@ char		**check_param(char *param)
 		}
 		ft_add_to_tab((void*)ft_strsub(param, start, index - start), &result);
 	}
-	return ((char**)result);
-}
-
-static char	**rm_quotes(char **tab)
-{
-	size_t	i;
-	size_t	j;
-	char	*tmp;
-
-	i = 0;
-	j = 0;
-	while (tab[i])
-	{
-		j = 0;
-		while (tab[i][j])
-		{
-			if (tab[i][j] == 39)
-			{
-				tmp = tab[i];
-				tab[i] = ft_rm_charset(tab[i], "'");
-				free(tmp);
-				break;
-			}
-			else if (tab[i][j] == '"')
-			{
-				tmp = tab[i];
-				tab[i] = ft_rm_charset(tab[i], "\"");
-				free(tmp);
-				break;
-			}
-			j++;
-		}
-		i++;
-	}
-	return (tab);
-}
-
-char	**replace_environ(char **result)
-{
-	size_t	i;
-	size_t	j;
-	size_t	start;
-	size_t	len;
-	int		ret;
-	char	*str;
-	char	*new;
-
-	i = 0;
-	while (result[i])
-	{
-		j = 0;
-		while (result[i] && result[i][j])
-		{
-			if (result[i][j] == '$' && ft_is_alpha_num(result[i][j + 1]))
-			{
-				start = j;
-				len = 1;
-				while(ft_is_alpha_num(result[i][j + len]))
-					len++;
-				str = ft_strsub(result[i], start + 1, len - 1);
-				ret = find_env_var(str);
-				free(str);
-				new = ft_strsub(result[i], 0, start);
-				if (ret != -1)
-				{
-					str = ft_strdup(g_env.data[ret] + len);
-					if (new != NULL)
-					{
-						ft_str_add_suffix(&new, str);
-						free(str);
-					}
-					else
-						new = str;
-				}
-				str = ft_strdup(result[i] + start + len);
-				ft_str_add_suffix(&new, str);
-				free(str);
-				free(result[i]);
-				result[i] = new;
-				if (ret != -1)
-					j = ft_strlen(g_env.data[ret]) - (len + 1) + start;
-			}
-			else if (result[i][j] == 39)
-			{
-				j++;
-				while (result[i][j] && result[i][j] != 39)
-					j++;
-				j++;
-			}
-			else
-				j++;
-		}
-		i++;
-	}
-	return (rm_quotes(result));
+	return (replace_environ((char**)result));
 }
