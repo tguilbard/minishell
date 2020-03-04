@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 09:22:55 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/04 09:27:54 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/04 12:02:47 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,23 @@ typedef struct	s_rep_env_data
 	char		*new;
 }				t_rep_env_data;
 
+/*
+**	Normal behavior functions
+*/
+
 t_rep_env_data	create_rep_env_data(void);
 t_rep_env_data	*malloc_rep_env_data(void);
 void			destroy_rep_env_data(t_rep_env_data p_info);
 void			free_rep_env_data(t_rep_env_data *p_info);
+
+/*
+**	Parsing functions
+*/
+
+void		jump_quotes(char *param, size_t *index);
+char		*rm_quote(char *p_str, char *type);
+t_bool		is_raw(char **result, t_rep_env_data info);
+void		env_var_missing(t_rep_env_data *info);
+void		put_env_to_text(char ***result, t_rep_env_data *info);
 
 #endif

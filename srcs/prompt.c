@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/04 09:16:34 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/04 13:44:37 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 extern t_char_list	g_env;
 
-static void	print_prompt(char *user)
+static void		print_prompt(char *user)
 {
 	write(1, user, ft_strlen(user));
 }
 
-static char	*get_usr(void)
+static char		*get_usr(void)
 {
 	char	*result;
 	int		index;
@@ -57,7 +57,7 @@ static void		*find_command(char *p_str)
 	}
 }
 
-int			main(int ac __attribute__((unused)),
+int				main(int ac __attribute__((unused)),
 								char **av __attribute__((unused)), char **env)
 {
 	char *str;

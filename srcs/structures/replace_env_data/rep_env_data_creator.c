@@ -6,13 +6,13 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 09:28:12 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/04 09:35:27 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/04 13:43:39 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_rep_env_data	create_rep_env_data()
+t_rep_env_data	create_rep_env_data(void)
 {
 	t_rep_env_data result;
 
@@ -27,7 +27,7 @@ t_rep_env_data	create_rep_env_data()
 	return (result);
 }
 
-t_rep_env_data	*malloc_rep_env_data()
+t_rep_env_data	*malloc_rep_env_data(void)
 {
 	t_rep_env_data *result;
 
