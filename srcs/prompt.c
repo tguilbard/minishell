@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/05 20:46:27 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/05 21:03:10 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void		*find_command(char *p_str)
 		return (&mini_unset);
 	else if (ft_strcmp(p_str, "cd"))
 		return (&mini_cd);
+	else if (ft_strcmp(p_str, "help"))
+		return (&help);
 	else if (ft_strcmp(p_str, "exit"))
 		return (&mini_exit);
 	else
