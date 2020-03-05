@@ -6,7 +6,7 @@
 /*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 14:50:02 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/01/13 14:52:22 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/05 23:04:29 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,9 @@ typedef enum	e_bool
 	true = 1,
 	false = 0,
 }				t_bool;
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
 
 #endif

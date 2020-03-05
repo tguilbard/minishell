@@ -6,18 +6,14 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/05 21:03:10 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/05 23:23:21 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_char_list	g_env;
-
-static void		print_prompt(char *user)
-{
-	write(1, user, ft_strlen(user));
-}
+int					g_env_fd[2];
 
 static char		*get_usr(void)
 {
@@ -31,6 +27,32 @@ static char		*get_usr(void)
 		return (result);
 	}
 	return (ft_strdup("unknow"));
+}
+
+static void		print_prompt(void)
+{
+	int		i;
+	int		last;
+	char	*str[2];
+
+	str[0] = get_pwd();
+	i = 0;
+	last = 0;
+	while (str[0][i])
+	{
+		if (str[0][i] == '/')
+			last = i;
+		i++;
+	}
+	str[1] = ft_strsub(str[0], last, i - last);
+	free(str[0]);
+	ft_putstr(str[1]);
+	free(str[1]);
+	ft_putstr(" (");
+	str[0] = get_usr();
+	ft_putstr(str[0]);
+	free(str[0]);
+	ft_putstr("):");
 }
 
 static void		*find_command(char *p_str)
@@ -66,27 +88,68 @@ static void		apply_function(void (*f)(char **param), char **param)
 	f(param);
 }
 
-static void		main_execution(char *user)
+static void		main_execution(void)
 {
 	char *str;
 	char **param;
 
 	param = NULL;
-	print_prompt(user);
+	print_prompt();
 	while (get_next_line(0, &str))
 	{
-		//find_command(str);
 		param = get_param(str);
 		apply_function(find_command(param[0]), &(param[1]));
 		free(str);
-		print_prompt(user);
-		// system("leaks miniShell");
+		print_prompt();
+		ft_free_tab((void**)param);
 	}
-	ft_free_tab((void**)param);
 	mini_exit();
 }
 
-void forker(char *user)
+void	child_killer(int sig)
+{
+	int	i;
+
+	i = 0;
+	(void)sig;
+	close(g_env_fd[0]);
+	while (g_env.data[i])
+	{
+		write(g_env_fd[1], g_env.data[i], ft_strlen(g_env.data[i]));
+		write(g_env_fd[1], "\n", 1);
+		i++;
+	}
+	close(g_env_fd[1]);
+	exit(1);
+}
+
+void take_environ(void)
+{
+	char	*str;
+	int		ret;
+	char	**tab;
+
+	tab = (char	**)ft_tab_new(0);
+	close(g_env_fd[1]);
+	ret = 1;
+	while ((ret = get_next_line(g_env_fd[0], &str)) != -1)
+	{
+		if (ret == 0)
+		{
+			destroy_t_char_list(g_env);
+			g_env = create_char_list(ft_tab_len((void **)tab));
+			g_env.data = (char **)ft_tab_cpy((void **)g_env.data, (void **)tab);
+			free(tab);
+			close(g_env_fd[0]);
+			return ;
+		}
+		ft_add_to_tab((void *)str, (void ***)&tab);
+	}
+	ft_putstr("relink failed");
+	exit (0);
+}
+
+void			forker(void)
 {
 	int status;
 	int	pid;
@@ -96,18 +159,26 @@ void forker(char *user)
 	signal(SIGINT, SIG_IGN);
 	while (pid != 0 && status != 0)
 	{
+		if (pipe(g_env_fd) == -1)
+		{
+			ft_putstr("relink failed");
+			exit (0);
+		}
 		if ((pid = fork()) == -1)
 			ft_putstr("fork failed");
 		if (pid == 0)
 		{
-			signal(SIGINT, SIG_DFL);
-			main_execution(user);
+			signal(SIGINT, child_killer);
+			main_execution();
 		}
 		else
 		{
 			waitpid(pid, &status, 0);
 			if (status != 0)
+			{
+				take_environ();
 				ft_putchar('\n');
+			}
 		}
 	}
 }
@@ -115,11 +186,7 @@ void forker(char *user)
 int				main(int ac __attribute__((unused)),
 								char **av __attribute__((unused)), char **env)
 {
-	char *user;
-
 	set_environ(env);
-	user = get_usr();
-	ft_str_add_suffix(&user, ":");
-	forker(user);
+	forker();
 	return (0);
 }

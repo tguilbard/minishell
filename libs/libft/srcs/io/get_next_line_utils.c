@@ -3,122 +3,102 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/29 23:52:50 by ldutriez          #+#    #+#             */
-/*   Updated: 2019/12/16 11:56:24 by ldutriez         ###   ########.fr       */
+/*   Created: 2019/11/11 15:31:24 by tguilbar          #+#    #+#             */
+/*   Updated: 2020/03/05 23:05:17 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_rm_line(char *bucket)
+unsigned int	strlen2(char *s1, char *s2, int type)
 {
-	int		i;
-	int		j;
-	char	*str;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	while (bucket[i] && bucket[i] != '\n')
-		i++;
-	if (!bucket[i])
-	{
-		free(bucket);
-		return (0);
-	}
-	if (!(str = malloc(sizeof(char) * (ft_slen_eol(bucket, STRLEN) - i + 1))))
-		return (0);
-	i++;
-	while (bucket[i])
-	{
-		str[j] = bucket[i];
-		i++;
-		j++;
-	}
-	str[j] = '\0';
-	free(bucket);
-	return (str);
-}
-
-int		ft_slen_eol(const char *str, int use)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	if (use == STRLEN)
-	{
-		while (str[i])
+	if (s1)
+		while (s1[i] && (type == 0 || (type == 1 && s1[i] != '\n')))
 			i++;
-		return (i);
-	}
-	else if (use == EOL)
+	if (type == 0)
 	{
-		while (str[i])
-		{
-			if (str[i] == '\n')
-				return (1);
-			i++;
-		}
-		return (0);
+		while (s2[j])
+			j++;
+		return (i + j);
 	}
-	return (IS_AN_ERROR);
+	if (!s1)
+		return (1);
+	else if (s1[i] != '\n')
+		return (1);
+	return (0);
 }
 
-void	*ft_memmove(void *dst, const void *src, unsigned int len)
+int				check_create(int fd, t_list_gnl **l1)
 {
-	char	*d;
-	char	*s;
+	t_list_gnl	*new;
+	t_list_gnl	*lst;
 
-	if (dst == src)
-		return (dst);
-	d = (char *)dst;
-	s = (char *)src;
-	if (s > d)
-		while (len--)
-			*d++ = *s++;
-	else if (s < d)
-		while (len--)
-			*(d + len) = *(s + len);
-	return (dst);
-}
-
-char	*ft_stradd(char const *bucket, char const *cup)
-{
-	char			*str;
-	unsigned int	n;
-
-	if (!bucket && !cup)
-		return (0);
-	n = (ft_slen_eol(bucket, STRLEN) + ft_slen_eol(cup, STRLEN) + 1);
-	if (!(str = (char*)malloc(sizeof(char) * n)))
-		return (0);
-	ft_memmove(str, bucket, ft_slen_eol(bucket, STRLEN));
-	ft_memmove(str + ft_slen_eol(bucket, STRLEN),
-		cup, ft_slen_eol(cup, STRLEN));
-	str[ft_slen_eol(bucket, STRLEN) + ft_slen_eol(cup, STRLEN)] = '\0';
-	free((void*)bucket);
-	return (str);
-}
-
-char	*ft_makeline(char *bucket)
-{
-	int		i;
-	char	*str;
-
-	i = 0;
-	while (bucket[i] && bucket[i] != '\n')
-		i++;
-	if (!(str = malloc(sizeof(char) * (i + 1))))
-		return (0);
-	i = 0;
-	while (bucket[i] && bucket[i] != '\n')
+	lst = *l1;
+	while (lst)
 	{
-		str[i] = bucket[i];
-		i++;
+		if (lst->fd == fd)
+			return (0);
+		lst = lst->next;
 	}
-	str[i] = '\0';
-	return (str);
+	if (!(new = malloc(sizeof(t_list_gnl))))
+		return (-1);
+	new->fd = fd;
+	new->next = *l1;
+	new->stock = NULL;
+	*l1 = new;
+	return (0);
+}
+
+t_list_gnl			*fb(int fd, t_list_gnl **l1)
+{
+	t_list_gnl *lst;
+
+	lst = *l1;
+	while (lst)
+	{
+		if (lst->fd == fd)
+			return (lst);
+		lst = lst->next;
+	}
+	return (NULL);
+}
+
+void			del_lst(t_list_gnl *l)
+{
+	free(l->stock);
+	l->stock = NULL;
+	free(l);
+	l = NULL;
+}
+
+void			rm_lst(int fd, t_list_gnl **lst)
+{
+	t_list_gnl *lst1;
+	t_list_gnl *lst2;
+
+	if ((*lst)->fd == fd)
+	{
+		lst1 = *lst;
+		*lst = lst1->next;
+		del_lst(lst1);
+		return ;
+	}
+	lst1 = *lst;
+	lst2 = lst1->next;
+	while (lst2->fd != fd)
+	{
+		if (!lst2)
+			return ;
+		lst1 = lst2;
+		lst2 = lst1->next;
+	}
+	lst1->next = lst2->next;
+	del_lst(lst2);
 }

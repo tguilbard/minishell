@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:05:06 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/05 12:20:58 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/05 21:38:43 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_bool	check_entry_export(char *p_to_add)
 void	mini_export(char **p_to_add)
 {
 	size_t	i;
-	size_t j;
+	size_t	j;
 	char	*find;
 
 	j = 0;

@@ -6,7 +6,7 @@
 /*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:06:39 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/27 02:21:44 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/05 23:17:30 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void			ft_print_int_tab(char *p_name, int *p_tab, size_t len);
 void			**ft_tab_new(int size);
 int				ft_tab_len(void	**tab);
 void			ft_free_tab(void **tab);
-void			ft_tab_cpy(void **dst, void **src);
+void			**ft_tab_cpy(void **dst, void **src);
 void			ft_add_to_tab(void *to_add, void ***tab);
 
 #endif
