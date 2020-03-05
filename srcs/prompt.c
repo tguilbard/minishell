@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/05 11:16:14 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/05 13:10:13 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,20 @@ static char		*get_usr(void)
 
 static void		*find_command(char *p_str)
 {
-	if (ft_strnstr(p_str, "echo", ft_strlen("echo")))
-		return (&mini_echo); //param
-	else if (ft_strnstr(p_str, "pwd", ft_strlen("pwd")))
+	if (ft_strcmp(p_str, "echo"))
+		return (&mini_echo);
+	else if (ft_strcmp(p_str, "pwd"))
 		return (&mini_pwd);
-	else if (ft_strnstr(p_str, "env", ft_strlen("env")))
+	else if (ft_strcmp(p_str, "env"))
 		return (&mini_env);
-	else if (ft_strnstr(p_str, "export", ft_strlen("export")))
-		return (&mini_export);//param
-	else if (ft_strnstr(p_str, "unset", ft_strlen("unset")))
-		return (&mini_unset);//param
-	else if (ft_strnstr(p_str, "cd", ft_strlen("cd")))
-		return (&mini_cd);//param
-	else if (ft_strnstr(p_str, "exit", ft_strlen("exit")))
-		return (&mini_exit);//param
+	else if (ft_strcmp(p_str, "export"))
+		return (&mini_export);
+	else if (ft_strcmp(p_str, "unset"))
+		return (&mini_unset);
+	else if (ft_strcmp(p_str, "cd"))
+		return (&mini_cd);
+	else if (ft_strcmp(p_str, "exit"))
+		return (&mini_exit);
 	else
 	{
 		ft_putstr(p_str);
@@ -57,15 +57,23 @@ static void		*find_command(char *p_str)
 	}
 }
 
+static void		apply_function(void (*f)(char **param), char **param)
+{
+	f(param);
+}
+
 static void		main_execution(char *user)
 {
 	char *str;
+	char **param;
 
+	param = NULL;
 	print_prompt(user);
 	while (get_next_line(0, &str))
 	{
 		//find_command(str);
-		ft_print_str_tab("ARGS", param = get_param(str));
+		param = get_param(str);
+		apply_function(find_command(param[0]), &(param[1]));
 		free(str);
 		print_prompt(user);
 		// system("leaks miniShell");
@@ -74,12 +82,37 @@ static void		main_execution(char *user)
 	mini_exit();
 }
 
+void forker(char *user)
+{
+	int status;
+	int	pid;
+
+	pid = 1;
+	status = 2;
+	signal(SIGINT, SIG_IGN);
+	while (pid != 0 && status != 0)
+	{
+		// printf("new\n");
+		if ((pid = fork()) == -1)
+			ft_putstr("fork failed");
+		if (pid == 0)
+		{
+			signal(SIGINT, SIG_DFL);
+			main_execution(user);
+		}
+		else
+		{
+			waitpid(pid, &status, 0);
+			ft_putchar('\n');
+		}
+	}
+	// printf("fin\n");
+}
 
 int				main(int ac __attribute__((unused)),
 								char **av __attribute__((unused)), char **env)
 {
 	char *user;
-	char **param;
 
 	set_environ(env);
 	user = get_usr();

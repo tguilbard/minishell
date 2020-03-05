@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 08:17:15 by ldutriez          #+#    #+#              #
-#    Updated: 2020/03/05 11:17:46 by ldutriez         ###   ########.fr        #
+#    Updated: 2020/03/05 13:12:50 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,13 +70,13 @@ show:
 				@echo "$(_BLUE)INC_DIR :\n$(_YELLOW)$(INC_DIR)$(_WHITE)"
 
 install:
-				$(foreach dir, $(LIB_DIR), make -C $(dir) ; )
+				@$(foreach dir, $(LIB_DIR), make -C $(dir) ; )
 
 re-install:
-				$(foreach dir, $(LIB_DIR), make -C $(dir) re ; )
+				@$(foreach dir, $(LIB_DIR), make -C $(dir) re ; )
 
 uninstall:
-				$(foreach dir, $(LIB_DIR), make -C $(dir) fclean ; )
+				@$(foreach dir, $(LIB_DIR), make -C $(dir) fclean ; )
 
 $(OBJ_DIR)/%.o : %.c
 				@echo "Compiling $(_YELLOW)$@$(_WHITE) ... \c"

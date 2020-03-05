@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:05:06 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/02 18:04:12 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/05 12:20:58 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,31 +49,43 @@ t_bool	check_entry_export(char *p_to_add)
 	return (false);
 }
 
-void	mini_export(char *p_to_add)
+void	mini_export(char **p_to_add)
 {
 	size_t	i;
+	size_t j;
 	char	*find;
 
-	i = 0;
-	if (check_entry_export(p_to_add) == false)
-		return ;
-	while (p_to_add[i] != '=' && p_to_add[i])
-		i++;
-	find = ft_strsub(p_to_add, 0, i);
-	if ((i = find_env_var(find)) != -1)
-		ft_char_list_replace(&g_env, g_env.data[i], ft_strdup(p_to_add));
-	else
-		ft_char_list_push_back(&g_env, ft_strdup(p_to_add));
-	free(find);
+	j = 0;
+	while (p_to_add[j])
+	{
+		i = 0;
+		if (check_entry_export(p_to_add[j]) == false)
+			return ;
+		while (p_to_add[j][i] != '=' && p_to_add[j][i])
+			i++;
+		find = ft_strsub(p_to_add[j], 0, i);
+		if ((i = find_env_var(find)) != -1)
+			ft_char_list_replace(&g_env, g_env.data[i], ft_strdup(p_to_add[j]));
+		else
+			ft_char_list_push_back(&g_env, ft_strdup(p_to_add[j]));
+		free(find);
+		j++;
+	}
 }
 
-void	mini_unset(char *p_to_remove)
+void	mini_unset(char **p_to_remove)
 {
 	size_t i;
+	size_t j;
 
-	if ((i = find_env_var(p_to_remove)) != -1)
+	j = 0;
+	while (p_to_remove[j])
 	{
-		ft_char_list_rm(&g_env, g_env.data[i]);
-		return ;
+		if ((i = find_env_var(p_to_remove[j])) != -1)
+		{
+			ft_char_list_rm(&g_env, g_env.data[i]);
+			return ;
+		}
+		j++;
 	}
 }
