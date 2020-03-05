@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 11:59:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/04 13:24:16 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/05 09:49:20 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,15 @@ void		jump_quotes(char *param, size_t *index)
 char		*rm_quote(char *p_str, char *type)
 {
 	char *tmp;
+	char to_del[2];
 
+	to_del[0] = '\"';
+	to_del[1] = '\0';
 	tmp = p_str;
 	if (ft_strcmp(type, "simple"))
-		p_str = ft_rm_charset(p_str, "'");
+		p_str = ft_rm_charset(p_str, "\'");
 	else if (ft_strcmp(type, "double"))
-		p_str = ft_rm_charset(p_str, "'\"'");
+		p_str = ft_rm_charset(p_str, to_del);
 	free(tmp);
 	return (p_str);
 }
@@ -55,7 +58,7 @@ char		*rm_quote(char *p_str, char *type)
 
 t_bool		is_raw(char **result, t_rep_env_data info)
 {
-	while (result[info.i][info.j]
+	while (result[info.i][info.j] != '\0'
 												&& result[info.i][info.j] != 39
 												&& result[info.i][info.j] != 34)
 		info.j++;

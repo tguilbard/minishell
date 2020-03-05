@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 08:17:15 by ldutriez          #+#    #+#              #
-#    Updated: 2020/03/04 09:16:40 by ldutriez         ###   ########.fr        #
+#    Updated: 2020/03/05 11:17:46 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,9 @@ install:
 re-install:
 				$(foreach dir, $(LIB_DIR), make -C $(dir) re ; )
 
+uninstall:
+				$(foreach dir, $(LIB_DIR), make -C $(dir) fclean ; )
+
 $(OBJ_DIR)/%.o : %.c
 				@echo "Compiling $(_YELLOW)$@$(_WHITE) ... \c"
 				@mkdir -p $(OBJ_DIR)
@@ -109,4 +112,4 @@ fclean:			clean
 				@rm -f $(NAME) $(BONUS_NAME)
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
-.PHONY: all clean flcean re install re-install show norme #bonus
+.PHONY: all clean flcean re install re-install show norme uninstall #bonus

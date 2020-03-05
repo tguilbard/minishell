@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:29:30 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/04 12:04:39 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/05 10:08:02 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char		**quotes_parsing(char **tab)
 				tab[i] = rm_quote(tab[i], "simple");
 				break ;
 			}
-			else if (tab[i][j] == '"')
+			else if (tab[i][j] == '\"')
 			{
 				tab[i] = rm_quote(tab[i], "double");
 				break ;

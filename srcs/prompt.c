@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/04 13:44:37 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/05 11:16:14 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,10 @@ static void		*find_command(char *p_str)
 	}
 }
 
-int				main(int ac __attribute__((unused)),
-								char **av __attribute__((unused)), char **env)
+static void		main_execution(char *user)
 {
 	char *str;
-	char *user;
-	char **param;
 
-	set_environ(env);
-	user = get_usr();
-	ft_str_add_suffix(&user, ":");
 	print_prompt(user);
 	while (get_next_line(0, &str))
 	{
@@ -78,5 +72,18 @@ int				main(int ac __attribute__((unused)),
 	}
 	ft_free_tab((void**)param);
 	mini_exit();
+}
+
+
+int				main(int ac __attribute__((unused)),
+								char **av __attribute__((unused)), char **env)
+{
+	char *user;
+	char **param;
+
+	set_environ(env);
+	user = get_usr();
+	ft_str_add_suffix(&user, ":");
+	forker(user);
 	return (0);
 }
