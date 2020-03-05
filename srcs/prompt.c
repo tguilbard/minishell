@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/05 13:10:13 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/05 20:46:27 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static void		*find_command(char *p_str)
 
 static void		apply_function(void (*f)(char **param), char **param)
 {
+	if (f == NULL)
+		return ;
 	f(param);
 }
 
@@ -92,7 +94,6 @@ void forker(char *user)
 	signal(SIGINT, SIG_IGN);
 	while (pid != 0 && status != 0)
 	{
-		// printf("new\n");
 		if ((pid = fork()) == -1)
 			ft_putstr("fork failed");
 		if (pid == 0)
@@ -103,10 +104,10 @@ void forker(char *user)
 		else
 		{
 			waitpid(pid, &status, 0);
-			ft_putchar('\n');
+			if (status != 0)
+				ft_putchar('\n');
 		}
 	}
-	// printf("fin\n");
 }
 
 int				main(int ac __attribute__((unused)),

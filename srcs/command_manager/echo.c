@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 09:57:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/05 12:21:53 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/05 20:43:26 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	mini_echo(char **p_param)
 	if (pid == 0)
 	{
 		if (execve("/bin/echo", p_param - 1, g_env.data) == -1)
-			perror("minishell");
+			ft_putstr("echo: invalide param");
 	}
 	else
 		wait(NULL);
