@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 09:28:12 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/04 13:43:39 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/06 08:57:33 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_rep_env_data	create_rep_env_data(void)
 
 	result.i = 0;
 	result.j = 0;
+	result.n = 0;
 	result.start = 0;
 	result.len = 0;
 	result.raw_text = false;

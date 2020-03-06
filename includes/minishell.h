@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:43:02 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/05 20:45:55 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/06 10:13:06 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	mini_cd(char **path);
 void	help(void);
 void	set_environ(char **env);
 int		find_env_var(char *find);
-char	**get_param(char *param);
+char	***get_param(char *param);
 
 #endif

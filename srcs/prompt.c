@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/05 23:23:21 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/06 10:21:04 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,28 @@ static void		apply_function(void (*f)(char **param), char **param)
 
 static void		main_execution(void)
 {
-	char *str;
-	char **param;
+	char	*str;
+	char	***param;
+	size_t	n;
 
 	param = NULL;
 	print_prompt();
 	while (get_next_line(0, &str))
 	{
+		n = 0;
 		param = get_param(str);
-		apply_function(find_command(param[0]), &(param[1]));
+		while (param[n])
+		{
+			apply_function(find_command(param[n][0]), &(param[n][1]));
+			n++;
+		}
 		free(str);
 		print_prompt();
-		ft_free_tab((void**)param);
+		while (param[n])
+		{
+			ft_free_tab((void**)param[n]);
+			n++;
+		}
 	}
 	mini_exit();
 }

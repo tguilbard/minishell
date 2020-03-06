@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 11:59:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/05 09:49:20 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/06 10:40:56 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,13 @@ char		*rm_quote(char *p_str, char *type)
 t_bool		is_raw(char **result, t_rep_env_data info)
 {
 	while (result[info.i][info.j] != '\0'
-												&& result[info.i][info.j] != 39
-												&& result[info.i][info.j] != 34)
+										&& result[info.i][info.j] != 39
+										&& result[info.i][info.j] != 34)
 		info.j++;
 	if (result[info.i][info.j] == 39)
 		return (true);
-	else if (result[info.i][info.j] == 34 || result[info.i][info.j] == 0)
+	else if (result[info.i][info.j] == 34
+										|| result[info.i][info.j] == 0)
 		return (false);
 	return (false);
 }

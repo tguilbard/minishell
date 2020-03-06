@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 09:22:55 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/04 12:02:47 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/06 10:41:08 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct	s_rep_env_data
 {
 	size_t		i;
 	size_t		j;
+	size_t		n;
 	size_t		start;
 	size_t		len;
 	t_bool		raw_text;
