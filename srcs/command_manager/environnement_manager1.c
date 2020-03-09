@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:05:06 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/05 21:38:43 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:58:37 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	mini_export(char **p_to_add)
 	size_t	j;
 	char	*find;
 
-	j = 0;
+	j = 1;
 	while (p_to_add[j])
 	{
 		i = 0;
@@ -78,7 +78,7 @@ void	mini_unset(char **p_to_remove)
 	size_t i;
 	size_t j;
 
-	j = 0;
+	j = 1;
 	while (p_to_remove[j])
 	{
 		if ((i = find_env_var(p_to_remove[j])) != -1)

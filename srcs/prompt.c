@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/09 15:10:12 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/09 16:04:28 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static void		*find_command(char *p_str)
 		return (&mini_cd);
 	else if (ft_strcmp(p_str, "help"))
 		return (&help);
+	else if (ft_strnstr(p_str, "./", 2) || ft_strnstr(p_str, "../", 3) || ft_strnstr(p_str, "/", 1))
+		return (&mini_exec);
 	else if (ft_strcmp(p_str, "exit"))
 		return (&mini_exit);
 	else
@@ -104,7 +106,7 @@ static void		main_execution(void)
 		param = get_param(str);
 		while (param[n])
 		{
-			apply_function(find_command(param[n][0]), &(param[n][1]));
+			apply_function(find_command(param[n][0]), param[n]);
 			n++;
 		}
 		free(str);

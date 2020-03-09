@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:43:02 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/06 10:13:06 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:53:32 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 void	mini_pwd(void);
 char	*get_pwd(void);
 void	mini_echo(char **p_param);
+void	mini_exec(char **p_param);
 void	mini_exit(void);
 void	mini_env(void);
 void	mini_export(char **p_str);

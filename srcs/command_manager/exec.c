@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/26 09:57:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/09 15:58:20 by tguilbar         ###   ########.fr       */
+/*   Created: 2020/03/09 15:51:20 by tguilbar          #+#    #+#             */
+/*   Updated: 2020/03/09 15:59:49 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 extern t_char_list	g_env;
 
-void	mini_echo(char **p_param)
+void	mini_exec(char **p_param)
 {
 	int		pid;
 
 	pid = fork();
 	if (pid == 0)
 	{
-		if (execve("/bin/echo", p_param, g_env.data) == -1)
-			ft_putstr("echo: invalide param");
+		if (execve(p_param[0], p_param, g_env.data) == -1)
+			ft_putstr("invalide executable");
 	}
 	else
 		waitpid(pid, NULL, 0);
