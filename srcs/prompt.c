@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/06 10:21:04 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:10:12 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ static void		print_prompt(void)
 
 static void		*find_command(char *p_str)
 {
-	if (ft_strcmp(p_str, "echo"))
+	if (p_str == NULL)
+		return (NULL);
+	else if (ft_strcmp(p_str, "echo"))
 		return (&mini_echo);
 	else if (ft_strcmp(p_str, "pwd"))
 		return (&mini_pwd);
@@ -107,6 +109,7 @@ static void		main_execution(void)
 		}
 		free(str);
 		print_prompt();
+		n = 0;
 		while (param[n])
 		{
 			ft_free_tab((void**)param[n]);

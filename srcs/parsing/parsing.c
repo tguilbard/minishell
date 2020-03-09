@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:29:30 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/06 10:23:52 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:08:32 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static char		***quotes_parsing(char ***tab)
 			}
 			i++;
 		}
+		n++;
 	}
 	return (tab);
 }
@@ -96,15 +97,15 @@ static char		***replace_environ(char ***res)
 
 char			***get_param(char *param)
 {
-	void	***result;
+	char	***result;
 	size_t	i;
 	size_t	n;
 	size_t	start;
 
 	i = 0;
 	n = 0;
-	result = (void***)malloc(sizeof(void**) * 50); // Nan mais t'inquiète j'avais la flemme de recoder un ft_tab_of_tab_new
-	result[n] = ft_tab_new(0);
+	result = (char ***)ft_tab_new(0); // Nan mais t'inquiète j'avais la flemme de recoder un ft_tab_of_tab_new
+	ft_add_to_tab(ft_tab_new(0), (void ***)&result);
 	while (param[i])
 	{
 		while (param[i] && ft_is_whitespaces(param[i]))
@@ -114,12 +115,14 @@ char			***get_param(char *param)
 		{
 			jump_quotes(param, &i);
 		}
-		ft_add_to_tab((void*)ft_strsub(param, start, i - start), &result[n]);
+		ft_add_to_tab((void*)ft_strsub(param, start, i - start), (void ***)&result[n]);
 		if (param[i] == ';')
 		{
-			result[n] = ft_tab_new(0);
+			ft_add_to_tab(ft_tab_new(0), (void ***)&result);
 			n++;
+			i++;
 		}
 	}
-	return (replace_environ((char***)result));
+	result[n + 1] = NULL;
+	return (replace_environ(result));
 }
