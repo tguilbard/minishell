@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/11 11:33:01 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/11 15:23:03 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,39 @@ static char		*get_usr(void)
 	return (ft_strdup("unknow"));
 }
 
+static void		ft_put_rainbow(char *str)
+{
+	char	*format;
+	size_t	i;
+	size_t	len;
+	int		j;
+	int		color;
+
+	i = 0;
+	color = 91;
+	len = ft_strlen(str);
+	while (str[i])
+	{
+		format = ft_itoa(color);
+		ft_str_add_prefixe("\033[1;", &format);
+		ft_str_add_suffix(&format, "m");
+		ft_putstr(format);
+		j = 0;
+		while (j < (int)(len / 7) + 1)
+		{
+			write(1, str + i + j, 1);
+			j++;
+			if (!str[i + j])
+			 	break ;
+		}
+		i += j;
+		ft_putstr("\033[0m");
+		if (color == 97)
+			color = 91;
+		else
+			color++;
+	}
+}
 static void		print_prompt(void)
 {
 	int		i;
@@ -46,13 +79,18 @@ static void		print_prompt(void)
 	}
 	str[1] = ft_strsub(str[0], last, i - last);
 	free(str[0]);
+	ft_putstr("\033[3;94m");
 	ft_putstr(str[1]);
 	free(str[1]);
-	ft_putstr(" (");
+	ft_putstr("\033[0m");
+	ft_putstr(" ");
+//
 	str[0] = get_usr();
-	ft_putstr(str[0]);
+	ft_str_add_prefixe("(", &str[0]);
+	ft_str_add_suffix(&str[0], "):");
+	ft_put_rainbow(str[0]);
 	free(str[0]);
-	ft_putstr("):");
+//
 }
 
 static void		*find_command(char *p_str)
