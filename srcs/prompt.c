@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/09 16:04:28 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/11 10:53:28 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,35 +92,6 @@ static void		apply_function(void (*f)(char **param), char **param)
 	f(param);
 }
 
-static void		main_execution(void)
-{
-	char	*str;
-	char	***param;
-	size_t	n;
-
-	param = NULL;
-	print_prompt();
-	while (get_next_line(0, &str))
-	{
-		n = 0;
-		param = get_param(str);
-		while (param[n])
-		{
-			apply_function(find_command(param[n][0]), param[n]);
-			n++;
-		}
-		free(str);
-		print_prompt();
-		n = 0;
-		while (param[n])
-		{
-			ft_free_tab((void**)param[n]);
-			n++;
-		}
-	}
-	mini_exit();
-}
-
 void	child_killer(int sig)
 {
 	int	i;
@@ -135,7 +106,39 @@ void	child_killer(int sig)
 		i++;
 	}
 	close(g_env_fd[1]);
-	exit(1);
+	exit(sig);
+}
+
+static void		main_execution(void)
+{
+	char	*str;
+	char	***param;
+	size_t	n;
+	int		stand_exit;
+
+	param = NULL;
+	stand_exit = dup(1);
+	print_prompt();
+	if (get_next_line(0, &str))
+	{
+		n = 0;
+		param = get_param(str);
+		while (param[n])
+		{
+			apply_function(find_command(param[n][0]), param[n]);
+			n++;
+			dup2(stand_exit, 1);
+		}
+		free(str);
+		n = 0;
+		while (param[n])
+		{
+			ft_free_tab((void**)param[n]);
+			n++;
+		}
+		child_killer(3);
+	}
+	mini_exit();
 }
 
 void take_environ(void)
@@ -192,7 +195,8 @@ void			forker(void)
 			if (status != 0)
 			{
 				take_environ();
-				ft_putchar('\n');
+				if (status == 512)
+					ft_putchar('\n');
 			}
 		}
 	}

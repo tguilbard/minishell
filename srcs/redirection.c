@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:49:15 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/10 15:50:52 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/11 10:54:25 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int		redirection(char *str)
 	name = get_name(str);
 	if (*str != ';')
 		i += ft_strlen(name);
-	printf("ici\n");
 	if (ft_strnstr(str, ">>", 2))
 	{
 		i += 1;
