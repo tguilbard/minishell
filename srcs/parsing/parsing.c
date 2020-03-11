@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:29:30 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/09 15:30:58 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/10 15:50:41 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,16 +111,16 @@ char			***get_param(char *param)
 		while (param[i] && ft_is_whitespaces(param[i]))
 			i++;
 		start = i;
-		while (param[i] && param[i] != ';' && ft_is_whitespaces(param[i]) == false)
+		while (param[i] && param[i] != ';' && param[i] != '>' && ft_is_whitespaces(param[i]) == false)
 		{
 			jump_quotes(param, &i);
 		}
 		ft_add_to_tab((void*)ft_strsub(param, start, i - start), (void ***)&result[n]);
-		if (param[i] == ';')
+		if (param[i] == ';' || param[i] == '>')
 		{
+			i += redirection(param + i);
 			ft_add_to_tab(ft_tab_new(0), (void ***)&result);
 			n++;
-			i++;
 		}
 	}
 	return (replace_environ(result));
