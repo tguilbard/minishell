@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:49:15 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/11 12:03:52 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/11 14:07:45 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*get_name(char *str)
 
 int		redirection(char *str)
 {
-	char	buf[16];
 	char	*file;
 	char	*name;
 	int		fd[2];
@@ -51,13 +50,7 @@ int		redirection(char *str)
 	}
 	else if (ft_strnstr(str, ">", 1))
 		fd[1] = open(name, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
-	else if (ft_strnstr(str, "|", 1))
-	{
-		pipe(fd);
-	}
-	dup2(fd[1], 1);
-	//trouver un moyenne d utiliser fd[0] pour |
-	if (ft_strcmp(str, "<"))
+	else if (ft_strcmp(str, "<"))
 	{
 		fd[0] = open(name, O_RDONLY);
 		if (fd[0] == -1)
@@ -65,7 +58,13 @@ int		redirection(char *str)
 			ft_putstr(name);
 			ft_putstr(" :invalide file name");
 		}
-		dup2(fd[0], 0);
 	}
+	else if (ft_strnstr(str, "|", 1))
+	{
+		pipe(fd);
+	}
+	dup2(fd[1], 1);
+	dup2(fd[0], 0);
+	//trouver un moyenne d utiliser fd[0] pour |
 	return (i);
 }
