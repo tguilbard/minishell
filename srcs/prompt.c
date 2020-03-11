@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/11 10:53:28 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/11 11:33:01 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void	child_killer(int sig)
 		i++;
 	}
 	close(g_env_fd[1]);
+	if (sig != 1)
+		ft_putchar('\n');
 	exit(sig);
 }
 
@@ -114,20 +116,21 @@ static void		main_execution(void)
 	char	*str;
 	char	***param;
 	size_t	n;
-	int		stand_exit;
+	int		stdout;
 
 	param = NULL;
-	stand_exit = dup(1);
+	stdout = dup(1);
 	print_prompt();
 	if (get_next_line(0, &str))
 	{
+		signal(SIGQUIT, child_killer);
 		n = 0;
 		param = get_param(str);
 		while (param[n])
 		{
 			apply_function(find_command(param[n][0]), param[n]);
 			n++;
-			dup2(stand_exit, 1);
+			dup2(stdout, 1);
 		}
 		free(str);
 		n = 0;
@@ -136,7 +139,7 @@ static void		main_execution(void)
 			ft_free_tab((void**)param[n]);
 			n++;
 		}
-		child_killer(3);
+		child_killer(1);
 	}
 	mini_exit();
 }
@@ -174,7 +177,6 @@ void			forker(void)
 
 	pid = 1;
 	status = 2;
-	signal(SIGINT, SIG_IGN);
 	while (pid != 0 && status != 0)
 	{
 		if (pipe(g_env_fd) == -1)
@@ -193,11 +195,7 @@ void			forker(void)
 		{
 			waitpid(pid, &status, 0);
 			if (status != 0)
-			{
 				take_environ();
-				if (status == 512)
-					ft_putchar('\n');
-			}
 		}
 	}
 }
@@ -206,6 +204,8 @@ int				main(int ac __attribute__((unused)),
 								char **av __attribute__((unused)), char **env)
 {
 	set_environ(env);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	forker();
 	return (0);
 }

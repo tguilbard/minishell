@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:49:15 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/11 10:54:25 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/11 12:03:52 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,7 @@ int		redirection(char *str)
 			ft_putstr(name);
 			ft_putstr(" :invalide file name");
 		}
-		while (ret > 0)
-		{
-			ret =  write(fd[0], buf, 15);
-			buf[ret] = '\0';
-			if (file == NULL)
-				file = ft_strdup(buf);
-			else
-				ft_str_add_suffix(&file, buf);
-		}
+		dup2(fd[0], 0);
 	}
 	return (i);
 }
