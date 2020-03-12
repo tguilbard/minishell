@@ -10,3 +10,9 @@
  * env		: Affiche toutes les variables d'environnement
  * export	: Exporte une variable dans l'environnement
  * unset	: Detruit une variable de l'environnement
+
+## A fair
+
+ * transfer pwd et valeur de retour vers le pere
+ * ajouter les separateurs dans la structure
+ * verifier le set de la valeur de retour
