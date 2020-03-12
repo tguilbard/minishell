@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/11 15:23:03 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/12 13:00:06 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,11 +152,11 @@ void	child_killer(int sig)
 static void		main_execution(void)
 {
 	char	*str;
-	char	***param;
+	t_param *param;
 	size_t	n;
 	int		stdout;
 
-	param = NULL;
+	param = malloc_param();
 	stdout = dup(1);
 	print_prompt();
 	if (get_next_line(0, &str))
@@ -164,17 +164,17 @@ static void		main_execution(void)
 		signal(SIGQUIT, child_killer);
 		n = 0;
 		param = get_param(str);
-		while (param[n])
+		while (param->param[n])
 		{
-			apply_function(find_command(param[n][0]), param[n]);
+			apply_function(find_command(param->param[n][0]), param->param[n]);
 			n++;
 			dup2(stdout, 1);
 		}
 		free(str);
 		n = 0;
-		while (param[n])
+		while (param->param[n])
 		{
-			ft_free_tab((void**)param[n]);
+			ft_free_tab((void**)param->param[n]);
 			n++;
 		}
 		child_killer(1);
