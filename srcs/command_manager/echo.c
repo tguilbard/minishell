@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 09:57:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/12 12:57:37 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/12 13:08:12 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	mini_echo(char **p_param)
 	int		status;
 
 	pid = fork();
+	status = 0;
 	if (pid == 0)
 	{
 		if (execve("/bin/echo", p_param, g_env.data) == -1)
