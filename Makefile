@@ -6,12 +6,12 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 08:17:15 by ldutriez          #+#    #+#              #
-#    Updated: 2020/03/09 13:38:37 by tguilbar         ###   ########.fr        #
+#    Updated: 2020/03/12 11:54:54 by tguilbar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= miniShell
-#BONUS_NAME	= Cub3D_bonus <---wtf?
+NAME		= minishell
+#BONUS_NAME	=
 
 CC =		gcc
 
@@ -29,9 +29,9 @@ LIB = ft
 
 SRC = $(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
 
-#NORMAL_SRC = game.c
+#NORMAL_SRC = 
 
-#BONUS_SRC = game_bonus.c
+#BONUS_SRC =
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 NORMAL_OBJ = $(OBJ) #$(addprefix $(OBJ_DIR)/, $(NORMAL_SRC:%.c=%.o))

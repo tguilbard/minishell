@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 09:22:55 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/06 10:41:08 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/12 11:48:06 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void			free_rep_env_data(t_rep_env_data *p_info);
 **	Parsing functions
 */
 
-void		jump_quotes(char *param, size_t *index);
-char		*rm_quote(char *p_str, char *type);
-t_bool		is_raw(char **result, t_rep_env_data info);
-void		env_var_missing(t_rep_env_data *info);
-void		put_env_to_text(char ***result, t_rep_env_data *info);
+void			jump_quotes(char *param, size_t *index);
+char			*rm_quote(char *p_str, char *type);
+t_bool			is_raw(char **result, t_rep_env_data info);
+void			env_var_missing(t_rep_env_data *info);
+void			put_env_to_text(char ***result, t_rep_env_data *info);
 
 #endif
