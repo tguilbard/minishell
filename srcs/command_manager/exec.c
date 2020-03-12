@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 15:51:20 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/10 11:20:07 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/12 12:59:00 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,22 @@
 
 extern t_char_list	g_env;
 
-void	mini_exec(char **p_param)
+int	mini_exec(char **p_param)
 {
 	int		pid;
+	int		status;
 
 	pid = fork();
 	if (pid == 0)
 	{
 		if (execve(p_param[0], p_param, g_env.data) == -1)
+		{
 			ft_putstr("invalide executable\n");
+			return (1);
+		}
 		exit(0);
 	}
 	else
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &status, 0);
+	return (status);
 }

@@ -6,13 +6,13 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 15:56:31 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/02/27 11:58:40 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/12 12:52:37 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	mini_pwd(void)
+int	mini_pwd(void)
 {
 	char *pwd;
 
@@ -20,6 +20,7 @@ void	mini_pwd(void)
 	ft_str_add_suffix(&pwd, "\n");
 	ft_putstr(pwd);
 	free(pwd);
+	return (0);
 }
 
 char	*get_pwd(void)
