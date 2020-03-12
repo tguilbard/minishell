@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 11:14:34 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/02 11:15:42 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/12 12:53:56 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_char_list	g_env;
 
-void	mini_env(void)
+int	mini_env(void)
 {
 	size_t	i;
 
@@ -25,6 +25,7 @@ void	mini_env(void)
 		ft_putchar('\n');
 		i++;
 	}
+	return (0);
 }
 
 void	set_environ(char **env)

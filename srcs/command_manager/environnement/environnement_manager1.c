@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:05:06 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/09 15:58:37 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/12 12:56:28 by tguilbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,35 @@ int		find_env_var(char *find)
 	return (-1);
 }
 
-t_bool	check_entry_export(char *p_to_add)
+int		check_entry_export(char *p_to_add)
 {
 	if (ft_is_digit(p_to_add[0]))
+	{
 		ft_putstr("not a valid identifier\n");
+		return (1);
+	}
 	else if (ft_strcmp_c(p_to_add, '=') == false)
 		;
 	else
-		return (true);
-	return (false);
+		return (2);
+	return (0);
 }
 
-void	mini_export(char **p_to_add)
+int		mini_export(char **p_to_add)
 {
 	size_t	i;
 	size_t	j;
+	int		ret[2];
 	char	*find;
 
 	j = 1;
+	ret[1] = 0;
 	while (p_to_add[j])
 	{
 		i = 0;
-		if (check_entry_export(p_to_add[j]) == false)
-			return ;
+		ret[0] = check_entry_export(p_to_add[j]);
+		if (ret[0] == 0 || ret[0] == 1)
+			;
 		while (p_to_add[j][i] != '=' && p_to_add[j][i])
 			i++;
 		find = ft_strsub(p_to_add[j], 0, i);
@@ -71,21 +77,27 @@ void	mini_export(char **p_to_add)
 		free(find);
 		j++;
 	}
+	ret[1] = (ret[1] == 1 || ret[0] == 1) ? 1 : 0;
+	return (ret[1]);
 }
 
-void	mini_unset(char **p_to_remove)
+int		mini_unset(char **p_to_remove)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	j;
+	int		ret[2];
 
 	j = 1;
+	ret[1] = 0;
 	while (p_to_remove[j])
 	{
-		if ((i = find_env_var(p_to_remove[j])) != -1)
-		{
+		ret[0] = check_entry_export(p_to_remove[j]);
+		if (ret[0] == 1)
+			;
+		else if ((i = find_env_var(p_to_remove[j])) != -1)
 			ft_char_list_rm(&g_env, g_env.data[i]);
-			return ;
-		}
 		j++;
 	}
+	ret[1] = (ret[1] == 1 || ret[0] == 1) ? 1 : 0;
+	return (ret[1]);
 }

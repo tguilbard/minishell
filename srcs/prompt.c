@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/12 13:00:06 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/12 13:06:07 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,11 @@ static void		print_prompt(void)
 	free(str[1]);
 	ft_putstr("\033[0m");
 	ft_putstr(" ");
-//
 	str[0] = get_usr();
 	ft_str_add_prefixe("(", &str[0]);
 	ft_str_add_suffix(&str[0], "):");
 	ft_put_rainbow(str[0]);
 	free(str[0]);
-//
 }
 
 static void		*find_command(char *p_str)
@@ -144,7 +142,7 @@ void	child_killer(int sig)
 		i++;
 	}
 	close(g_env_fd[1]);
-	if (sig != 1)
+	if (sig != 1 && sig != 3)
 		ft_putchar('\n');
 	exit(sig);
 }
@@ -234,6 +232,8 @@ void			forker(void)
 			waitpid(pid, &status, 0);
 			if (status != 0)
 				take_environ();
+			if (status == 768)
+					ft_putstr("minishell quit process\n");
 		}
 	}
 }

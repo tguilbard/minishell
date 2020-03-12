@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:43:02 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/12 12:59:45 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/12 13:06:09 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,15 @@
 
 # include "minishell_include.h"
 
-
-void	mini_pwd(void);
+int		mini_pwd(void);
 char	*get_pwd(void);
-void	mini_echo(char **p_param);
-void	mini_exec(char **p_param);
-void	mini_exit(void);
-void	mini_env(void);
-void	mini_export(char **p_str);
-void	mini_unset(char **p_str);
-void	mini_cd(char **path);
+int		mini_echo(char **p_param);
+int		mini_exec(char **p_param);
+int		mini_exit(void);
+int		mini_env(void);
+int		mini_export(char **p_str);
+int		mini_unset(char **p_str);
+int		mini_cd(char **path);
 void	help(void);
 void	set_environ(char **env);
 int		find_env_var(char *find);
