@@ -38,24 +38,24 @@ NORMAL_OBJ = $(OBJ) #$(addprefix $(OBJ_DIR)/, $(NORMAL_SRC:%.c=%.o))
 #BONUS_OBJ = $(OBJ) $(addprefix $(OBJ_DIR)/, $(BONUS_SRC:%.c=%.o))
 
 #Compilation flag
-CFLAGS = -Wall -Wextra -fsanitize=address -g3 -O3 #-Werror
+CFLAGS = -Wall -Wextra #-fsanitize=address -g3 -O3 #-Werror
 
 IFLAGS = $(foreach dir, $(INC_DIR), -I$(dir))
 
 LFLAGS =	$(foreach dir, $(LIB_DIR), -L $(dir)) \
-			$(foreach lib, $(LIB), -l $(lib)) \
-#			$(foreach frame, $(FRAMEWORK), -framework  $(frame))
+		$(foreach lib, $(LIB), -l $(lib)) \
+#		$(foreach frame, $(FRAMEWORK), -framework  $(frame))
 
 # Colors
 
-_GREY=	$'\x1b[30m
-_RED=	$'\x1b[31m
-_GREEN=	$'\x1b[32m
-_YELLOW=$'\x1b[33m
-_BLUE=	$'\x1b[34m
-_PURPLE=$'\x1b[35m
-_CYAN=	$'\x1b[36m
-_WHITE=	$'\x1b[37m
+_GREY=	$'\033[30m
+_RED=	$'\033[31m
+_GREEN=	$'\033[32m
+_YELLOW=$'\033[33m
+_BLUE=	$'\033[34m
+_PURPLE=$'\033[35m
+_CYAN=	$'\033[36m
+_WHITE=	$'\033[37m
 
 all:			$(NAME)
 
@@ -85,7 +85,7 @@ $(OBJ_DIR)/%.o : %.c
 				@echo "$(_GREEN)DONE$(_WHITE)"
 
 
-$(NAME): 		$(INC_DIR) $(NORMAL_OBJ) Makefile
+$(NAME): 			$(INC_DIR) $(NORMAL_OBJ) Makefile
 				@echo "-----\nCreating Executable $(_YELLOW)$@$(_WHITE) ... \c"
 				@$(CC) $(CFLAGS) $(LFLAGS) $(NORMAL_OBJ) -o $(NAME)
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
@@ -97,6 +97,10 @@ $(NAME): 		$(INC_DIR) $(NORMAL_OBJ) Makefile
 #				@$(CC) $(CFLAGS) $(LFLAGS) $(BONUS_OBJ) -o $(BONUS_NAME)
 #				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
+linux:
+				@echo "-----\nCreating Executable $(_YELLOW)$(_WHITE) ... \c"
+				@gcc obj/* libs/libft/objs/* -I includes/ -I includes/structures/ -I libs/libft/includes/ -o $(NAME)
+				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 norme:
 				norminette $(SRC_DIR)
 

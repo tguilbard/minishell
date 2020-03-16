@@ -13,6 +13,6 @@
 
 ## A fair
 
- * transfer pwd et valeur de retour vers le pere
  * ajouter les separateurs dans la structure
  * verifier le set de la valeur de retour
+ * renvoyer au pere la valeur de retour

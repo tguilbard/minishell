@@ -46,7 +46,7 @@ int		check_entry_export(char *p_to_add)
 		return (1);
 	}
 	else if (ft_strcmp_c(p_to_add, '=') == false)
-		;
+	{}
 	else
 		return (2);
 	return (0);
@@ -54,7 +54,7 @@ int		check_entry_export(char *p_to_add)
 
 int		mini_export(char **p_to_add)
 {
-	size_t	i;
+	int	i;
 	size_t	j;
 	int		ret[2];
 	char	*find;
@@ -66,7 +66,7 @@ int		mini_export(char **p_to_add)
 		i = 0;
 		ret[0] = check_entry_export(p_to_add[j]);
 		if (ret[0] == 0 || ret[0] == 1)
-			;
+		{}
 		while (p_to_add[j][i] != '=' && p_to_add[j][i])
 			i++;
 		find = ft_strsub(p_to_add[j], 0, i);
@@ -83,7 +83,7 @@ int		mini_export(char **p_to_add)
 
 int		mini_unset(char **p_to_remove)
 {
-	size_t	i;
+	int	i;
 	size_t	j;
 	int		ret[2];
 

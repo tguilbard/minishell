@@ -130,6 +130,7 @@ static void		apply_function(void (*f)(char **param), char **param)
 
 void	child_killer(int sig)
 {
+	char	*pwd;
 	int	i;
 
 	i = 0;
@@ -141,6 +142,9 @@ void	child_killer(int sig)
 		write(g_env_fd[1], "\n", 1);
 		i++;
 	}
+	pwd = get_pwd();
+	write(g_env_fd[1], pwd, ft_strlen(pwd));
+	free(pwd);
 	close(g_env_fd[1]);
 	if (sig != 1 && sig != 3)
 		ft_putchar('\n');
@@ -197,6 +201,8 @@ void take_environ(void)
 			g_env = create_char_list(ft_tab_len((void **)tab));
 			g_env.data = (char **)ft_tab_cpy((void **)g_env.data, (void **)tab);
 			free(tab);
+			chdir(str);
+			free(str);
 			close(g_env_fd[0]);
 			return ;
 		}

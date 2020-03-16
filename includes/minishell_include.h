@@ -16,6 +16,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/wait.h>
+# include <sys/types.h>
 # include "libft.h"
 # include "minishell_define.h"
 # include "minishell_replace_env_data.h"
