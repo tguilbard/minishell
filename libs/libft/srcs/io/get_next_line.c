@@ -107,7 +107,7 @@ int		ft_read(int fd, char **stock)
 
 int		get_next_line(int fd, char **line)
 {
-	t_list_gnl static	*l1 = NULL;
+	static t_list_gnl		*l1 = NULL;
 	t_list_gnl			*current;
 	int				error;
 	int				ret;
