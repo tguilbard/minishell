@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:29:30 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/12 13:03:11 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/26 00:26:17 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,40 +91,85 @@ static t_param	*replace_environ(t_param *res)
 	return (quotes_parsing(res));
 }
 
-/*
-**	Split into multi param
-*/
+int			take_name(char *param, t_param *result, int n)
+{
+	int i;
+	int start;
+
+	i = 0;
+	while (param[i] != '\0' && !ft_is_alpha_num(param[i]) && param[i] != '.'
+										&& param[i] != '_' && param[i] != '-')
+		i++;
+	start = i;
+	while (param[i] != '\0' && !ft_is_whitespaces(param[i]) && param[i] != '|'
+					&& param[i] != '<' && param[i] != '>' && param[i] != ';')
+		i++;
+	ft_add_to_tab(ft_strsub(param, start, i - start), (void ***)&result->name[n]);
+	return (i);
+}
+
+int			no_name(t_param *result, int n)
+{
+	ft_add_to_tab(ft_strdup("random"), (void ***)&result->name[n]);
+	return (1);
+}
+
+void		ft_get_redirection(char *param, size_t *i, t_param *result, int n)
+{
+	char *sep;
+
+	//foret de if a ranger dans une fonction et remplacer les strnstr pour trouver erreur de sep
+	if (ft_strnstr(param + *i, ">>", 2))
+		sep = ft_strdup(">>");
+	else if (param[*i] == '>')
+			sep = ft_strdup(">");
+	else if (param [*i] == '<')
+		sep = ft_strdup("<");
+	ft_add_to_tab(sep, (void ***)&result->sep[n]);
+	if (param[*i] == '>' || param[*i] == '<')
+		*i += take_name(param + *i, result, n);
+	else
+		*i += no_name(result, n);
+}
 
 t_param		*get_param(char *param)
 {
-	t_param			*r_param;
-	char			***result;
+	t_param			*result;
 	size_t			i;
 	size_t			n;
 	size_t			start;
 
-	r_param = malloc_param();
+	result = malloc_param();
 	i = 0;
 	n = 0;
-	result = (char ***)ft_tab_new(0);
-	ft_add_to_tab(ft_tab_new(0), (void ***)&result);
+	add_new_space(result);
 	while (param[i])
 	{
 		while (param[i] && ft_is_whitespaces(param[i]))
 			i++;
 		start = i;
-		while (param[i] && param[i] != ';' && param[i] != '>' && ft_is_whitespaces(param[i]) == false)
+		while (param[i] && param[i] != ';' && param[i] != '>' && param[i] != '<'
+					&& param[i] != '|' && ft_is_whitespaces(param[i]) == false)
 		{
 			jump_quotes(param, &i);
 		}
-		ft_add_to_tab((void*)ft_strsub(param, start, i - start), (void ***)&result[n]);
-		if (param[i] == ';' || param[i] == '>')
+		ft_add_to_tab((void*)ft_strsub(param, start, i - start), (void ***)&result->param[n]);
+		if (param[i] == '>' || param[i] == '<')
+			ft_get_redirection(param, &i, result, n);
+		if (param[i] == ';')
 		{
-			i += redirection(param + i);
-			ft_add_to_tab(ft_tab_new(0), (void ***)&result);
+			add_new_space(result);
+			i++;
+			n++;
+		}
+		if (param[i] == '|')
+		{
+			ft_add_to_tab(ft_strdup("|"), (void ***)&result->sep[n]);
+			ft_add_to_tab(ft_strdup("random"), (void ***)&result->name[n]);
+			add_new_space(result);
+			i++;
 			n++;
 		}
 	}
-	r_param->param = result;
-	return (replace_environ(r_param));
+	return (replace_environ(result));
 }

@@ -6,65 +6,67 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:49:15 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/11 14:07:45 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/26 00:26:39 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_name(char *str)
+/*
+** 1 = act in
+** 2 = act out
+** 3 = next in
+** 4 = next out
+*/
+
+void		redirection(t_param *param, int n)
 {
-	size_t i;
-	size_t start;
+	static int	*std = NULL;
+	static int	in = -1;
+	static int 	out = -1;
+	size_t			i;
+	int			fd[2];
 
-	i = 0;
-	while (str[i] == '>' || str[i] == '|' || str[i] == '<')
-		i++;
-	while (ft_is_whitespaces(str[i]))
-		i++;
-	start = i;
-	while (ft_is_alpha_num(str[i]))
-		i++;
-	return (ft_strsub(str, start, i - start));
-}
-
-int		redirection(char *str)
-{
-	char	*file;
-	char	*name;
-	int		fd[2];
-	int		ret;
-	int		i;
-
-	fd[1] = 0;
-	file = NULL;
-	ret = 1;
-	i = 1;
-	name = get_name(str);
-	if (*str != ';')
-		i += ft_strlen(name);
-	if (ft_strnstr(str, ">>", 2))
+	if (in == -1)
+		in = dup(0);
+	if (out == -1)
+		out = dup(1);
+	if (std == NULL)
 	{
-		i += 1;
-		fd[1] = open(name, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		std = malloc(sizeof(int) * 4);
+		std[2] = in;
+		std[3] = out;
 	}
-	else if (ft_strnstr(str, ">", 1))
-		fd[1] = open(name, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
-	else if (ft_strcmp(str, "<"))
+	std[0] = std[2];
+	std[1] = std[3];
+	std[2] = in;
+	std[3] = out;
+	i = 0;
+	if (param->sep[n])
 	{
-		fd[0] = open(name, O_RDONLY);
-		if (fd[0] == -1)
+		//ft_putstr("ici\n", 2);
+	 	while (param->sep[n][i])	//lieu du crash
 		{
-			ft_putstr(name);
-			ft_putstr(" :invalide file name");
+			if (*(param->sep[n][i]) == '|')
+			{
+				pipe(fd);
+				std[1] = fd[1];
+				std[2] = fd[0];
+			}
+			else if (*(param->sep[n][i]) == '>')
+			{
+				if (param->sep[n][i][1] == '>')
+					std[1] = open(param->name[n][i], O_WRONLY | O_CREAT | O_APPEND, 0777);
+				else
+					std[1] = open(param->name[n][i], O_WRONLY | O_CREAT | O_APPEND | O_TRUNC, 0777);
+			}
+			else if (*(param->sep[n][i]) == '<')
+				std[0] = open(param->name[n][i], O_RDONLY, 044);
+			i++;
 		}
 	}
-	else if (ft_strnstr(str, "|", 1))
-	{
-		pipe(fd);
-	}
-	dup2(fd[1], 1);
-	dup2(fd[0], 0);
-	//trouver un moyenne d utiliser fd[0] pour |
-	return (i);
+	dup2(std[0], 0);
+	close(std[0]);
+	dup2(std[1], 1);
+	close(std[1]);
 }

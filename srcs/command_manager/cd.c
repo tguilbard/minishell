@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 03:59:26 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/12 12:51:00 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/25 00:57:17 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ int		mini_cd(char **path)
 			change_pwd(i);
 			return (0);
 		}
-		ft_putstr("minishell: cd: HOME not set");
+		ft_putstr("minishell: cd: HOME not set", 2);
 		return (1);
 	}
 	if (chdir(path[1]) == -1)
 	{
-		ft_putstr(path[1]);
-		ft_putstr(": no such file or directory\n");
+		ft_putstr(path[1], 2);
+		ft_putstr(": no such file or directory\n", 2);
 		return (1);
 	}
 	i = find_env_var("PWD");

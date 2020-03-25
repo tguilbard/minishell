@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:09:18 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/12 13:07:17 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/26 00:25:19 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@
 typedef struct		s_param
 {
  	char			***param;
- 	char			**name;
- 	unsigned char	*sep;
+ 	char			***name;
+ 	char			***sep;
 }					t_param;
 
 t_param		create_param(void);
-void		set_data_param(t_param *param, char ***p_param, char **p_name,
- 														unsigned char *p_sep);
 t_param		*malloc_param(void);
+void		add_new_space(t_param *result);
 void		destroy_param(t_param p_param);
 void		free_param(t_param *p_param);
 

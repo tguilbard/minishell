@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/12 13:06:07 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/25 14:26:16 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void		ft_put_rainbow(char *str)
 		format = ft_itoa(color);
 		ft_str_add_prefixe("\033[1;", &format);
 		ft_str_add_suffix(&format, "m");
-		ft_putstr(format);
+		ft_putstr(format, 1);
 		j = 0;
 		while (j < (int)(len / 7) + 1)
 		{
@@ -55,7 +55,7 @@ static void		ft_put_rainbow(char *str)
 			 	break ;
 		}
 		i += j;
-		ft_putstr("\033[0m");
+		ft_putstr("\033[0m", 1);
 		if (color == 97)
 			color = 91;
 		else
@@ -79,11 +79,11 @@ static void		print_prompt(void)
 	}
 	str[1] = ft_strsub(str[0], last, i - last);
 	free(str[0]);
-	ft_putstr("\033[3;94m");
-	ft_putstr(str[1]);
+	ft_putstr("\033[3;94m", 1);
+	ft_putstr(str[1], 1);
 	free(str[1]);
-	ft_putstr("\033[0m");
-	ft_putstr(" ");
+	ft_putstr("\033[0m", 1);
+	ft_putstr(" ", 1);
 	str[0] = get_usr();
 	ft_str_add_prefixe("(", &str[0]);
 	ft_str_add_suffix(&str[0], "):");
@@ -115,8 +115,8 @@ static void		*find_command(char *p_str)
 		return (&mini_exit);
 	else
 	{
-		ft_putstr(p_str);
-		ft_putstr(": command not found\n");
+		ft_putstr(p_str, 2);
+		ft_putstr(": command not found\n", 2);
 		return (NULL);
 	}
 }
@@ -158,8 +158,6 @@ static void		main_execution(void)
 	size_t	n;
 	int		stdout;
 
-	param = malloc_param();
-	stdout = dup(1);
 	print_prompt();
 	if (get_next_line(0, &str))
 	{
@@ -168,17 +166,16 @@ static void		main_execution(void)
 		param = get_param(str);
 		while (param->param[n])
 		{
+			// printf("name: %s\n", param->name[n][0]);
+			// printf("sep : %s\n", param->sep[n][0]);
+			redirection(param, n);
 			apply_function(find_command(param->param[n][0]), param->param[n]);
 			n++;
-			dup2(stdout, 1);
 		}
 		free(str);
-		n = 0;
-		while (param->param[n])
-		{
-			ft_free_tab((void**)param->param[n]);
-			n++;
-		}
+		close(0);
+		close(1);
+		free_param(param);
 		child_killer(1);
 	}
 	mini_exit();
@@ -208,7 +205,7 @@ void take_environ(void)
 		}
 		ft_add_to_tab((void *)str, (void ***)&tab);
 	}
-	ft_putstr("relink failed");
+	ft_putstr("relink failed", 2);
 	exit (0);
 }
 
@@ -223,11 +220,11 @@ void			forker(void)
 	{
 		if (pipe(g_env_fd) == -1)
 		{
-			ft_putstr("relink failed");
+			ft_putstr("relink failed", 2);
 			exit (0);
 		}
 		if ((pid = fork()) == -1)
-			ft_putstr("fork failed");
+			ft_putstr("fork failed", 2);
 		if (pid == 0)
 		{
 			signal(SIGINT, child_killer);
@@ -239,7 +236,7 @@ void			forker(void)
 			if (status != 0)
 				take_environ();
 			if (status == 768)
-					ft_putstr("minishell quit process\n");
+					ft_putstr("minishell quit process\n", 2);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:58:31 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/12 12:52:29 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/25 00:59:43 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	mini_exit(void)
 {
-	ft_putstr("exit\n");
+	ft_putstr("exit\n", 2);
 	exit(0);
 }

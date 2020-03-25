@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 08:17:15 by ldutriez          #+#    #+#              #
-#    Updated: 2020/03/12 11:54:54 by tguilbar         ###   ########.fr        #
+#    Updated: 2020/03/26 00:25:27 by anonymous        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ LIB = ft
 
 SRC = $(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
 
-#NORMAL_SRC = 
+#NORMAL_SRC =
 
 #BONUS_SRC =
 
@@ -87,7 +87,7 @@ $(OBJ_DIR)/%.o : %.c
 
 $(NAME): 			$(INC_DIR) $(NORMAL_OBJ) Makefile
 				@echo "-----\nCreating Executable $(_YELLOW)$@$(_WHITE) ... \c"
-				@$(CC) $(CFLAGS) $(LFLAGS) $(NORMAL_OBJ) -o $(NAME)
+				@$(CC) $(CFLAGS) $(LFLAGS) $(NORMAL_OBJ) libs/libft/libft.a -o $(NAME)
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
 #bonus:			$(BONUS_NAME)

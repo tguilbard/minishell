@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 09:57:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/12 13:08:12 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/25 00:57:24 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	mini_echo(char **p_param)
 		if (execve("/bin/echo", p_param, g_env.data) == -1)
 		{
 			return (1);
-			ft_putstr("echo: invalide param");
+			ft_putstr("echo: invalide param", 2);
 		}
 	}
 	else

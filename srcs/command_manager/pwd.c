@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 15:56:31 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/12 12:52:37 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/25 00:59:02 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	mini_pwd(void)
 
 	pwd = get_pwd();
 	ft_str_add_suffix(&pwd, "\n");
-	ft_putstr(pwd);
+	ft_putstr(pwd, 1);
 	free(pwd);
 	return (0);
 }

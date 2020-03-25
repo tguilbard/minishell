@@ -13,6 +13,5 @@
 
 ## A fair
 
- * ajouter les separateurs dans la structure
  * verifier le set de la valeur de retour
  * renvoyer au pere la valeur de retour

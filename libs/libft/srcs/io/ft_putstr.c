@@ -6,22 +6,15 @@
 /*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 13:48:45 by ncoudsi           #+#    #+#             */
-/*   Updated: 2019/12/11 13:49:51 by ncoudsi          ###   ########.fr       */
+/*   Updated: 2020/03/25 00:53:15 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char *str)
+void	ft_putstr(char *str, int fd)
 {
-	int	i;
-
-	i = 0;
 	if (str == NULL)
 		return ;
-	while (str[i] != '\0')
-	{
-		ft_putchar(str[i]);
-		i++;
-	}
+	write(fd, str, ft_strlen(str));
 }

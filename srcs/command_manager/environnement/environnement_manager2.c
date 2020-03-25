@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 11:14:34 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/12 12:53:56 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/03/25 00:57:43 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	mini_env(void)
 	i = 0;
 	while (g_env.data[i] != NULL)
 	{
-		ft_putstr(g_env.data[i]);
+		ft_putstr(g_env.data[i], 1);
 		ft_putchar('\n');
 		i++;
 	}

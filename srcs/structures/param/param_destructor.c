@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:02:03 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/11 18:11:00 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/03/25 13:07:39 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@ void		destroy_param(t_param p_param)
 	while (p_param.param && p_param.param[i])
 	{
 		ft_free_tab((void**)p_param.param[i]);
+		ft_free_tab((void**)p_param.sep[i]);
+		ft_free_tab((void**)p_param.name[i]);
 		i++;
 	}
-	if (p_param.name)
-		ft_free_tab((void**)p_param.name);
-	if (p_param.sep)
-		free(p_param.sep);
 }
 
 void		free_param(t_param *p_param)
