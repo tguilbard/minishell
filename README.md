@@ -13,5 +13,5 @@
 
 ## A fair
 
- * verifier le set de la valeur de retour
- * renvoyer au pere la valeur de retour
+ * ajouter dans le parsing la valeur de retour
+ * ajouter param a exit

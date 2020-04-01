@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/25 14:26:16 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/04/01 11:14:36 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 extern t_char_list	g_env;
 int					g_env_fd[2];
+int					g_ret = 0;
 
 static char		*get_usr(void)
 {
@@ -121,11 +122,11 @@ static void		*find_command(char *p_str)
 	}
 }
 
-static void		apply_function(void (*f)(char **param), char **param)
+static int		apply_function(int (*f)(char **param), char **param)
 {
 	if (f == NULL)
-		return ;
-	f(param);
+		return (g_ret);
+	return(f(param));
 }
 
 void	child_killer(int sig)
@@ -143,11 +144,13 @@ void	child_killer(int sig)
 		i++;
 	}
 	pwd = get_pwd();
-	write(g_env_fd[1], pwd, ft_strlen(pwd));
+	ft_putstr(pwd, g_env_fd[1]);
 	free(pwd);
+	ft_putchar(' ', g_env_fd[1]);
+	ft_putnbr(g_ret, g_env_fd[1]);
 	close(g_env_fd[1]);
 	if (sig != 1 && sig != 3)
-		ft_putchar('\n');
+		ft_putchar('\n', 1);
 	exit(sig);
 }
 
@@ -166,10 +169,9 @@ static void		main_execution(void)
 		param = get_param(str);
 		while (param->param[n])
 		{
-			// printf("name: %s\n", param->name[n][0]);
-			// printf("sep : %s\n", param->sep[n][0]);
 			redirection(param, n);
-			apply_function(find_command(param->param[n][0]), param->param[n]);
+			g_ret = apply_function(find_command(param->param[n][0]), param->param[n]);
+			printf("%d\n", g_ret);
 			n++;
 		}
 		free(str);
@@ -183,11 +185,13 @@ static void		main_execution(void)
 
 void take_environ(void)
 {
-	char	*str;
-	int		ret;
 	char	**tab;
+	char	*str;
+	char	*pwd;
+	int		ret;
+	int		i;
 
-	tab = (char	**)ft_tab_new(0);
+	tab = (char **)ft_tab_new(0);
 	close(g_env_fd[1]);
 	ret = 1;
 	while ((ret = get_next_line(g_env_fd[0], &str)) != -1)
@@ -198,8 +202,13 @@ void take_environ(void)
 			g_env = create_char_list(ft_tab_len((void **)tab));
 			g_env.data = (char **)ft_tab_cpy((void **)g_env.data, (void **)tab);
 			free(tab);
-			chdir(str);
-			free(str);
+			i = 0;
+			while (!ft_is_whitespaces(str[i]))
+				i++;
+			pwd = ft_strsub(str, 0, i);
+			chdir(pwd);
+			free(pwd);
+			g_ret = atoi(str + i);
 			close(g_env_fd[0]);
 			return ;
 		}

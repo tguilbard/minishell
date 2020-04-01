@@ -6,7 +6,7 @@
 /*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:06:39 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/03/25 00:52:57 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/04/01 10:56:43 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,12 @@ void			ft_lst_rm_node(t_list **lst, size_t num, void (*del)(void*));
 ** Prototypage des IO.
 */
 
-void			ft_putchar(char c);
+void			ft_putchar(char c, int);
 void			ft_putstr(char *str, int fd);
-void  			ft_putnbr(int nb);
+void  			ft_putnbr(int nb, int fd);
 char			**ft_get_file(char *path);
-void			ft_print_str_tab(char *p_name, char **p_tab);
-void			ft_print_int_tab(char *p_name, int *p_tab, size_t len);
+void			ft_print_str_tab(char *p_name, char **p_tab, int fd);
+void			ft_print_int_tab(char *p_name, int *p_tab, size_t len, int fd);
 
 /*
 **	Prototypage des TABS.
