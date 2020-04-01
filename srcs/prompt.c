@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/04/01 11:14:36 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/04/01 11:16:58 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,6 @@ static void		main_execution(void)
 		{
 			redirection(param, n);
 			g_ret = apply_function(find_command(param->param[n][0]), param->param[n]);
-			printf("%d\n", g_ret);
 			n++;
 		}
 		free(str);

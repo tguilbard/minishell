@@ -13,5 +13,4 @@
 
 ## A fair
 
- * ajouter dans le parsing la valeur de retour
  * ajouter param a exit

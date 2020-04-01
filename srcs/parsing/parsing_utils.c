@@ -6,13 +6,14 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 11:59:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/06 10:40:56 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/04/01 12:01:48 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_char_list	g_env;
+extern int			g_ret;
 
 void		jump_quotes(char *param, size_t *index)
 {
@@ -70,13 +71,21 @@ t_bool		is_raw(char **result, t_rep_env_data info)
 	return (false);
 }
 
-/*
-**	Error function if the var searched doesn't exist
-*/
-
-void		env_var_missing(t_rep_env_data *info)
+void		env_replace(t_rep_env_data *info)
 {
 	info->str = ft_strdup(g_env.data[info->ret] + info->len);
+	if (info->new != NULL)
+	{
+		ft_str_add_suffix(&info->new, info->str);
+		free(info->str);
+	}
+	else
+		info->new = info->str;
+}
+
+void		return_val_replace(t_rep_env_data *info)
+{
+	info->str = ft_itoa(g_ret);
 	if (info->new != NULL)
 	{
 		ft_str_add_suffix(&info->new, info->str);
@@ -92,22 +101,25 @@ void		env_var_missing(t_rep_env_data *info)
 
 void		put_env_to_text(char ***result, t_rep_env_data *info)
 {
+	info->ret = -2;
 	info->start = info->j;
 	info->len = 1;
-	while (ft_is_alpha_num((*result)[info->i][info->j + info->len]))
+	while (ft_is_alpha_num((*result)[info->i][info->j + info->len])
+		|| (*result)[info->i][info->j + info->len] == '?')
 		info->len++;
 	info->str = ft_strsub((*result)[info->i], info->start + 1, info->len - 1);
-	info->ret = find_env_var(info->str);
+	if (*(info->str) != '?')
+		info->ret = find_env_var(info->str);
 	free(info->str);
 	info->new = ft_strsub((*result)[info->i], 0, info->start);
-	if (info->ret != -1)
-		env_var_missing(info);
+	if (info->ret == -2)
+		return_val_replace(info);
+	else if (info->ret != -1)
+		env_replace(info);
+	info->j = ft_strlen(info->new);
 	info->str = ft_strdup((*result)[info->i] + info->start + info->len);
 	ft_str_add_suffix(&info->new, info->str);
 	free(info->str);
 	free((*result)[info->i]);
 	(*result)[info->i] = info->new;
-	if (info->ret != -1)
-		info->j = ft_strlen(g_env.data[info->ret])
-												- (info->len + 1) + info->start;
 }

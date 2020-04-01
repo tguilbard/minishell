@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:29:30 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/26 00:26:17 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/04/01 11:47:07 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ static t_param	*replace_environ(t_param *res)
 			info.raw_text = is_raw(res->param[info.n], info);
 			while (res->param[info.n][info.i] && res->param[info.n][info.i][info.j])
 				if (res->param[info.n][info.i][info.j] == '$'
-							&& ft_is_alpha_num(res->param[info.n][info.i][info.j + 1])
+							&& (ft_is_alpha_num(res->param[info.n][info.i][info.j + 1])
+							|| res->param[info.n][info.i][info.j + 1] == '?')
 							&& info.raw_text == false)
 					put_env_to_text(res->param, &info);
 				else if (res->param[info.n][info.i][info.j] == 39
