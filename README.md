@@ -13,4 +13,4 @@
 
 ## A fair
 
- * ajouter param a exit
+ * ameliorer parsing sep

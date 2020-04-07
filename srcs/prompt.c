@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/04/01 11:16:58 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/04/05 01:49:12 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static void		*find_command(char *p_str)
 		return (&mini_cd);
 	else if (ft_strcmp(p_str, "help"))
 		return (&help);
-	else if (ft_strnstr(p_str, "./", 2) || ft_strnstr(p_str, "../", 3) || ft_strnstr(p_str, "/", 1))
+	else if (ft_strcmp_c(p_str, '/'))
 		return (&mini_exec);
 	else if (ft_strcmp(p_str, "exit"))
 		return (&mini_exit);
@@ -179,7 +179,7 @@ static void		main_execution(void)
 		free_param(param);
 		child_killer(1);
 	}
-	mini_exit();
+	mini_exit(0);
 }
 
 void take_environ(void)
@@ -213,7 +213,29 @@ void take_environ(void)
 		}
 		ft_add_to_tab((void *)str, (void ***)&tab);
 	}
-	ft_putstr("relink failed", 2);
+	ft_putstr("relink failed\n", 2);
+	exit (0);
+}
+
+int				take_return()
+{
+	char	*str;
+	int		ret;
+	int		tmp;
+
+	close(g_env_fd[1]);
+	while ((ret = get_next_line(g_env_fd[0], &str)) != -1)
+	{
+		if (ret == 0)
+		{
+			tmp = ft_atoi(str);
+			close(g_env_fd[0]);
+			free(str);
+			return (tmp);
+		}
+		free(str);
+	}
+	ft_putstr("relink failed\n", 2);
 	exit (0);
 }
 
@@ -243,6 +265,8 @@ void			forker(void)
 			waitpid(pid, &status, 0);
 			if (status != 0)
 				take_environ();
+			else
+				exit(take_return());
 			if (status == 768)
 					ft_putstr("minishell quit process\n", 2);
 		}
