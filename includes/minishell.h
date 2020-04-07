@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:43:02 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/04/01 12:15:54 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/04/07 19:06:27 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	set_environ(char **env);
 int		find_env_var(char *find);
 t_param	*get_param(char *param);
 void	redirection(t_param *param, int n);
+void	child_killer(int sig);
 
 #endif

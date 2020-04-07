@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:29:30 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/04/01 11:47:07 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/04/07 19:08:51 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,20 @@ int			take_name(char *param, t_param *result, int n)
 	int start;
 
 	i = 0;
-	while (param[i] != '\0' && !ft_is_alpha_num(param[i]) && param[i] != '.'
-										&& param[i] != '_' && param[i] != '-')
+	while (param[i] != '\0' && (ft_is_whitespaces(param[i]) || (param[i] == '>'
+									&& i < 2) || (param[i] == '<' && i < 1)))
 		i++;
 	start = i;
 	while (param[i] != '\0' && !ft_is_whitespaces(param[i]) && param[i] != '|'
 					&& param[i] != '<' && param[i] != '>' && param[i] != ';')
 		i++;
+	if (start == i)
+	{
+		ft_putstr("syntax error near unexpected token `", 2);
+		ft_putchar(param[start], 2);
+		ft_putstr("'\n", 2);
+		child_killer(1);
+	}
 	ft_add_to_tab(ft_strsub(param, start, i - start), (void ***)&result->name[n]);
 	return (i);
 }
@@ -156,20 +163,47 @@ t_param		*get_param(char *param)
 		}
 		ft_add_to_tab((void*)ft_strsub(param, start, i - start), (void ***)&result->param[n]);
 		if (param[i] == '>' || param[i] == '<')
-			ft_get_redirection(param, &i, result, n);
+		{
+			if (result->param[n][0])
+				ft_get_redirection(param, &i, result, n);
+			else
+			{
+				if (param[i] == '>')
+					ft_putstr("syntax error near unexpected token `>'\n", 2);
+				else
+					ft_putstr("syntax error near unexpected token `<'\n", 2);
+				child_killer(1);
+			}
+		}
 		if (param[i] == ';')
 		{
-			add_new_space(result);
-			i++;
-			n++;
+			if (result->param[n][0])
+			{
+				add_new_space(result);
+				i++;
+				n++;
+			}
+			else
+			{
+				ft_putstr("syntax error near unexpected token `;'\n", 2);
+				child_killer(1);
+			}
 		}
 		if (param[i] == '|')
 		{
-			ft_add_to_tab(ft_strdup("|"), (void ***)&result->sep[n]);
-			ft_add_to_tab(ft_strdup("random"), (void ***)&result->name[n]);
-			add_new_space(result);
-			i++;
-			n++;
+			if (result->param[n][0])
+			{
+				ft_add_to_tab(ft_strdup("|"), (void ***)&result->sep[n]);
+				ft_add_to_tab(ft_strdup("random"), (void ***)&result->name[n]);
+				add_new_space(result);
+				i++;
+				n++;
+			}
+			else
+			{
+				ft_putstr("syntax error near unexpected token `|'\n", 2);
+				child_killer(1);
+			}
 		}
 	}
 	return (replace_environ(result));
