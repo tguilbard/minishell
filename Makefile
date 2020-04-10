@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 08:17:15 by ldutriez          #+#    #+#              #
-#    Updated: 2020/03/26 00:25:27 by anonymous        ###   ########.fr        #
+#    Updated: 2020/04/10 23:44:32 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +102,7 @@ linux:
 				@gcc obj/* libs/libft/objs/* -I includes/ -I includes/structures/ -I libs/libft/includes/ -o $(NAME)
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 norme:
-				norminette $(SRC_DIR)
+				norminette $(SRC_DIR) $(INC_DIR) $(LIB_DIR)
 
 re:				fclean all
 

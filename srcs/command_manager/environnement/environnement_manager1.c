@@ -6,15 +6,15 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:05:06 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/04/10 16:40:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/10 23:28:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_char_list	g_env;
+extern t_char_list	g_env;
 
-int		find_env_var(char *find)
+int			find_env_var(char *find)
 {
 	size_t	i;
 	size_t	j;
@@ -38,7 +38,7 @@ int		find_env_var(char *find)
 	return (-1);
 }
 
-int		check_entry_export(char *p_to_add)
+int			check_entry_export(char *p_to_add)
 {
 	if (ft_is_digit(p_to_add[0]))
 	{
@@ -51,38 +51,42 @@ int		check_entry_export(char *p_to_add)
 		return (2);
 }
 
-int		mini_export(char **p_to_add)
+static void	export_env(char *param)
 {
 	int		i;
+	char	*find;
+
+	i = 0;
+	while (param[i] != '=' && param[i])
+		i++;
+	find = ft_strsub(param, 0, i);
+	if ((i = find_env_var(find)) != -1)
+		ft_char_list_replace(&g_env, g_env.data[i], ft_strdup(param));
+	else
+		ft_char_list_push_back(&g_env, ft_strdup(param));
+	free(find);
+}
+
+int			mini_export(char **p_to_add)
+{
 	size_t	j;
 	int		ret[2];
-	char	*find;
 
 	j = 1;
 	ret[1] = 0;
 	while (p_to_add[j])
 	{
-		i = 0;
-		ret[0] = check_entry_export(p_to_add[j]);
-		if (ret[0] == 2)
+		if ((ret[0] = check_entry_export(p_to_add[j])) == 2)
 		{
-			while (p_to_add[j][i] != '=' && p_to_add[j][i])
-				i++;
-			find = ft_strsub(p_to_add[j], 0, i);
-			if ((i = find_env_var(find)) != -1)
-				ft_char_list_replace(&g_env, g_env.data[i],
-														ft_strdup(p_to_add[j]));
-			else
-				ft_char_list_push_back(&g_env, ft_strdup(p_to_add[j]));
-			free(find);
+			export_env(p_to_add[j]);
 		}
 		j++;
+		ret[1] = (ret[1] == 1 || ret[0] == 1) ? 1 : 0;
 	}
-	ret[1] = (ret[1] == 1 || ret[0] == 1) ? 1 : 0;
 	return (ret[1]);
 }
 
-int		mini_unset(char **p_to_remove)
+int			mini_unset(char **p_to_remove)
 {
 	int		i;
 	size_t	j;

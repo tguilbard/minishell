@@ -10,7 +10,3 @@
  * env		: Affiche toutes les variables d'environnement
  * export	: Exporte une variable dans l'environnement
  * unset	: Detruit une variable de l'environnement
-
-## A fair
-
- * ameliorer parsing sep

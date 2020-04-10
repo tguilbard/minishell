@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 11:59:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/04/01 12:01:48 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/04/10 20:21:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,6 @@
 
 extern t_char_list	g_env;
 extern int			g_ret;
-
-void		jump_quotes(char *param, size_t *index)
-{
-	if (param[*index] == '"')
-	{
-		(*index)++;
-		while (param[*index] != '"' && param[*index])
-			(*index)++;
-	}
-	else if (param[*index] == 39)
-	{
-		(*index)++;
-		while (param[*index] != 39 && param[*index])
-			(*index)++;
-	}
-	if (param[*index])
-		(*index)++;
-}
-
-/*
-**	Remove only the external quote
-*/
-
-char		*rm_quote(char *p_str, char *type)
-{
-	char *tmp;
-	char to_del[2];
-
-	to_del[0] = '\"';
-	to_del[1] = '\0';
-	tmp = p_str;
-	if (ft_strcmp(type, "simple"))
-		p_str = ft_rm_charset(p_str, "\'");
-	else if (ft_strcmp(type, "double"))
-		p_str = ft_rm_charset(p_str, to_del);
-	free(tmp);
-	return (p_str);
-}
 
 /*
 **	Check if the word need to be replace by env var or to be write raw
