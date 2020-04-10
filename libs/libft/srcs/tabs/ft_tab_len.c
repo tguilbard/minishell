@@ -6,13 +6,13 @@
 /*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 14:13:14 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/25 12:11:13 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/04/10 16:18:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_tab_len(void	**tab)
+int	ft_tab_len(void **tab)
 {
 	int	index;
 

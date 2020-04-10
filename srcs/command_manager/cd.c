@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 03:59:26 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/31 16:45:30 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/04/10 16:27:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_char_list g_env;
 
-static void	find_oldpwd(size_t i)
+static void	replace_oldpwd(size_t i)
 {
 	int j;
 
@@ -24,18 +24,20 @@ static void	find_oldpwd(size_t i)
 																g_env.data[i]));
 }
 
-static void	change_pwd(size_t i)
+static void	change_pwd(void)
 {
-	char *pwd;
+	char	*pwd;
+	size_t	i;
 
+	i = find_env_var("PWD");
+	replace_oldpwd(i);
 	pwd = get_pwd();
 	ft_str_add_prefixe("PWD=", &pwd);
 	ft_char_list_replace(&g_env, g_env.data[i], pwd);
 }
 
-int		mini_cd(char **path)
+int			mini_cd(char **path)
 {
-	size_t	i;
 	int		j;
 
 	if (path[1] == NULL)
@@ -44,9 +46,7 @@ int		mini_cd(char **path)
 		if (j > -1)
 		{
 			chdir(g_env.data[j] + 5);
-			i = find_env_var("PWD");
-			find_oldpwd(i);
-			change_pwd(i);
+			change_pwd();
 			return (0);
 		}
 		ft_putstr("minishell: cd: HOME not set", 2);
@@ -58,8 +58,6 @@ int		mini_cd(char **path)
 		ft_putstr(": no such file or directory\n", 2);
 		return (1);
 	}
-	i = find_env_var("PWD");
-	find_oldpwd(i);
-	change_pwd(i);
+	change_pwd();
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 21:04:53 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/04/01 11:00:43 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/04/10 16:15:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void  ft_putnbr(int nb, int fd)
+void	ft_putnbr(int nb, int fd)
 {
 	if (nb < 0)
 	{

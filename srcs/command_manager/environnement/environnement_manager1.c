@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:05:06 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/31 16:45:47 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/04/10 16:40:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,14 @@ int		check_entry_export(char *p_to_add)
 		return (1);
 	}
 	else if (ft_strcmp_c(p_to_add, '=') == false)
-	{}
+		return (0);
 	else
 		return (2);
-	return (0);
 }
 
 int		mini_export(char **p_to_add)
 {
-	int	i;
+	int		i;
 	size_t	j;
 	int		ret[2];
 	char	*find;
@@ -65,16 +64,18 @@ int		mini_export(char **p_to_add)
 	{
 		i = 0;
 		ret[0] = check_entry_export(p_to_add[j]);
-		if (ret[0] == 0 || ret[0] == 1)
-		{}
-		while (p_to_add[j][i] != '=' && p_to_add[j][i])
-			i++;
-		find = ft_strsub(p_to_add[j], 0, i);
-		if ((i = find_env_var(find)) != -1)
-			ft_char_list_replace(&g_env, g_env.data[i], ft_strdup(p_to_add[j]));
-		else
-			ft_char_list_push_back(&g_env, ft_strdup(p_to_add[j]));
-		free(find);
+		if (ret[0] == 2)
+		{
+			while (p_to_add[j][i] != '=' && p_to_add[j][i])
+				i++;
+			find = ft_strsub(p_to_add[j], 0, i);
+			if ((i = find_env_var(find)) != -1)
+				ft_char_list_replace(&g_env, g_env.data[i],
+														ft_strdup(p_to_add[j]));
+			else
+				ft_char_list_push_back(&g_env, ft_strdup(p_to_add[j]));
+			free(find);
+		}
 		j++;
 	}
 	ret[1] = (ret[1] == 1 || ret[0] == 1) ? 1 : 0;
@@ -83,7 +84,7 @@ int		mini_export(char **p_to_add)
 
 int		mini_unset(char **p_to_remove)
 {
-	int	i;
+	int		i;
 	size_t	j;
 	int		ret[2];
 

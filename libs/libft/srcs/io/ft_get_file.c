@@ -6,7 +6,7 @@
 /*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:34:11 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/02/25 12:12:47 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/04/10 16:15:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**ft_get_file(char *path)
 	char	*line;
 
 	result = NULL;
-	fd = open(path,O_RDONLY);
+	fd = open(path, O_RDONLY);
 	if (fd < 3)
 	{
 		printf("%s\n", "Error : Bad fd");

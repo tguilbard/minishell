@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 15:31:24 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/05 23:05:17 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/04/10 16:16:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int				check_create(int fd, t_list_gnl **l1)
 	return (0);
 }
 
-t_list_gnl			*fb(int fd, t_list_gnl **l1)
+t_list_gnl		*fb(int fd, t_list_gnl **l1)
 {
 	t_list_gnl *lst;
 

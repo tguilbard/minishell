@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 16:15:16 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/26 23:37:56 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/04/10 16:19:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char		**ft_chartab_new(size_t nb)
 {
-	char	**tab;
+	char		**tab;
 	size_t		i;
 
 	tab = (char **)malloc(sizeof(char *) * (nb + 1));

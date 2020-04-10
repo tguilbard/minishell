@@ -6,7 +6,7 @@
 /*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 11:21:19 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/05 23:05:11 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/04/10 16:20:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,10 @@ int		ft_read(int fd, char **stock)
 
 int		get_next_line(int fd, char **line)
 {
-	static t_list_gnl		*l1 = NULL;
+	static t_list_gnl	*l1 = NULL;
 	t_list_gnl			*current;
-	int				error;
-	int				ret;
+	int					error;
+	int					ret;
 
 	if (line == NULL)
 		return (-1);
