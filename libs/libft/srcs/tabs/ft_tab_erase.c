@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   param_destructor.c                                 :+:      :+:    :+:   */
+/*   ft_tab_erase.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/11 18:02:03 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/09/11 11:41:05 by ldutriez         ###   ########.fr       */
+/*   Created: 2020/09/11 15:43:38 by ldutriez          #+#    #+#             */
+/*   Updated: 2020/09/11 16:37:35 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void		destroy_param(t_param p_param)
+void	***ft_tab_erase(void ***tab, size_t index)
 {
-	size_t	i;
+	void 	**tmp;
+	size_t	cpy_i;
 
-	i = 0;
-	while (p_param.param && p_param.param[i])
+	tmp = *tab;
+	cpy_i = 0;
+	*tab = ft_tab_new(ft_tab_len(tmp) - 1);
+	while (cpy_i < index)
 	{
-		ft_free_tab((void**)p_param.param[i]);
-		ft_free_tab((void**)p_param.sep[i]);
-		ft_free_tab((void**)p_param.name[i]);
-		i++;
+		(*tab)[cpy_i] = tmp[cpy_i];
+		cpy_i++;
 	}
-	free(p_param.param);
-	free(p_param.sep);
-	free(p_param.name);
-}
-
-void		free_param(t_param *p_param)
-{
-	destroy_param(*p_param);
-	free(p_param);
+	cpy_i++;
+	while (tmp[cpy_i])
+	{
+		(*tab)[cpy_i - 1] = tmp[cpy_i];
+		cpy_i++;
+	}
+	(*tab)[cpy_i - 1] = NULL;
+	free(tmp);
+	return (tab);
 }

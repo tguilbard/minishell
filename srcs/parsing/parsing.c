@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:29:30 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/04/10 22:41:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/11 16:42:02 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void		replace_environ_forest(t_param *res, t_rep_env_data *info)
 			&& (ft_is_alpha_num(res->param[info->n][info->i][info->j + 1])
 				|| res->param[info->n][info->i][info->j + 1] == '?')
 			&& info->raw_text == false)
-		put_env_to_text(res->param, info);
+		put_env_to_text(res->param[info->n], info);
 	else if (res->param[info->n][info->i][info->j] == 39
 			&& res->param[info->n][info->i][info->j + 1] &&
 			info->raw_text == true)

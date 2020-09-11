@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_param.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <tguilbar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 21:59:32 by user42            #+#    #+#             */
-/*   Updated: 2020/04/10 22:40:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/11 13:42:29 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ t_param			*get_param(char *param)
 	result = malloc_param();
 	i = 0;
 	n = 0;
-	add_new_space(result);
 	while (param[i])
 	{
 		while (param[i] && ft_is_whitespaces(param[i]))
@@ -94,6 +93,7 @@ t_param			*get_param(char *param)
 		get_param_redi(param, result, &i, &n);
 		get_param_sepa(param, result, &i, &n);
 		get_param_pipe(param, result, &i, &n);
+		add_new_space(result);
 	}
 	return (replace_environ(result));
 }

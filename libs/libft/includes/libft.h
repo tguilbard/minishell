@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncoudsi <ncoudsi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:06:39 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/04/10 16:11:55 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/11 15:55:35 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,6 @@ int				ft_tab_len(void	**tab);
 void			ft_free_tab(void **tab);
 void			**ft_tab_cpy(void **dst, void **src);
 void			ft_add_to_tab(void *to_add, void ***tab);
+void			***ft_tab_erase(void ***tab, size_t index);
 
 #endif

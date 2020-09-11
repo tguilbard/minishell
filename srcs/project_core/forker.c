@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forker.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <tguilbar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 23:24:58 by user42            #+#    #+#             */
-/*   Updated: 2020/04/10 23:30:14 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/11 12:23:58 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	take_environ_core(char **tab, char *str)
 	g_env.data = (char **)ft_tab_cpy((void **)g_env.data, (void **)tab);
 	free(tab);
 	i = 0;
-	while (!ft_is_whitespaces(str[i]))
+	while (str && !ft_is_whitespaces(str[i]))
 		i++;
 	pwd = ft_strsub(str, 0, i);
 	chdir(pwd);
@@ -49,6 +49,7 @@ void		take_environ(void)
 		if (ret == 0)
 		{
 			take_environ_core(tab, str);
+			free(str);
 			return ;
 		}
 		ft_add_to_tab((void *)str, (void ***)&tab);

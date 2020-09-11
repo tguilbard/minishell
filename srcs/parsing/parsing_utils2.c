@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <tguilbar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 20:16:30 by user42            #+#    #+#             */
-/*   Updated: 2020/04/10 22:10:40 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/11 11:04:56 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	ft_get_redirection(char *param, size_t *i, t_param *result, int n)
 {
 	char *sep;
 
+	sep = NULL;
 	if (ft_strnstr(param + *i, ">>", 2))
 		sep = ft_strdup(">>");
 	else if (param[*i] == '>')

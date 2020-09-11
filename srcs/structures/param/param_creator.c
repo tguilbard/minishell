@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:56:58 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/26 00:24:40 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/09/11 11:36:33 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_param	*malloc_param(void)
 
 void	add_new_space(t_param *result)
 {
-	ft_add_to_tab(ft_tab_new(0), (void ***)&result->param);
-	ft_add_to_tab(ft_tab_new(0), (void ***)&result->sep);
-	ft_add_to_tab(ft_tab_new(0), (void ***)&result->name);
+	ft_add_to_tab(ft_tab_new(0), (void ***)&(result->param));
+	ft_add_to_tab(ft_tab_new(0), (void ***)&(result->sep));
+	ft_add_to_tab(ft_tab_new(0), (void ***)&(result->name));
 }

@@ -6,14 +6,14 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 08:17:15 by ldutriez          #+#    #+#              #
-#    Updated: 2020/04/10 23:44:32 by user42           ###   ########.fr        #
+#    Updated: 2020/09/11 11:03:35 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell
 #BONUS_NAME	=
 
-CC =		gcc
+CC =		clang
 
 SRC_DIR = 	$(shell find srcs -type d)
 INC_DIR = 	$(shell find includes -type d) \
@@ -38,7 +38,7 @@ NORMAL_OBJ = $(OBJ) #$(addprefix $(OBJ_DIR)/, $(NORMAL_SRC:%.c=%.o))
 #BONUS_OBJ = $(OBJ) $(addprefix $(OBJ_DIR)/, $(BONUS_SRC:%.c=%.o))
 
 #Compilation flag
-CFLAGS = -Wall -Wextra #-fsanitize=address -g3 -O3 #-Werror
+CFLAGS = -Wall -Wextra -fsanitize=address -g3 -O3 -Werror
 
 IFLAGS = $(foreach dir, $(INC_DIR), -I$(dir))
 

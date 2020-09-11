@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <tguilbar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 23:18:23 by user42            #+#    #+#             */
-/*   Updated: 2020/04/10 23:23:16 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/11 16:05:04 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		main_execution(void)
 	char	*str;
 	t_param *param;
 	size_t	n;
-	int		stdout;
+	// int		stdout;
 
 	print_prompt();
 	if (get_next_line(0, &str))
@@ -88,6 +88,7 @@ void		main_execution(void)
 		signal(SIGQUIT, child_killer);
 		n = 0;
 		param = get_param(str);
+		free(str);
 		while (param->param[n])
 		{
 			redirection(param, n);
@@ -95,7 +96,6 @@ void		main_execution(void)
 															param->param[n]);
 			n++;
 		}
-		free(str);
 		close(0);
 		close(1);
 		free_param(param);

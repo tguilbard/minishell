@@ -31,7 +31,7 @@ SRC =		ft_f_abs.c ft_f_floor.c ft_f_roof.c ft_i_abs.c ft_i_roof.c \
 			ft_print_int_tab.c \
 			\
 			ft_free_tab.c ft_tab_cpy.c ft_tab_new.c ft_tab_len.c \
-			ft_add_to_tab.c \
+			ft_add_to_tab.c ft_tab_erase.c \
 			\
 			ft_lst_add_back.c ft_lst_clear.c ft_lst_rm_data.c ft_lst_map.c \
 			ft_lst_size.c ft_lst_add_front.c ft_lst_create_node.c \
@@ -51,14 +51,14 @@ IFLAGS = $(foreach dir, $(INC_DIR), -I$(dir))
 LFLAGS = $(foreach lib_dir, $(LIB_DIR), -L $(lib_dir)) $(foreach lib, $(LIB), -l $(lib))
 
 # Colors
-_GREY=$'\x1b[30m
-_RED=$'\x1b[31m
-_GREEN=$'\x1b[32m
-_YELLOW=$'\x1b[33m
-_BLUE=$'\x1b[34m
-_PURPLE=$'\x1b[35m
-_CYAN=$'\x1b[36m
-_WHITE=$'\x1b[37m
+_GREY=	$'\033[30m
+_RED=	$'\033[31m
+_GREEN=	$'\033[32m
+_YELLOW=$'\033[33m
+_BLUE=	$'\033[34m
+_PURPLE=$'\033[35m
+_CYAN=	$'\033[36m
+_WHITE=	$'\033[37m
 
 all:
 				@echo "\n$(_BLUE)___$(NAME) Setting___\n$(_WHITE)"

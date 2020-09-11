@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 09:22:55 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/03/12 11:48:06 by tguilbar         ###   ########.fr       */
+/*   Updated: 2020/09/11 14:44:49 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void			jump_quotes(char *param, size_t *index);
 char			*rm_quote(char *p_str, char *type);
 t_bool			is_raw(char **result, t_rep_env_data info);
 void			env_var_missing(t_rep_env_data *info);
-void			put_env_to_text(char ***result, t_rep_env_data *info);
+void			put_env_to_text(char **result, t_rep_env_data *info);
 
 #endif
