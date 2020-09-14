@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 09:57:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/09/11 13:38:11 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/14 13:51:34 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,18 @@ extern t_char_list	g_env;
 
 int	mini_echo(char **p_param)
 {
-	int		pid;
-	int		status;
+	int		param_index;
 
-	pid = fork();
-	status = 0;
-	if (pid == 0)
+	param_index = 1;
+	if (p_param == NULL || p_param[0] == NULL)
+		return (-1);
+	while (p_param[param_index])
 	{
-		if (execve("/bin/echo", p_param, g_env.data) == -1)
-		{
-			ft_putstr("echo: invalide param", 2);
-			return (1);
-		}
+		ft_putstr(p_param[param_index], 1);
+		if (p_param[param_index + 1])
+			ft_putchar(' ', 1);
+		param_index++;
 	}
-	else
-		waitpid(pid, &status, 0);
-	return (status);
+	ft_putchar('\n', 1);
+	return (0);
 }
