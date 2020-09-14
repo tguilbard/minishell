@@ -25,6 +25,7 @@ void	***ft_tab_erase(void ***tab, size_t index)
 		(*tab)[cpy_i] = tmp[cpy_i];
 		cpy_i++;
 	}
+	free(tmp[cpy_i]);
 	cpy_i++;
 	while (tmp[cpy_i])
 	{

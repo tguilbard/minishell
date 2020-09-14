@@ -61,34 +61,32 @@ void		return_val_replace(t_rep_env_data *info)
 **	Find the env line to put instead of the word
 */
 
-void		put_env_to_text(char **result, t_rep_env_data *info)
+void		put_env_to_text(char ***result, t_rep_env_data *info)
 {
 	info->ret = -2;
 	info->start = info->j;
 	info->len = 1;
-	while (ft_is_alpha_num(result[info->i][info->j + info->len])
-		|| result[info->i][info->j + info->len] == '?')
+	while (ft_is_alpha_num((*result)[info->i][info->j + info->len])
+		|| (*result)[info->i][info->j + info->len] == '?')
 		info->len++;
-	info->str = ft_strsub(result[info->i], info->start + 1, info->len - 1);
+	info->str = ft_strsub((*result)[info->i], info->start + 1, info->len - 1);
 	if (*(info->str) != '?')
 		info->ret = find_env_var(info->str);
 	free(info->str);
-	info->new = ft_strsub(result[info->i], 0, info->start);
+	info->new = ft_strsub((*result)[info->i], 0, info->start);
 	if (info->ret == -2)
 		return_val_replace(info);
 	else if (info->ret != -1)
 		env_replace(info);
 	info->j = ft_strlen(info->new);
-	info->str = ft_strdup(result[info->i] + info->start + info->len);
+	info->str = ft_strdup((*result)[info->i] + info->start + info->len);
 	ft_str_add_suffix(&info->new, info->str);
 	free(info->str);
 	if (info->ret == -1)
-	{
-		ft_tab_erase((void ***)(&result), info->i);
-	}
+		ft_tab_erase((void ***)result, info->i);
 	else
 	{
-		free(result[info->i]);
-		result[info->i] = info->new;
+		free((*result)[info->i]);
+		(*result)[info->i] = info->new;
 	}
 }

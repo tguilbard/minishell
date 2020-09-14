@@ -43,6 +43,6 @@ void			jump_quotes(char *param, size_t *index);
 char			*rm_quote(char *p_str, char *type);
 t_bool			is_raw(char **result, t_rep_env_data info);
 void			env_var_missing(t_rep_env_data *info);
-void			put_env_to_text(char **result, t_rep_env_data *info);
+void			put_env_to_text(char ***result, t_rep_env_data *info);
 
 #endif

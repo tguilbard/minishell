@@ -10,6 +10,3 @@
  * env		: Affiche toutes les variables d'environnement
  * export	: Exporte une variable dans l'environnement
  * unset	: Detruit une variable de l'environnement
-
-## TODO
-ENV is deleted when many echo are done and another than the first access to an env variable.

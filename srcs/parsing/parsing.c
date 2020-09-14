@@ -64,7 +64,7 @@ static void		replace_environ_forest(t_param *res, t_rep_env_data *info)
 			&& (ft_is_alpha_num(res->param[info->n][info->i][info->j + 1])
 				|| res->param[info->n][info->i][info->j + 1] == '?')
 			&& info->raw_text == false)
-		put_env_to_text(res->param[info->n], info);
+		put_env_to_text((&res->param[info->n]), info);
 	else if (res->param[info->n][info->i][info->j] == 39
 			&& res->param[info->n][info->i][info->j + 1] &&
 			info->raw_text == true)
@@ -98,7 +98,8 @@ t_param			*replace_environ(t_param *res)
 			while (res->param[info.n][info.i] &&
 					res->param[info.n][info.i][info.j])
 				replace_environ_forest(res, &info);
-			info.i++;
+			if (res->param[info.n][info.i])
+				info.i++;
 		}
 		info.n++;
 	}
