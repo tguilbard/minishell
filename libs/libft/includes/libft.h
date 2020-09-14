@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:06:39 by ncoudsi           #+#    #+#             */
-/*   Updated: 2020/09/11 15:55:35 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/14 16:47:03 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void			ft_str_add_suffix(char **p_str, char *p_suffix);
 int				ft_str_count_c(char *str, char c);
 char			*ft_strnstr(char *haystack, char *needle, size_t len);
 char			*ft_rm_charset(char *p_str, char *p_charset);
+char			*ft_erase_str(char *p_str, size_t pos, size_t len);
 
 /*
 ** Prototypage des CHECKS.
