@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 23:18:23 by user42            #+#    #+#             */
-/*   Updated: 2020/09/11 16:05:04 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/14 13:55:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ static void	*find_command(char *p_str)
 		return (&mini_exec);
 	else if (ft_strcmp(p_str, "exit"))
 		return (&mini_exit);
-	ft_putstr(p_str, 2);
-	ft_putstr(": command not found\n", 2);
-	return (NULL);
+	else
+		return (&find_cmd);
 }
 
 static int	apply_function(int (*f)(char **param), char **param)
