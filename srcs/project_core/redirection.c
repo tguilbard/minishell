@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:49:15 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/04/10 23:01:56 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/14 16:18:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** 3 = next out
 */
 
-static void	redirection_forest(t_param *param, int n, size_t i, int *std)
+static int	redirection_forest(t_param *param, int n, size_t i, int *std)
 {
 	int fd[2];
 
@@ -28,6 +28,7 @@ static void	redirection_forest(t_param *param, int n, size_t i, int *std)
 		pipe(fd);
 		std[1] = fd[1];
 		std[2] = fd[0];
+		return (1);
 	}
 	else if (*(param->sep[n][i]) == '>')
 	{
@@ -40,6 +41,7 @@ static void	redirection_forest(t_param *param, int n, size_t i, int *std)
 	}
 	else if (*(param->sep[n][i]) == '<')
 		std[0] = open(param->name[n][i], O_RDONLY, 044);
+	return (0);
 }
 
 static int	*redirection_init(void)
@@ -69,19 +71,24 @@ void		redirection(t_param *param, int n)
 {
 	int		*std;
 	size_t	i;
+	int		ret;
 
 	std = redirection_init();
 	i = 0;
+	ret = 0;
 	if (param->sep[n])
 	{
 		while (param->sep[n][i])
 		{
-			redirection_forest(param, n, i, std);
+			ret = redirection_forest(param, n, i, std);
 			i++;
 		}
 	}
 	dup2(std[0], 0);
-	close(std[0]);
 	dup2(std[1], 1);
-	close(std[1]);
+	if (ret == 1)
+	{
+		close(std[0]);
+		close(std[1]);
+	}
 }
