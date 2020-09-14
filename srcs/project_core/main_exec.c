@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 23:18:23 by user42            #+#    #+#             */
-/*   Updated: 2020/09/14 13:55:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/14 16:06:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void		main_execution(void)
 			redirection(param, n);
 			g_ret = apply_function(find_command(param->param[n][0]),
 															param->param[n]);
+			//ft_putstr("ici\n", 2);
 			n++;
 		}
 		close(0);
