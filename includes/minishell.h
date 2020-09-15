@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:43:02 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/09/15 15:04:08 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/15 16:58:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int		mini_pwd(void);
 int		mini_echo(char **p_param);
 int		mini_exit(char **p_param);
-int		mini_env(void);
+int		mini_env(char **p_param);
 int		mini_export(char **p_str);
 int		mini_unset(char **p_str);
 int		mini_cd(char **path);

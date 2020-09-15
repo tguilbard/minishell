@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environnement_manager2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 11:14:34 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/04/10 16:28:55 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/15 16:59:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 extern t_char_list	g_env;
 
-int		mini_env(void)
+int		mini_env(char **p_param)
 {
 	size_t	i;
 
 	i = 0;
+	if (p_param[1] != NULL)
+	{
+		ft_putstr("env: too many argument\n", 2);
+		child_killer(1);
+	}
 	while (g_env.data[i] != NULL)
 	{
 		ft_putstr(g_env.data[i], 1);

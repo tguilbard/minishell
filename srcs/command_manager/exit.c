@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:58:31 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/04/04 10:27:25 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/09/15 16:52:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,19 @@ int	mini_exit(char **p_param)
 	ft_putstr("exit\n", 1);
 	if (p_param == NULL || p_param[1] == NULL)
 		ft_putnbr(g_ret, g_env_fd[1]);
+	else if (p_param[2] != NULL)
+	{
+		ft_putstr("exit: too many argument\n", 2);
+		child_killer(1);
+	}
 	else
 	{
 		i = 0;
-		while (p_param[1][i] && ft_is_digit(p_param[1][i]))
+		while (p_param[1][i] && ft_is_alpha(p_param[1][i]) == false)
 			i++;
 		if (p_param[1][i])
 		{
-			ft_putstr("bash: exit: ", 2);
+			ft_putstr("exit: ", 2);
 			ft_putstr(p_param[1], 2);
 			ft_putstr(": numeric argument required\n", 2);
 			ft_putstr("2", g_env_fd[1]);
