@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 09:57:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/09/14 13:51:34 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/15 11:38:03 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,26 @@ extern t_char_list	g_env;
 int	mini_echo(char **p_param)
 {
 	int		param_index;
+	t_bool	n_flag;
 
 	param_index = 1;
+	n_flag = false;
 	if (p_param == NULL || p_param[0] == NULL)
 		return (-1);
 	while (p_param[param_index])
 	{
+		if (param_index == 1)
+			while (ft_strcmp(p_param[param_index], "-n"))
+			{
+				n_flag = true;
+				param_index++;
+			}
 		ft_putstr(p_param[param_index], 1);
 		if (p_param[param_index + 1])
 			ft_putchar(' ', 1);
 		param_index++;
 	}
-	ft_putchar('\n', 1);
+	if (n_flag == false)
+		ft_putchar('\n', 1);
 	return (0);
 }
