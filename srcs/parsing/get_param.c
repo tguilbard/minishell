@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 21:59:32 by user42            #+#    #+#             */
-/*   Updated: 2020/09/11 13:42:29 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/15 14:09:24 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@ static void		get_param_redi(char *param, t_param *result, size_t *i,
 {
 	if (param[*i] == '>' || param[*i] == '<')
 	{
-		if (result->param[*n][0])
-			ft_get_redirection(param, i, result, *n);
-		else
-		{
-			if (param[*i] == '>')
-				ft_putstr("syntax error near unexpected token `>'\n", 2);
-			else
-				ft_putstr("syntax error near unexpected token `<'\n", 2);
-			child_killer(1);
-		}
+		ft_get_redirection(param, i, result, *n);
+		// if (result->name[*n][0] == NULL)
+		// {
+		// 	if (param[*i] == '>')
+		// 		ft_putstr("syntax error near unexpected token «>»\n", 2);
+		// 	else
+		// 		ft_putstr("syntax error near unexpected token «<»\n", 2);
+		// 	child_killer(1);
+		// }
 	}
 }
 
@@ -43,7 +42,7 @@ static void		get_param_sepa(char *param, t_param *result, size_t *i,
 		}
 		else
 		{
-			ft_putstr("syntax error near unexpected token `;'\n", 2);
+			ft_putstr("syntax error near unexpected token «;»\n", 2);
 			child_killer(1);
 		}
 	}
@@ -64,7 +63,7 @@ static void		get_param_pipe(char *param, t_param *result, size_t *i,
 		}
 		else
 		{
-			ft_putstr("syntax error near unexpected token `|'\n", 2);
+			ft_putstr("syntax error near unexpected token «|»\n", 2);
 			child_killer(1);
 		}
 	}

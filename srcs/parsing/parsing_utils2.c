@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 20:16:30 by user42            #+#    #+#             */
-/*   Updated: 2020/09/15 10:18:00 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/15 14:23:32 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ int		take_name(char *param, t_param *result, int n)
 		i++;
 	if (start == i)
 	{
-		ft_putstr("syntax error near unexpected token `", 2);
-		ft_putchar(param[start], 2);
-		ft_putstr("'\n", 2);
+		if (result->sep[n][ft_tab_len((void **)result->sep[n]) - 1][0] == '>')
+			ft_putstr("syntax error near unexpected token «>»\n", 2);
+		else
+			ft_putstr("syntax error near unexpected token «<»\n", 2);
 		child_killer(1);
 	}
 	ft_add_to_tab(ft_strsub(param, start, i - start),
