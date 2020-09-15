@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 11:59:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/09/11 16:39:56 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/15 11:21:44 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ void		put_env_to_text(char ***result, t_rep_env_data *info)
 		|| (*result)[info->i][info->j + info->len] == '?')
 		info->len++;
 	info->str = ft_strsub((*result)[info->i], info->start + 1, info->len - 1);
-	if (*(info->str) != '?')
-		info->ret = find_env_var(info->str);
+	info->ret = (*(info->str) != '?') ? find_env_var(info->str) : info->ret;
 	free(info->str);
 	info->new = ft_strsub((*result)[info->i], 0, info->start);
 	if (info->ret == -2)

@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 15:43:38 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/09/11 16:37:35 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/15 10:20:25 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	***ft_tab_erase(void ***tab, size_t index)
 {
-	void 	**tmp;
+	void	**tmp;
 	size_t	cpy_i;
 
 	tmp = *tab;

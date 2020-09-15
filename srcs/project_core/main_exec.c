@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 23:18:23 by user42            #+#    #+#             */
-/*   Updated: 2020/09/14 16:51:36 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/15 10:21:25 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void		main_execution(void)
 	char	*str;
 	t_param *param;
 	size_t	n;
-	// int		stdout;
 
 	print_prompt();
 	if (get_next_line(0, &str))

@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:29:30 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/09/14 16:46:05 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/15 11:25:16 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,32 @@ extern t_char_list	g_env;
 **	Erase the simple and the double quotes of the params
 */
 
-static void		quotes_parsing_loop(t_param *tab, size_t n, size_t i)
+static void		quotes_parsing_loop(t_param *tab, size_t n, size_t i, size_t j)
 {
-	size_t j;
-
-	j = 0;
 	while (tab->param[n][i][j])
-	{
-		if (tab->param[n][i][j] == 39)
+		if (tab->param[n][i][j] == '\\')
 		{
-			tab->param[n][i] = rm_quote(tab->param[n][i], "simple");
-			break ;
+			tab->param[n][i] = ft_erase_str(tab->param[n][i], j, 1);
+			j += (tab->param[n][i][j] == '\0') ? 0 : 1;
+		}
+		else if (tab->param[n][i][j] == '\'')
+		{
+			tab->param[n][i] = ft_erase_str(tab->param[n][i], j, 1);
+			while (tab->param[n][i][j] && tab->param[n][i][j] != '\'')
+				j++;
 		}
 		else if (tab->param[n][i][j] == '\"')
 		{
-			tab->param[n][i] = rm_quote(tab->param[n][i], "double");
-			break ;
+			tab->param[n][i] = ft_erase_str(tab->param[n][i], j, 1);
+			while (tab->param[n][i][j] && tab->param[n][i][j] != '\"')
+			{
+				if (tab->param[n][i][j] == '\\')
+					tab->param[n][i] = ft_erase_str(tab->param[n][i], j, 1);
+				j++;
+			}
 		}
-		j++;
-	}
+		else
+			j++;
 }
 
 t_param			*quotes_parsing(t_param *tab)
@@ -50,7 +57,7 @@ t_param			*quotes_parsing(t_param *tab)
 		i = 0;
 		while (tab->param[n][i])
 		{
-			quotes_parsing_loop(tab, n, i);
+			quotes_parsing_loop(tab, n, i, 0);
 			i++;
 		}
 		n++;
@@ -62,22 +69,19 @@ static void		replace_environ_forest(t_param *res, t_rep_env_data *info)
 {
 	if (res->param[info->n][info->i][info->j] == '\\')
 	{
-		res->param[info->n][info->i] = ft_erase_str(res->param[info->n][info->i],
-																	info->j, 1);
-		info->j++;
+		info->j += (res->param[info->n][info->i][info->j + 1] == '\0') ? 1 : 2;
 	}
 	else if (res->param[info->n][info->i][info->j] == '$'
 			&& (ft_is_alpha_num(res->param[info->n][info->i][info->j + 1])
-			|| res->param[info->n][info->i][info->j + 1] == '?')
-			&& info->raw_text == false)
+			|| res->param[info->n][info->i][info->j + 1] == '?'))
 		put_env_to_text((&res->param[info->n]), info);
-	else if (res->param[info->n][info->i][info->j] == 39
-			&& res->param[info->n][info->i][info->j + 1] &&
-			info->raw_text == true)
+	else if (res->param[info->n][info->i][info->j] == '\''
+			&& res->param[info->n][info->i][info->j + 1]
+			&& info->raw_text == true)
 	{
 		info->j++;
 		while (res->param[info->n][info->i][info->j + 1]
-				&& res->param[info->n][info->i][info->j + 1] != 39)
+				&& res->param[info->n][info->i][info->j + 1] != '\'')
 			info->j++;
 		info->j++;
 	}

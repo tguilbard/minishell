@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 20:16:30 by user42            #+#    #+#             */
-/*   Updated: 2020/09/11 11:04:56 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/15 10:18:00 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,6 @@ void	jump_quotes(char *param, size_t *index)
 	}
 	if (param[*index])
 		(*index)++;
-}
-
-/*
-**	Remove only the external quote
-*/
-
-char	*rm_quote(char *p_str, char *type)
-{
-	char *tmp;
-	char to_del[2];
-
-	to_del[0] = '\"';
-	to_del[1] = '\0';
-	tmp = p_str;
-	if (ft_strcmp(type, "simple"))
-		p_str = ft_rm_charset(p_str, "\'");
-	else if (ft_strcmp(type, "double"))
-		p_str = ft_rm_charset(p_str, to_del);
-	free(tmp);
-	return (p_str);
 }
 
 int		take_name(char *param, t_param *result, int n)

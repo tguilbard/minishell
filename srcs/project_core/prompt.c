@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/09/11 11:07:21 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/15 10:21:12 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	ft_put_rainbow(char *str)
 			color = 91;
 		else
 			color++;
-		free (format);
+		free(format);
 	}
 }
 
