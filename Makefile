@@ -6,12 +6,11 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 08:17:15 by ldutriez          #+#    #+#              #
-#    Updated: 2020/09/11 11:03:35 by ldutriez         ###   ########.fr        #
+#    Updated: 2020/09/15 15:05:58 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell
-#BONUS_NAME	=
 
 CC =		clang
 
@@ -25,17 +24,11 @@ vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 
 # List de toute les library a linker au projet (le nom - le lib et - le .a)
 LIB = ft
-#FRAMEWORK = OpenGL Appkit
 
 SRC = $(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
 
-#NORMAL_SRC =
-
-#BONUS_SRC =
-
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
-NORMAL_OBJ = $(OBJ) #$(addprefix $(OBJ_DIR)/, $(NORMAL_SRC:%.c=%.o))
-#BONUS_OBJ = $(OBJ) $(addprefix $(OBJ_DIR)/, $(BONUS_SRC:%.c=%.o))
+NORMAL_OBJ = $(OBJ)
 
 #Compilation flag
 CFLAGS = -Wall -Wextra -fsanitize=address -g3 -O3 -Werror
@@ -44,7 +37,6 @@ IFLAGS = $(foreach dir, $(INC_DIR), -I$(dir))
 
 LFLAGS =	$(foreach dir, $(LIB_DIR), -L $(dir)) \
 		$(foreach lib, $(LIB), -l $(lib)) \
-#		$(foreach frame, $(FRAMEWORK), -framework  $(frame))
 
 # Colors
 
@@ -90,13 +82,6 @@ $(NAME): 			$(INC_DIR) $(NORMAL_OBJ) Makefile
 				@$(CC) $(CFLAGS) $(LFLAGS) $(NORMAL_OBJ) libs/libft/libft.a -o $(NAME)
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
-#bonus:			$(BONUS_NAME)
-
-#$(BONUS_NAME):	$(INC_DIR) $(BONUS_OBJ) Makefile
-#				@echo "-----\nCreating Executable $(_YELLOW)$@$(_WHITE) ... \c"
-#				@$(CC) $(CFLAGS) $(LFLAGS) $(BONUS_OBJ) -o $(BONUS_NAME)
-#				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
-
 linux:
 				@echo "-----\nCreating Executable $(_YELLOW)$(_WHITE) ... \c"
 				@gcc obj/* libs/libft/objs/* -I includes/ -I includes/structures/ -I libs/libft/includes/ -o $(NAME)
@@ -116,4 +101,4 @@ fclean:			clean
 				@rm -f $(NAME) $(BONUS_NAME)
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
-.PHONY: all clean flcean re install re-install show norme uninstall #bonus
+.PHONY: all clean flcean re install re-install show norme uninstall

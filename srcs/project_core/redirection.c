@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:49:15 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/09/14 16:18:40 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/15 15:00:37 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,19 @@ static int	redirection_forest(t_param *param, int n, size_t i, int *std)
 		return (1);
 	}
 	else if (*(param->sep[n][i]) == '>')
-	{
 		if (param->sep[n][i][1] == '>')
 			std[1] = open(param->name[n][i], O_WRONLY | O_CREAT |
 													O_APPEND, 0777);
 		else
 			std[1] = open(param->name[n][i], O_WRONLY | O_CREAT |
 											O_APPEND | O_TRUNC, 0777);
-	}
 	else if (*(param->sep[n][i]) == '<')
-		std[0] = open(param->name[n][i], O_RDONLY, 044);
+		if ((std[0] = open(param->name[n][i], O_RDONLY, 044)) == -1)
+		{
+			ft_putstr(param->name[n][i], 2);
+			ft_putstr(": file or directory not found\n", 2);
+			child_killer(1);
+		}
 	return (0);
 }
 

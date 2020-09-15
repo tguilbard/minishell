@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 21:59:32 by user42            #+#    #+#             */
-/*   Updated: 2020/09/15 14:09:24 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/15 14:38:26 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,7 @@ static void		get_param_redi(char *param, t_param *result, size_t *i,
 																	size_t *n)
 {
 	if (param[*i] == '>' || param[*i] == '<')
-	{
 		ft_get_redirection(param, i, result, *n);
-		// if (result->name[*n][0] == NULL)
-		// {
-		// 	if (param[*i] == '>')
-		// 		ft_putstr("syntax error near unexpected token «>»\n", 2);
-		// 	else
-		// 		ft_putstr("syntax error near unexpected token «<»\n", 2);
-		// 	child_killer(1);
-		// }
-	}
 }
 
 static void		get_param_sepa(char *param, t_param *result, size_t *i,
