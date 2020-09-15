@@ -1,12 +1,13 @@
-# Projet miniShell
+# Project miniShell
 
-## Commandes
+## Commands
 
- * exit		: Ferme le shell
- * echo		: Ecrit tout les argument qui suivent
- * help		: Affiche le README.md
- * cd		: Permet de changer de fichier de travail
- * pwd		: Donne le chemin du fichier de travail actuel
- * env		: Affiche toutes les variables d'environnement
- * export	: Exporte une variable dans l'environnement
- * unset	: Detruit une variable de l'environnement
+ * exit    : Quit the shell
+ * echo    : Write all the following arguments
+    -n   --> Remove the new line at the end
+ * help    : Display the README.md
+ * cd      : Allow you to change the working directory
+ * pwd     : Display the actual working directory path
+ * env     : Display environment variables
+ * export  : Create or modify a environment variable
+ * unset   : Destroy an environment variable

@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 03:59:26 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/04/10 16:27:44 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/15 15:19:44 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,22 @@ static void	change_pwd(void)
 	ft_char_list_replace(&g_env, g_env.data[i], pwd);
 }
 
+static int	check_error(char **path)
+{
+	if (path[2] != NULL)
+	{
+		ft_putstr("too many arguments\n", 2);
+		return (1);
+	}
+	if (chdir(path[1]) == -1)
+	{
+		ft_putstr(path[1], 2);
+		ft_putstr(": no such file or directory\n", 2);
+		return (1);
+	}
+	return (0);
+}
+
 int			mini_cd(char **path)
 {
 	int		j;
@@ -52,12 +68,8 @@ int			mini_cd(char **path)
 		ft_putstr("minishell: cd: HOME not set", 2);
 		return (1);
 	}
-	if (chdir(path[1]) == -1)
-	{
-		ft_putstr(path[1], 2);
-		ft_putstr(": no such file or directory\n", 2);
+	if (check_error(path) == 1)
 		return (1);
-	}
 	change_pwd();
 	return (0);
 }
