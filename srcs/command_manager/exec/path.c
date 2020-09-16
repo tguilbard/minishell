@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 13:17:01 by user42            #+#    #+#             */
-/*   Updated: 2020/09/15 14:50:49 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/16 11:53:19 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,16 @@ static char	**take_path(void)
 {
 	char	*raw_path;
 	char	**path;
+	int		env_index;
 
-	raw_path = g_env.data[find_env_var("PATH")] + 5;
-	path = ft_split(raw_path, ':');
+	env_index = find_env_var("PATH");
+	raw_path = NULL;
+	path = NULL;
+	if (env_index != -1)
+	{
+		raw_path = g_env.data[env_index] + 5;
+		path = ft_split(raw_path, ':');
+	}
 	return (path);
 }
 
@@ -42,8 +49,12 @@ static int	check_path(char **path, char **p_param, int i, char *tmp)
 	{
 		p_param[0] = tmp;
 		while (path[++i])
+		{
 			free(path[i]);
+			path[i] = NULL;
+		}
 		free(path);
+		path = NULL;
 		return (0);
 	}
 	return (1);
@@ -58,7 +69,7 @@ int			find_cmd(char **p_param)
 	i = 0;
 	path = take_path();
 	tmp = p_param[0];
-	while (path[i])
+	while (path && path[i])
 	{
 		ft_str_add_suffix(&(path[i]), "/");
 		ft_str_add_suffix(&(path[i]), tmp);
@@ -70,6 +81,7 @@ int			find_cmd(char **p_param)
 	ft_putstr(tmp, 2);
 	ft_putstr(": command not found\n", 2);
 	free(path);
+	path = NULL;
 	p_param[0] = tmp;
 	return (1);
 }
