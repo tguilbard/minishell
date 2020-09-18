@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 23:24:58 by user42            #+#    #+#             */
-/*   Updated: 2020/09/11 12:23:58 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/18 10:04:24 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		take_environ(void)
 		}
 		ft_add_to_tab((void *)str, (void ***)&tab);
 	}
-	ft_putstr("relink failed\n", 2);
+	ft_putstr_fd("relink failed\n", 2);
 	exit(0);
 }
 
@@ -76,7 +76,7 @@ int			take_return(void)
 		}
 		free(str);
 	}
-	ft_putstr("relink failed\n", 2);
+	ft_putstr_fd("relink failed\n", 2);
 	exit(0);
 }
 
@@ -87,7 +87,7 @@ static void	forker_parent(int status)
 	else
 		exit(take_return());
 	if (status == 768)
-		ft_putstr("minishell quit process\n", 2);
+		ft_putstr_fd("minishell quit process\n", 2);
 }
 
 void		forker(void)
@@ -101,11 +101,11 @@ void		forker(void)
 	{
 		if (pipe(g_env_fd) == -1)
 		{
-			ft_putstr("relink failed", 2);
+			ft_putstr_fd("relink failed", 2);
 			exit(0);
 		}
 		if ((pid = fork()) == -1)
-			ft_putstr("fork failed", 2);
+			ft_putstr_fd("fork failed", 2);
 		if (pid == 0)
 		{
 			signal(SIGINT, child_killer);

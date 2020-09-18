@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:52:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/09/15 10:21:12 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/18 10:04:40 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static void	ft_put_rainbow(char *str)
 		format = ft_itoa(color);
 		ft_str_add_prefixe("\033[1;", &format);
 		ft_str_add_suffix(&format, "m");
-		ft_putstr(format, 1);
+		ft_putstr_fd(format, 1);
 		i += ft_put_rainbow_inc(str, i, len);
-		ft_putstr("\033[0m", 1);
+		ft_putstr_fd("\033[0m", 1);
 		if (color == 97)
 			color = 91;
 		else
@@ -88,11 +88,11 @@ void		print_prompt(void)
 	}
 	str[1] = ft_strsub(str[0], last, i - last);
 	free(str[0]);
-	ft_putstr("\033[3;94m", 1);
-	ft_putstr(str[1], 1);
+	ft_putstr_fd("\033[3;94m", 1);
+	ft_putstr_fd(str[1], 1);
 	free(str[1]);
-	ft_putstr("\033[0m", 1);
-	ft_putstr(" ", 1);
+	ft_putstr_fd("\033[0m", 1);
+	ft_putstr_fd(" ", 1);
 	str[0] = get_usr();
 	ft_str_add_prefixe("(", &str[0]);
 	ft_str_add_suffix(&str[0], "):");

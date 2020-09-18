@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 09:57:36 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/09/15 11:38:03 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/18 10:05:01 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int	mini_echo(char **p_param)
 				n_flag = true;
 				param_index++;
 			}
-		ft_putstr(p_param[param_index], 1);
+		ft_putstr_fd(p_param[param_index], 1);
 		if (p_param[param_index + 1])
-			ft_putchar(' ', 1);
+			ft_putchar_fd(' ', 1);
 		param_index++;
 	}
 	if (n_flag == false)
-		ft_putchar('\n', 1);
+		ft_putchar_fd('\n', 1);
 	return (0);
 }

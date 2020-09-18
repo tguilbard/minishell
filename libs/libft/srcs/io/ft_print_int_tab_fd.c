@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_print_int_tab_fd.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 21:04:53 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/09/18 09:51:49 by ldutriez         ###   ########.fr       */
+/*   Created: 2020/09/18 09:56:43 by ldutriez          #+#    #+#             */
+/*   Updated: 2020/09/18 09:57:36 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr(int nb)
+void	ft_print_int_tab_fd(char *p_name, int *p_tab, size_t len, int fd)
 {
-	if (nb < 0)
+	size_t		index;
+
+	index = 0;
+	if (p_name != NULL)
 	{
-		ft_putchar('-');
-		nb = nb * -1;
+		ft_putchar_fd('{', fd);
+		ft_putstr_fd(p_name, fd);
+		ft_putstr_fd("}\n", fd);
 	}
-	if (nb >= 10)
+	ft_putstr_fd("-----===-----\n", fd);
+	while (p_tab && index < len)
 	{
-		ft_putnbr(nb / 10);
+		ft_putnbr_fd(index, fd);
+		ft_putstr_fd("--->[", fd);
+		ft_putnbr_fd(p_tab[index], fd);
+		ft_putstr_fd("]\n", fd);
+		index++;
 	}
-	ft_putchar((nb % 10) + '0');
+	ft_putstr_fd("-----===-----\n", fd);
 }

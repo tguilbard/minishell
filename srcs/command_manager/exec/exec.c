@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 15:51:20 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/03/25 00:57:58 by anonymous        ###   ########.fr       */
+/*   Updated: 2020/09/18 10:06:44 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	mini_exec(char **p_param)
 	{
 		if (execve(p_param[0], p_param, g_env.data) == -1)
 		{
-			ft_putstr("invalide executable\n", 2);
+			ft_putstr_fd("invalide executable\n", 2);
 			return (1);
 		}
 		exit(0);

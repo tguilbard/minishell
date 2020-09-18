@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 13:17:01 by user42            #+#    #+#             */
-/*   Updated: 2020/09/16 11:53:19 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/18 10:06:58 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int			find_cmd(char **p_param)
 			return (0);
 		i++;
 	}
-	ft_putstr(tmp, 2);
-	ft_putstr(": command not found\n", 2);
+	ft_putstr_fd(tmp, 2);
+	ft_putstr_fd(": command not found\n", 2);
 	free(path);
 	path = NULL;
 	p_param[0] = tmp;

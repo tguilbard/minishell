@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:49:15 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/09/15 15:00:37 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/18 10:04:01 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int	redirection_forest(t_param *param, int n, size_t i, int *std)
 	else if (*(param->sep[n][i]) == '<')
 		if ((std[0] = open(param->name[n][i], O_RDONLY, 044)) == -1)
 		{
-			ft_putstr(param->name[n][i], 2);
-			ft_putstr(": file or directory not found\n", 2);
+			ft_putstr_fd(param->name[n][i], 2);
+			ft_putstr_fd(": file or directory not found\n", 2);
 			child_killer(1);
 		}
 	return (0);

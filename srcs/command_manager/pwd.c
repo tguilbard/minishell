@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 15:56:31 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/04/10 16:41:40 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/18 10:05:44 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		mini_pwd(void)
 
 	pwd = get_pwd();
 	ft_str_add_suffix(&pwd, "\n");
-	ft_putstr(pwd, 1);
+	ft_putstr_fd(pwd, 1);
 	free(pwd);
 	return (0);
 }

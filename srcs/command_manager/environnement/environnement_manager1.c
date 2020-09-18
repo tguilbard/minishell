@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environnement_manager1.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:05:06 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/04/10 23:28:54 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/18 10:06:12 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			check_entry_export(char *p_to_add)
 {
 	if (ft_is_digit(p_to_add[0]))
 	{
-		ft_putstr("not a valid identifier\n", 2);
+		ft_putstr_fd("not a valid identifier\n", 2);
 		return (1);
 	}
 	else if (ft_strcmp_c(p_to_add, '=') == false)

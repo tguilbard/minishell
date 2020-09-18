@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 21:59:32 by user42            #+#    #+#             */
-/*   Updated: 2020/09/15 14:38:26 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/18 10:07:21 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		get_param_sepa(char *param, t_param *result, size_t *i,
 		}
 		else
 		{
-			ft_putstr("syntax error near unexpected token «;»\n", 2);
+			ft_putstr_fd("syntax error near unexpected token «;»\n", 2);
 			child_killer(1);
 		}
 	}
@@ -53,7 +53,7 @@ static void		get_param_pipe(char *param, t_param *result, size_t *i,
 		}
 		else
 		{
-			ft_putstr("syntax error near unexpected token «|»\n", 2);
+			ft_putstr_fd("syntax error near unexpected token «|»\n", 2);
 			child_killer(1);
 		}
 	}

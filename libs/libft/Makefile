@@ -26,9 +26,11 @@ SRC =		ft_f_abs.c ft_f_floor.c ft_f_roof.c ft_i_abs.c ft_i_roof.c \
 			ft_is_alpha.c ft_is_lower.c ft_is_upper.c ft_is_alpha_num.c \
 			ft_is_whitespaces.c ft_file_exist.c\
 			\
-			ft_putchar.c ft_putstr.c ft_putnbr.c get_next_line.c \
-			get_next_line_utils.c ft_get_file.c ft_print_str_tab.c \
-			ft_print_int_tab.c \
+			ft_putchar.c ft_putstr.c ft_putnbr.c \
+			ft_print_str_tab.c ft_print_int_tab.c \
+			ft_putchar_fd.c ft_putstr_fd.c ft_putnbr_fd.c \
+			ft_print_str_tab_fd.c ft_print_int_tab_fd.c \
+			get_next_line.c get_next_line_utils.c ft_get_file.c \
 			\
 			ft_free_tab.c ft_tab_cpy.c ft_tab_new.c ft_tab_len.c \
 			ft_add_to_tab.c ft_tab_erase.c \

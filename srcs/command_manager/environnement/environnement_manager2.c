@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environnement_manager2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 11:14:34 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/09/15 16:59:37 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/18 10:06:32 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int		mini_env(char **p_param)
 	i = 0;
 	if (p_param[1] != NULL)
 	{
-		ft_putstr("env: too many argument\n", 2);
+		ft_putstr_fd("env: too many argument\n", 2);
 		child_killer(1);
 	}
 	while (g_env.data[i] != NULL)
 	{
-		ft_putstr(g_env.data[i], 1);
-		ft_putchar('\n', 1);
+		ft_putstr_fd(g_env.data[i], 1);
+		ft_putchar_fd('\n', 1);
 		i++;
 	}
 	return (0);
