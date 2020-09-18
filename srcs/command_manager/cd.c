@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 03:59:26 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/09/18 10:06:01 by ldutriez         ###   ########.fr       */
+/*   Updated: 2020/09/18 12:36:23 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int			mini_cd(char **path)
 			change_pwd();
 			return (0);
 		}
-		ft_putstr_fd("minishell: cd: HOME not set", 2);
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		return (1);
 	}
 	if (check_error(path) == 1)
